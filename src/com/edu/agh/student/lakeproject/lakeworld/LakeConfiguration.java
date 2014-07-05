@@ -8,8 +8,10 @@ public class LakeConfiguration {
 	
 	public final static int width = 600;
 	public final static int height = 500;
-
 	
+	public final static String fishTypeName = "Fish";
+	public final static String obstacleTypeName = "Obstacle";
+	public final static String foodTypeName = "Food";
 	
 	public final static int wallWidth = 10;
 	

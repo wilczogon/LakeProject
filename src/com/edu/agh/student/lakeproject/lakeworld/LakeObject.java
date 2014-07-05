@@ -6,17 +6,14 @@ import org.jbox2d.dynamics.Body;
 public abstract class LakeObject{
 	
 	protected Body body;
+	protected LakeWorld lakeWorld;
 	private float radius;
 	private Vec2 position;
 	
 	public abstract String getType();
 	
-	public LakeObject(){
-		position = new Vec2();
-		radius = 1;
-	}
-	
-	public LakeObject(float radius, Vec2 position){
+	public LakeObject(LakeWorld world, float radius, Vec2 position){
+		this.lakeWorld = lakeWorld;
 		this.position = position;
 		this.radius = radius;
 	}
@@ -47,5 +44,7 @@ public abstract class LakeObject{
 		return position;
 	}
 	
-	// TODO reszta klasy
+	public boolean isActive(){
+		return true;
+	}
 }

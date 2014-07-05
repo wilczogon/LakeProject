@@ -16,7 +16,9 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
-import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
+import org.jbox2d.dynamics.contacts.Contact;
+
+import com.edu.agh.student.lakeproject.fish.Fish;
 
 
 public class LakeWorld extends World {
@@ -30,10 +32,35 @@ public class LakeWorld extends World {
 	}
 	
 	public void step(){
+		
+		for(int i = 0; i<lakeObjects.size(); ++i){
+			if(!lakeObjects.get(i).isActive()){
+				super.destroyBody(lakeObjects.get(i).body);
+				lakeObjects.remove(i);
+			}
+		}
+		
 		for(LakeObject lakeObject: lakeObjects){
 			lakeObject.move();
 		}
 		super.step(LakeConfiguration.stepTime, 1, 1);
+		
+		if(getContactCount() != 0){
+			Contact contact = getContactList();
+			
+			LakeObject objectA;
+			LakeObject objectB;
+			
+			do{
+				objectA = (LakeObject)contact.getFixtureA().m_body.getUserData();
+				objectB = (LakeObject)contact.getFixtureB().m_body.getUserData();
+				
+				objectA.interactWith(objectB);
+				objectB.interactWith(objectA);
+				
+				contact = contact.m_next;
+			}while(contact != null);
+		}
 		
 		super.drawDebugData();
 		debugDraw.swapBuffers();
@@ -60,7 +87,13 @@ public class LakeWorld extends World {
 		System.out.println(lakeObject.toString());
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.position = lakeObject.getInitialPosition();
-		bodyDef.type = BodyType.DYNAMIC;
+		
+		if(lakeObject.getType().equals(LakeConfiguration.fishTypeName))
+			bodyDef.type = BodyType.DYNAMIC;
+		else
+			bodyDef.type = BodyType.STATIC;
+		
+		bodyDef.userData = lakeObject;
 		Body body = super.createBody(bodyDef);
 		lakeObject.setBody(body);
 		lakeObjects.add(lakeObject);
@@ -75,4 +108,5 @@ public class LakeWorld extends World {
 	private Timer timer = null;
 	private Slick2dDebugDraw debugDraw;
 	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
+	private List<Fish> retainers = new ArrayList<Fish>();
 }
