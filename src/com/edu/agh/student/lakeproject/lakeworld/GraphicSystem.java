@@ -20,7 +20,7 @@ public class GraphicSystem {
 	
 	public void paint(){
 		for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
-			buffer.getGraphics().drawImage(rotateImage((BufferedImage)lakeObject.getImage(), (double)lakeObject.getAngle()*180/Math.PI), 
+			buffer.getGraphics().drawImage(rotateImage((BufferedImage)lakeObject.getImage(), lakeObject.getAngle()), 
 					(int)(lakeObject.getPosition().x - lakeObject.getRadius()), 
 					(int)(lakeObject.getPosition().y - lakeObject.getRadius()), 
 					(int)(lakeObject.getRadius()*2), 
@@ -45,15 +45,9 @@ public class GraphicSystem {
 	    int srcWidth = src.getWidth();
 	    int srcHeight = src.getHeight();
 	 
-	    double sin = Math.abs(Math.sin(radians));
-	    double cos = Math.abs(Math.cos(radians));
-	    int newWidth = (int) Math.floor(srcWidth * cos + srcHeight * sin);
-	    int newHeight = (int) Math.floor(srcHeight * cos + srcWidth * sin);
-	 
-	    BufferedImage result = new BufferedImage(newWidth, newHeight,
+	    BufferedImage result = new BufferedImage(srcWidth, srcHeight,
 	            src.getType());
 	    Graphics2D g = result.createGraphics();
-	    g.translate((newWidth - srcWidth) / 2, (newHeight - srcHeight) / 2);
 	    g.rotate(radians, srcWidth / 2, srcHeight / 2);
 	    g.drawRenderedImage(src, null);
 	 

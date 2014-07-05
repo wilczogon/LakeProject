@@ -82,7 +82,7 @@ public class LakeWorld extends World {
 		frame.setVisible(true);
 		
 		timer = new Timer();
-		timer.schedule(new LakeTimerTask(this), new Date(), (long)Math.floor(100*LakeConfiguration.stepTime));
+		timer.schedule(new LakeTimerTask(this), new Date(), (long)Math.floor(1000*LakeConfiguration.stepTime));
 	}
 
 	public void addLakeObject(LakeObject lakeObject){

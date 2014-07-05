@@ -11,13 +11,16 @@ public class VeiltailMuscles extends Muscles {
 
 	public VeiltailMuscles(Body body) {
 		super(body);
-		super.strength = 10;
+		super.strength = 100;
 	}
 
 	@Override
 	public void applyForces(MovementDecision decision) {//TODO
-		body.applyAngularImpulse((LakeConfiguration.random.nextFloat() -0.5f)*strength);
-		body.applyForceToCenter(new Vec2((LakeConfiguration.random.nextFloat() -0.5f)*strength, (LakeConfiguration.random.nextFloat() -0.5f)*strength));
+		Vec2 force = new Vec2((LakeConfiguration.random.nextFloat() -0.5f)*strength, (LakeConfiguration.random.nextFloat() -0.5f)*strength);
+		Vec2 normal = new Vec2(0, 1);
+		body.m_sweep.a = (float) (180/Math.PI*Math.acos((force.y*normal.y) / Math.sqrt((force.x*force.x + force.y*force.y))));
+		System.out.println(body.m_sweep.a);
+		body.applyForceToCenter(force);
 	}
 
 }
