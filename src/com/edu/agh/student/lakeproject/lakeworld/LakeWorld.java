@@ -7,7 +7,7 @@ import java.util.Timer;
 
 import javax.swing.JFrame;
 
-import lessur.engine.physics.Slick2dDebugDraw;
+import lessur.engine.physics.MyDebugDraw;
 
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.common.Vec2;
@@ -23,6 +23,7 @@ import com.edu.agh.student.lakeproject.fish.Fish;
 
 public class LakeWorld extends World {
 	
+	private GraphicSystem graphicSystem;
 	public LakeWorld(){
 		super(new Vec2(0, 0));
 	}
@@ -62,17 +63,20 @@ public class LakeWorld extends World {
 			}while(contact != null);
 		}
 		
-		super.drawDebugData();
-		debugDraw.swapBuffers();
+		//super.drawDebugData();
+		graphicSystem.paint();
+		graphicSystem.swapBuffers();
+		//debugDraw.swapBuffers();
 	}
 	
 	private void init(){
 		JFrame frame = new JFrame(LakeConfiguration.title);
 		frame.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
 		
-		debugDraw = new Slick2dDebugDraw(frame);
-		debugDraw.setFlags(0x0001);
-		super.setDebugDraw(debugDraw);
+		//debugDraw = new MyDebugDraw(frame);
+		//debugDraw.setFlags(0x0001);
+		//super.setDebugDraw(debugDraw);
+		this.graphicSystem = new GraphicSystem(this, frame); // TODO tymczasowo pole
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -105,8 +109,12 @@ public class LakeWorld extends World {
 		body.createFixture(fixDef);
 	}
 	
+	public List<LakeObject> getLakeObjects(){
+		return lakeObjects;
+	}
+	
 	private Timer timer = null;
-	private Slick2dDebugDraw debugDraw;
+	private MyDebugDraw debugDraw;
 	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
 	private List<Fish> retainers = new ArrayList<Fish>();
 }

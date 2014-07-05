@@ -10,6 +10,7 @@ public class Veiltail extends Fish {
 	
 	public Veiltail(LakeWorld lakeWorld, float radius, Vec2 position){
 		super(lakeWorld, radius, position);
+		setImage("rsc/ryba.png");
 	}
 
 	@Override

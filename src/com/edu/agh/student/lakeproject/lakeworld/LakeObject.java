@@ -1,5 +1,11 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
@@ -9,6 +15,7 @@ public abstract class LakeObject{
 	protected LakeWorld lakeWorld;
 	private float radius;
 	private Vec2 position;
+	private Image image;
 	
 	public abstract String getType();
 	
@@ -38,6 +45,28 @@ public abstract class LakeObject{
 	
 	public void setInitialPosition(Vec2 position){
 		this.position = position;
+	}
+	
+	public Vec2 getPosition(){
+		return body.getPosition();
+	}
+	
+	public float getAngle(){
+		return body.getAngle();
+	}
+	
+	protected void setImage(String fileName){
+		File img = new File(fileName);
+		try {
+			image = ImageIO.read(img);
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
+	
+	public Image getImage(){
+		return image;
 	}
 	
 	public Vec2 getInitialPosition(){

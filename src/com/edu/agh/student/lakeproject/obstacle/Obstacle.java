@@ -10,6 +10,7 @@ public class Obstacle extends LakeObject {
 	
 	public Obstacle(LakeWorld lakeWorld, float radius, Vec2 position){
 		super(lakeWorld, radius, position);
+		setImage("rsc/skala.png");
 	}
 
 	@Override
