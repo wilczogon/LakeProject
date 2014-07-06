@@ -20,7 +20,7 @@ public abstract class LakeObject{
 	public abstract String getType();
 	
 	public LakeObject(LakeWorld world, float radius, Vec2 position){
-		this.lakeWorld = lakeWorld;
+		this.lakeWorld = world;
 		this.position = position;
 		this.radius = radius;
 	}
