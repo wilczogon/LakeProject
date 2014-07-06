@@ -11,7 +11,7 @@ import com.edu.agh.student.lakeproject.fish.MovementDecision;
 import com.edu.agh.student.lakeproject.fish.Muscles;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 
-public class MouseControlledMuscles extends Muscles implements MouseListener {
+public class MouseControlledMuscles extends Muscles implements MouseMotionListener {
 
 	public MouseControlledMuscles(Body body) {
 		super(body);
@@ -22,9 +22,7 @@ public class MouseControlledMuscles extends Muscles implements MouseListener {
 		return;
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
+	public void mouseDragged(MouseEvent arg0) {
 		float x = arg0.getX() - body.getPosition().x;
 		float y = arg0.getY() - body.getPosition().y;
 		
@@ -39,26 +37,7 @@ public class MouseControlledMuscles extends Muscles implements MouseListener {
 		
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}

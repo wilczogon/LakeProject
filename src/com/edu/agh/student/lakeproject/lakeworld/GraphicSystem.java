@@ -5,14 +5,15 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GraphicSystem {
 
 	private LakeWorld lakeWorld;
 	private Image buffer;
-	private JFrame container;
+	private JPanel container;
 
-	public GraphicSystem(LakeWorld lakeWorld, final JFrame app){
+	public GraphicSystem(LakeWorld lakeWorld, final JPanel app){
 		this.lakeWorld = lakeWorld;
 		this.container = app;
 		buffer = new BufferedImage(this.container.getWidth(),this.container.getHeight(), BufferedImage.TYPE_INT_RGB);

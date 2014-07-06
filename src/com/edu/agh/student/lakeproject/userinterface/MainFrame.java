@@ -1,14 +1,24 @@
 package com.edu.agh.student.lakeproject.userinterface;
 
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
+import org.jbox2d.common.Vec2;
+
+import com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish;
+import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
+import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
+import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 
 public class MainFrame extends JFrame {
 	private static String frameTitle = "Lake Project";
@@ -37,7 +47,7 @@ public class MainFrame extends JFrame {
 	JButton saveLakeObjectButton;
 	JButton modifyLakeObjectButton;
 	
-	JFrame lakeWorldFrame;
+	JPanel lakeWorldPanel;
 	
 	public MainFrame() {
 		super(frameTitle);
@@ -61,10 +71,45 @@ public class MainFrame extends JFrame {
 		
 		
 		LakeWorld lakeWorld = new LakeWorld();
-		lakeWorldFrame = lakeWorld.getFrame();
+		lakeWorldPanel = new JPanel();
+		lakeWorldPanel.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
+		lakeWorld.setFrame(lakeWorldPanel);
+		//lakeWorldFrame = lakeWorld.getFrame();
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, 20.0f, new Vec2(300, 300)));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, 20.0f, new Vec2(250, 350)));
+		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
+		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, 50.0f, new Vec2(400, 400)));
 		
 		
 		// placing Components
+		
+		Container pane = this.getContentPane();
+		pane.setLayout(new BoxLayout(pane,BoxLayout.X_AXIS));
+		
+		JPanel objectPanel = new JPanel();
+		JPanel lakePanel = new JPanel();
+		JPanel controlPanel = new JPanel();
+		
+		controlPanel.setLayout(new BoxLayout(controlPanel,BoxLayout.X_AXIS));
+		//((BoxLayout)controlPanel.getLayout()).;
+		objectPanel.setLayout(new BoxLayout(objectPanel,BoxLayout.Y_AXIS));
+		lakePanel.setLayout(new BoxLayout(lakePanel,BoxLayout.Y_AXIS));
+		
+		objectPanel.add(newLakeObjectButton);
+		objectPanel.add(openLakeObjectButton);
+		objectPanel.add(saveLakeButton);
+		objectPanel.add(modifyLakeObjectButton);
+		controlPanel.add(playButton);
+		controlPanel.add(pauseButton);
+		controlPanel.add(recButton);
+		controlPanel.add(forwardButton);
+		controlPanel.add(openLakeButton);
+		controlPanel.add(saveLakeObjectButton);
+		pane.add(objectPanel);
+		pane.add(lakePanel);
+		lakePanel.add(lakeWorldPanel);
+		lakePanel.add(controlPanel);
+		this.setVisible(true);
 		
 		// adding Listeners
 		playButton.addActionListener(new ActionListener() {
@@ -171,6 +216,8 @@ public class MainFrame extends JFrame {
 			public void windowActivated(WindowEvent arg0) {
 			}
 		});
+		
+		lakeWorld.start();
 	}
 	
 	protected void modifyLakeObjectButtonActionPerformed() {

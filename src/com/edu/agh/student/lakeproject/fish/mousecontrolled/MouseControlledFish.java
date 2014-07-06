@@ -20,7 +20,7 @@ public class MouseControlledFish extends Fish {
 	public void setBody(Body body){
 		super.setBody(body);
 		super.muscles = new MouseControlledMuscles(super.body);
-		lakeWorld.addMouseListener((MouseListener) muscles);
+		lakeWorld.addMouseMotionListener((MouseMotionListener) muscles);
 	}
 
 	@Override
