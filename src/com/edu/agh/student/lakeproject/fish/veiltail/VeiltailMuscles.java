@@ -21,8 +21,6 @@ public class VeiltailMuscles extends Muscles {
 		float speed = LakeConfiguration.random.nextFloat()*strength;
 		body.m_sweep.a = angle;
 		body.applyForceToCenter(new Vec2((float)Math.sin((angle/180)*Math.PI)*speed, -(float)Math.cos((angle/180)*Math.PI)*speed));
-		System.out.println(angle + " " + speed);
-		
 	}
 
 }
