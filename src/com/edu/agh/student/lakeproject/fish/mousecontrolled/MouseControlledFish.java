@@ -1,6 +1,5 @@
 package com.edu.agh.student.lakeproject.fish.mousecontrolled;
 
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import org.jbox2d.common.Vec2;

@@ -1,7 +1,6 @@
 package com.edu.agh.student.lakeproject.fish;
 
 import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
 
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;

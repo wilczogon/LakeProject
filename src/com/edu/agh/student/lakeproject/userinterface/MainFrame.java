@@ -1,7 +1,6 @@
 package com.edu.agh.student.lakeproject.userinterface;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -21,6 +20,11 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 
 public class MainFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1231864224720584963L;
+
 	private static String frameTitle = "Lake Project";
 	
 	private static String playButtonTitle = "Start";

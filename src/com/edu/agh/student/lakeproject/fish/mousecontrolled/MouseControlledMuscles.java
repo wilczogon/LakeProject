@@ -1,7 +1,6 @@
 package com.edu.agh.student.lakeproject.fish.mousecontrolled;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import org.jbox2d.common.Vec2;
@@ -9,7 +8,6 @@ import org.jbox2d.dynamics.Body;
 
 import com.edu.agh.student.lakeproject.fish.MovementDecision;
 import com.edu.agh.student.lakeproject.fish.Muscles;
-import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 
 public class MouseControlledMuscles extends Muscles implements MouseMotionListener {
 

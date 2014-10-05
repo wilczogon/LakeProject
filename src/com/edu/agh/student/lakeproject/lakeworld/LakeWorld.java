@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.jbox2d.collision.shapes.CircleShape;
@@ -131,5 +130,6 @@ public class LakeWorld extends World {
 	
 	private Timer timer = null;
 	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
+	@SuppressWarnings("unused")
 	private List<Fish> retainers = new ArrayList<Fish>();
 }
