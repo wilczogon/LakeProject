@@ -18,6 +18,7 @@ import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
+import com.edu.agh.student.lakeproject.food.Food;
 
 public class MainFrame extends JFrame {
 	/**
@@ -29,13 +30,13 @@ public class MainFrame extends JFrame {
 	
 	private static String playButtonTitle = "Start";
 	private static String pauseButtonTitle = "Pauza";
-	private static String forwardButtonTitle = "Przyœpieszenie";
+	private static String forwardButtonTitle = "Przyspieszenie";
 	private static String saveLakeButtonTitle = "Zapisz";
-	private static String openLakeButtonTitle = "Otwórz";
+	private static String openLakeButtonTitle = "Otworz";
 	private static String recButtonTitle = "Nagrywaj";
 	
 	private static String newLakeObjectButtonTitle = "Nowy";
-	private static String openLakeObjectButtonTitle = "Otwórz";
+	private static String openLakeObjectButtonTitle = "Otworz";
 	private static String saveLakeObjectButtonTitle = "Zapisz";
 	private static String modifyLakeObjectButtonTitle = "Modyfikuj";
 	
@@ -82,6 +83,9 @@ public class MainFrame extends JFrame {
 		lakeWorld.addLakeObject(new Veiltail(lakeWorld, 20.0f, new Vec2(300, 300)));
 		lakeWorld.addLakeObject(new Veiltail(lakeWorld, 20.0f, new Vec2(250, 350)));
 		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
+		lakeWorld.addLakeObject(new Food(lakeWorld, 10.0f, new Vec2(124, 267), 100));
+		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(200, 450), 10));
+		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(320, 260), 200));
 		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, 50.0f, new Vec2(400, 400)));
 		
 		

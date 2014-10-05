@@ -6,14 +6,18 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
+import com.edu.agh.student.lakeproject.food.Food;
 
 public abstract class Fish extends LakeObject {
 
 	protected Eye eye;
 	protected Brain brain;
 	protected Muscles muscles;
+	protected ReproductiveOrgans reproductiveOrgans;
 	protected int energy = 1000;	// does fish eat something?
 	protected int health = 1000;	// does fish fight with others?
+	protected int age = 0;
+	protected float growthFactor = 1/200;
 	
 	public Fish(LakeWorld lakeWorld, float radius, Vec2 position){
 		super(lakeWorld, radius, position);
@@ -38,8 +42,8 @@ public abstract class Fish extends LakeObject {
 			interactWith((Fish)lakeObject);
 		else if(lakeObject.getType().equals(LakeConfiguration.obstacleTypeName))
 			interactWith((Obstacle)lakeObject);
-		//else if(lakeObject.getType().equals(LakeConfiguration.foodTypeName))
-			//interactWith((Food)lakeObject);
+		else if(lakeObject.getType().equals(LakeConfiguration.foodTypeName))
+			interactWith((Food)lakeObject);
 		
 	}
 	
@@ -53,6 +57,12 @@ public abstract class Fish extends LakeObject {
 	
 	protected void interactWith(Obstacle obstacle){
 		health--;
+	}
+	
+	protected void interactWith(Food food){
+		energy+= food.getEnergy();
+		if(energy > 1000)	//TODO
+		  energy = 1000;
 	}
 	
 	@Override
