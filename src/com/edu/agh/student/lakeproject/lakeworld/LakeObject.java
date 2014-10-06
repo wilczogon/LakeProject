@@ -88,4 +88,8 @@ public abstract class LakeObject{
 	public boolean isActive(){
 		return true;
 	}
+
+	public LakeObjectColor getColor() {
+		return null;
+	}
 }
