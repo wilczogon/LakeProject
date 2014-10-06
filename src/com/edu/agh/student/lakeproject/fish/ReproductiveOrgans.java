@@ -8,5 +8,5 @@ public abstract class ReproductiveOrgans{
     return gender;
   }
   
-  private Gender gender;
+  protected Gender gender;
 }

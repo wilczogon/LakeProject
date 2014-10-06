@@ -10,8 +10,8 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
 public class MouseControlledFish extends Fish {
 
-	public MouseControlledFish(LakeWorld lakeWorld, float radius, Vec2 position) {
-		super(lakeWorld, radius, position);
+	public MouseControlledFish(LakeWorld lakeWorld, Vec2 position) {
+		super(lakeWorld, position);
 		setImage("rsc/ryba.png");
 	}
 	

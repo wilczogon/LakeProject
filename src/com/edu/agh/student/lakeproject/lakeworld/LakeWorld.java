@@ -116,12 +116,6 @@ public class LakeWorld extends World {
 		Body body = super.createBody(bodyDef);
 		lakeObject.setBody(body);
 		lakeObjects.add(lakeObject);
-		
-		FixtureDef fixDef = new FixtureDef();
-		CircleShape circle = new CircleShape();
-		circle.m_radius = lakeObject.getRadius();
-		fixDef.shape = circle;
-		body.createFixture(fixDef);
 	}
 	
 	public List<LakeObject> getLakeObjects(){

@@ -8,12 +8,16 @@ import javax.imageio.ImageIO;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
+import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.dynamics.FixtureDef;
+import org.jbox2d.dynamics.Fixture;
 
 public abstract class LakeObject{
 	
 	protected Body body;
+	protected Fixture fixture;
 	protected LakeWorld lakeWorld;
-	private float radius;
+	protected float radius;
 	private Vec2 position;
 	private Image image;
 	
@@ -27,6 +31,11 @@ public abstract class LakeObject{
 	
 	public void setBody(Body body){
 		this.body = body;
+		FixtureDef fixDef = new FixtureDef();
+		CircleShape circle = new CircleShape();
+		circle.m_radius = radius;
+		fixDef.shape = circle;
+		fixture = body.createFixture(fixDef);
 	}
 
 	public void interactWith(LakeObject lakeObject){
@@ -36,7 +45,10 @@ public abstract class LakeObject{
 	public abstract void move();
 	
 	public void setRadius(float radius){
-		this.radius = radius;
+		if(this.radius != radius){
+		  this.radius = radius;
+		  ((CircleShape)fixture.m_shape).m_radius = radius;
+		}
 	}
 	
 	public float getRadius(){

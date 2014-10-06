@@ -8,8 +8,8 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
 public class Veiltail extends Fish {
 	
-	public Veiltail(LakeWorld lakeWorld, float radius, Vec2 position){
-		super(lakeWorld, radius, position);
+	public Veiltail(LakeWorld lakeWorld, Vec2 position){
+		super(lakeWorld, position);
 		setImage("rsc/ryba.png");
 	}
 

@@ -14,13 +14,30 @@ public abstract class Fish extends LakeObject {
 	protected Brain brain;
 	protected Muscles muscles;
 	protected ReproductiveOrgans reproductiveOrgans;
-	protected int energy = 1000;	// does fish eat something?
-	protected int health = 1000;	// does fish fight with others?
+	protected final int MAX_ENERGY = 1000;
+	protected final int MAX_HEALTH = 1000;
+	protected final float INITIAL_RADIUS = 10.0f;
+	protected final float MAX_RADIUS = 50.0f;
+	protected int energy = MAX_ENERGY;	// does fish eat something?
+	protected int health = MAX_HEALTH;	// does fish fight with others?
 	protected int age = 0;
-	protected float growthFactor = 1/200;
+	protected float growthFactor = 0.001f;
 	
-	public Fish(LakeWorld lakeWorld, float radius, Vec2 position){
-		super(lakeWorld, radius, position);
+	public Fish(LakeWorld lakeWorld, Vec2 position/*, Gender gender*/){
+		super(lakeWorld, 20.0f, position);
+		radius = INITIAL_RADIUS;
+		//initReproductionOrgans(gender); TODO
+	}
+	
+	//public Fish(LakeWorld lakeWorld, Vec2 position){
+	//	this(lakeWorld, 20.0f, position, null);//, (Math.random()%2 == 0 ? new Gender.FEMALE() : new Gender.MALE()));
+	//}
+	
+	public void initReproductionOrgans(Gender gender){
+	  /*if(gender == Gender.FEMALE)
+	    reproductiveOrgans = new FemaleReproductiveOrgans();
+	  else if (gender == Gender.MALE)
+	    reproductiveOrgans = new MaleReproductiveOrgans();*/
 	}
 	
 	@Override
@@ -28,10 +45,16 @@ public abstract class Fish extends LakeObject {
 		return LakeConfiguration.fishTypeName;
 	}
 	
+	public Gender getGender(){
+	  return reproductiveOrgans.getGender();
+	}
+	
 	public abstract String getSpace();
 	
 	@Override
 	public void move(){
+		age++;
+		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
 		muscles.applyForces(null);//brain.decideMovement(eye.getView())); //TODO
 	}
@@ -48,8 +71,8 @@ public abstract class Fish extends LakeObject {
 	}
 	
 	protected void interactWith(Fish fish){
-		if(fish.getSpace().equals(getSpace())){
-			// mój gatunek, sprawdź płeć
+		if(fish.getSpace().equals(getSpace()) ){//&& getGender() != fish.getGender()){ TODO
+			// mój gatunek, przeciwna płeć
 		} else{
 			health--;
 		}
@@ -61,8 +84,8 @@ public abstract class Fish extends LakeObject {
 	
 	protected void interactWith(Food food){
 		energy+= food.getEnergy();
-		if(energy > 1000)	//TODO
-		  energy = 1000;
+		if(energy > MAX_ENERGY)
+		  energy = MAX_ENERGY;
 	}
 	
 	@Override
