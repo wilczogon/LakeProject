@@ -12,6 +12,8 @@ import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.Fixture;
 
+import com.edu.agh.student.lakeproject.util.LakeObjectColor;
+
 public abstract class LakeObject{
 	
 	protected Body body;
