@@ -90,8 +90,5 @@ public abstract class LakeObject{
 		return true;
 	}
 
-	public Color getColor(float distance) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public abstract Color getColor(float distance);
 }

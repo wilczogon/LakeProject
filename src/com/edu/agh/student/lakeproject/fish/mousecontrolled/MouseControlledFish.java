@@ -1,5 +1,6 @@
 package com.edu.agh.student.lakeproject.fish.mousecontrolled;
 
+import java.awt.Color;
 import java.awt.event.MouseMotionListener;
 
 import org.jbox2d.common.Vec2;
@@ -25,6 +26,12 @@ public class MouseControlledFish extends Fish {
 	@Override
 	public String getSpace() {
 		return "com.edu.agh.student.lakeproject.fish.mousecontrolled";
+	}
+
+	@Override
+	public Color getColor(float distance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

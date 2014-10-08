@@ -1,5 +1,7 @@
 package com.edu.agh.student.lakeproject.fish.veiltail;
 
+import java.awt.Color;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 
@@ -22,6 +24,12 @@ public class Veiltail extends Fish {
 	public void setBody(Body body){
 		super.setBody(body);
 		super.muscles = new VeiltailMuscles(super.body);
+	}
+
+	@Override
+	public Color getColor(float distance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

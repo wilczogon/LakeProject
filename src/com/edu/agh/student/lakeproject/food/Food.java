@@ -1,5 +1,7 @@
 package com.edu.agh.student.lakeproject.food;
 
+import java.awt.Color;
+
 import org.jbox2d.common.Vec2;
 
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
@@ -37,6 +39,12 @@ public class Food extends LakeObject {
 		if(energy <= 0)
 			return false;
 		return true;
+	}
+
+	@Override
+	public Color getColor(float distance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
