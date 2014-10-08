@@ -1,5 +1,6 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +12,6 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.Fixture;
-
-import com.edu.agh.student.lakeproject.util.LakeObjectColor;
 
 public abstract class LakeObject{
 	
@@ -91,7 +90,8 @@ public abstract class LakeObject{
 		return true;
 	}
 
-	public LakeObjectColor getColor() {
+	public Color getColor(float distance) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

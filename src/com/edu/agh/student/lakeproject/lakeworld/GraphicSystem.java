@@ -1,5 +1,6 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -14,7 +15,6 @@ import org.omg.CORBA.BooleanHolder;
 
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.impl.ArrayEyeView;
-import com.edu.agh.student.lakeproject.util.EyePixel;
 
 public class GraphicSystem {
 
@@ -83,7 +83,7 @@ public class GraphicSystem {
 		float angleZero = fish.getAngle();
 		float angleDelta = (float) (2 * Math.PI / viewSize);
 		float angle = angleZero;
-		EyePixel pixel;
+		Color pixel;
 		Vec2 pointA = fish.getPosition();
 		Vec2 pointB;
 		LakeObject visibleObject = null;
@@ -122,7 +122,7 @@ public class GraphicSystem {
 				}
 			}
 			//TODO requires some more concurrency 
-			pixel = new EyePixel(visibleObject,distance);
+			pixel = visibleObject.getColor(distance);
 			result.appendPixel(pixel);
 		}
 		return result;
