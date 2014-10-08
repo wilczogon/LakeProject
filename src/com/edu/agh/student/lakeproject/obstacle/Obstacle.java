@@ -1,5 +1,7 @@
 package com.edu.agh.student.lakeproject.obstacle;
 
+import java.awt.Color;
+
 import org.jbox2d.common.Vec2;
 
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
@@ -21,6 +23,12 @@ public class Obstacle extends LakeObject {
 	@Override
 	public void move() {
 		return;
+	}
+
+	@Override
+	public Color getColor(float distance) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
