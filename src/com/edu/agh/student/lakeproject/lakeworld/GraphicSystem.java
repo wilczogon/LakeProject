@@ -121,10 +121,21 @@ public class GraphicSystem {
 					visibleObject = null;
 				}
 			}
-			//TODO requires some more concurrency 
 			pixel = visibleObject.getColor(distance);
 			result.appendPixel(pixel);
 		}
+		return result;
+	}
+	public static Color getFadedColor(Color color, float distance){
+		Color result;
+		float fadingFactor = 1/(distance+1);
+		int red = color.getRed();
+		int green = color.getGreen();
+		int blue = color.getBlue();
+		red *= fadingFactor;
+		green *= fadingFactor;
+		blue *= fadingFactor;
+		result = new Color(red, green, blue);
 		return result;
 	}
 }
