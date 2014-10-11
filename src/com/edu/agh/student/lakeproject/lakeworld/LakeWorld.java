@@ -122,6 +122,10 @@ public class LakeWorld extends World {
 		return lakeObjects;
 	}
 	
+	public GraphicSystem getGraphicSystem(){
+	  return graphicSystem;
+	}
+	
 	private Timer timer = null;
 	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
 	@SuppressWarnings("unused")

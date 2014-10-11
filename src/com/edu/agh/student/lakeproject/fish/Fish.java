@@ -7,6 +7,7 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.food.Food;
+import java.awt.Color;
 
 public abstract class Fish extends LakeObject {
 
@@ -23,8 +24,8 @@ public abstract class Fish extends LakeObject {
 	protected int age = 0;
 	protected float growthFactor = 0.001f;
 	
-	public Fish(LakeWorld lakeWorld, Vec2 position/*, Gender gender*/){
-		super(lakeWorld, 20.0f, position);
+	public Fish(LakeWorld lakeWorld, Vec2 position/*, Gender gender*/, Color color){
+		super(lakeWorld, 20.0f, position, color);
 		radius = INITIAL_RADIUS;
 		//initReproductionOrgans(gender); TODO
 	}

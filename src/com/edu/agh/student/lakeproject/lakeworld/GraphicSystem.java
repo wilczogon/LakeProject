@@ -121,7 +121,7 @@ public class GraphicSystem {
 					visibleObject = null;
 				}
 			}
-			pixel = visibleObject.getColor(distance);
+			pixel = visibleObject.getColor();
 			result.appendPixel(pixel);
 		}
 		return result;

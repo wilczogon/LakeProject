@@ -11,7 +11,7 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 public class Obstacle extends LakeObject {
 	
 	public Obstacle(LakeWorld lakeWorld, float radius, Vec2 position){
-		super(lakeWorld, radius, position);
+		super(lakeWorld, radius, position, Color.GRAY);
 		setImage("rsc/skala.png");
 	}
 
@@ -23,12 +23,6 @@ public class Obstacle extends LakeObject {
 	@Override
 	public void move() {
 		return;
-	}
-
-	@Override
-	public Color getColor(float distance) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

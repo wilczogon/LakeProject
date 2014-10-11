@@ -13,7 +13,7 @@ public class Food extends LakeObject {
 	private int energy;
 	
 	public Food(LakeWorld lakeWorld, float radius, Vec2 position, int energy){
-		super(lakeWorld, radius, position);
+		super(lakeWorld, radius, position, Color.GREEN);
 		this.energy = energy;
 		setImage("rsc/food.png");
 	}
@@ -39,12 +39,6 @@ public class Food extends LakeObject {
 		if(energy <= 0)
 			return false;
 		return true;
-	}
-
-	@Override
-	public Color getColor(float distance) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

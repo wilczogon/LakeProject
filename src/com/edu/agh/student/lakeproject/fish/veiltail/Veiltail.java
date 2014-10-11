@@ -11,7 +11,7 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 public class Veiltail extends Fish {
 	
 	public Veiltail(LakeWorld lakeWorld, Vec2 position){
-		super(lakeWorld, position);
+		super(lakeWorld, position, Color.YELLOW);
 		setImage("rsc/ryba.png");
 	}
 
@@ -25,13 +25,5 @@ public class Veiltail extends Fish {
 		super.setBody(body);
 		super.muscles = new VeiltailMuscles(super.body);
 	}
-
-	@Override
-	public Color getColor(float distance) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 
 }
