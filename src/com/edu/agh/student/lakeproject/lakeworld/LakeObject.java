@@ -19,6 +19,10 @@ public abstract class LakeObject{
 	protected Body body;
 	protected Fixture fixture;
 	protected LakeWorld lakeWorld;
+	public LakeWorld getLakeWorld() {
+		return lakeWorld;
+	}
+
 	protected float radius;
 	private Vec2 position;
 	private Image image;
@@ -106,7 +110,7 @@ public abstract class LakeObject{
 	  for (int i = 0; i < maskPixels.length; i++){
 	    int alpha = maskPixels[i] << 24; // Shift green to alpha
 	    maskPixels[i] = color.getRGB() | alpha;
-	    System.out.println(alpha + " " + maskPixels[i])
+	    System.out.println(alpha + " " + maskPixels[i]);
 	  }
 
 	  mask.setRGB(0, 0, width, height, maskPixels, 0, width);

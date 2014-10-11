@@ -2,6 +2,7 @@ package com.edu.agh.student.lakeproject.fish.mousecontrolled;
 
 import com.edu.agh.student.lakeproject.fish.Eye;
 import com.edu.agh.student.lakeproject.fish.EyeView;
+import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
 public class MouseControlledEye extends Eye {
 
@@ -14,7 +15,6 @@ public class MouseControlledEye extends Eye {
 
 	@Override
 	public EyeView getView() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
