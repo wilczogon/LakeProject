@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
 		saveLakeObjectButton = new JButton(saveLakeObjectButtonTitle);
 		modifyLakeObjectButton = new JButton(modifyLakeObjectButtonTitle);
 		
-		
+		this.setBounds(0, 0, 800, 600);
 		LakeWorld lakeWorld = new LakeWorld();
 		lakeWorldPanel = new JPanel();
 		lakeWorldPanel.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
