@@ -7,6 +7,7 @@ import org.jbox2d.dynamics.Body;
 
 import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
+import com.edu.agh.student.lakeproject.fish.Gender;
 
 public class Veiltail extends Fish {
 	
@@ -32,6 +33,17 @@ public class Veiltail extends Fish {
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
 		muscles.applyForces(null); //Veiltail is stupid - no brain
+	}
+	
+	@Override
+	public void initReproductionOrgans(Gender gender){
+	  // TODO
+	  /*
+	  if(gender == Gender.FEMALE)
+	    reproductiveOrgans = new FemaleReproductiveOrgans();
+	  else if (gender == Gender.MALE)
+	    reproductiveOrgans = new MaleReproductiveOrgans();
+	  */
 	}
 
 }
