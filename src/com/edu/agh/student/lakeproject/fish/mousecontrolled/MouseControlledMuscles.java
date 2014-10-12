@@ -17,7 +17,7 @@ public class MouseControlledMuscles extends Muscles implements MouseMotionListen
 
 	@Override
 	public void applyForces(MovementDecision decision) {
-		return;
+		
 	}
 
 	public void mouseDragged(MouseEvent arg0) {
