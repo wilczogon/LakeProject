@@ -67,11 +67,13 @@ public class LakeWorld extends World {
 			LakeObject objectB;
 			
 			do{
-				objectA = (LakeObject)contact.getFixtureA().m_body.getUserData();
-				objectB = (LakeObject)contact.getFixtureB().m_body.getUserData();
+				if(contact.getFixtureA().m_body.getUserData() != null && contact.getFixtureB().m_body.getUserData() != null){
+				  objectA = (LakeObject)contact.getFixtureA().m_body.getUserData();
+				  objectB = (LakeObject)contact.getFixtureB().m_body.getUserData();
 				
-				objectA.interactWith(objectB);
-				objectB.interactWith(objectA);
+				  objectA.interactWith(objectB);
+				  objectB.interactWith(objectA);
+				}
 				
 				contact = contact.m_next;
 			}while(contact != null);
