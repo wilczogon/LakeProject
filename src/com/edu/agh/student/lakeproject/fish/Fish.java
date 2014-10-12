@@ -24,22 +24,17 @@ public abstract class Fish extends LakeObject {
 	protected int age = 0;
 	protected float growthFactor = 0.001f;
 	
-	public Fish(LakeWorld lakeWorld, Vec2 position/*, Gender gender*/, Color color){
+	public Fish(LakeWorld lakeWorld, Vec2 position, Gender gender, Color color){
 		super(lakeWorld, 20.0f, position, color);
 		radius = INITIAL_RADIUS;
-		//initReproductionOrgans(gender); TODO
+		initReproductionOrgans(gender);// TODO
 	}
 	
-	//public Fish(LakeWorld lakeWorld, Vec2 position){
-	//	this(lakeWorld, 20.0f, position, null);//, (Math.random()%2 == 0 ? new Gender.FEMALE() : new Gender.MALE()));
-	//}
-	
-	public void initReproductionOrgans(Gender gender){
-	  /*if(gender == Gender.FEMALE)
-	    reproductiveOrgans = new FemaleReproductiveOrgans();
-	  else if (gender == Gender.MALE)
-	    reproductiveOrgans = new MaleReproductiveOrgans();*/
+	public Fish(LakeWorld lakeWorld, Vec2 position, Color color){
+		this(lakeWorld, position, (Math.random()%2 == 0 ? Gender.FEMALE : Gender.MALE), color);
 	}
+	
+	public abstract void initReproductionOrgans(Gender gender);
 	
 	@Override
 	public String getType() {
@@ -57,7 +52,7 @@ public abstract class Fish extends LakeObject {
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
-		muscles.applyForces(brain.decideMovement(eye.getView())); //TODO
+		muscles.applyForces(brain.decideMovement(eye.getView()));
 	}
 	
 	@Override

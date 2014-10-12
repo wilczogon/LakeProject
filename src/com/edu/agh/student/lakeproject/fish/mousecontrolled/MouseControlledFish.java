@@ -9,6 +9,7 @@ import org.jbox2d.dynamics.Body;
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
+import com.edu.agh.student.lakeproject.fish.Gender;
 
 public class MouseControlledFish extends Fish {
 
@@ -36,6 +37,11 @@ public class MouseControlledFish extends Fish {
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
 		muscles.applyForces(null); //TODO
+	}
+	
+	@Override
+	public void initReproductionOrgans(Gender gender){
+	  // do nothing
 	}
 
 }
