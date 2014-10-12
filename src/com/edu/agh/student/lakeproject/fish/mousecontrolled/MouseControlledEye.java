@@ -20,7 +20,7 @@ public class MouseControlledEye extends Eye {
 
 	@Override
 	public EyeView getView() {
-		EyeView result = lakeWorld.getGraphicSystem().getEyeView(fish, 5, 10);
+		EyeView result = lakeWorld.getGraphicSystem().getEyeView(fish, 100, 10);
 //		for(Color color: result.getPixels()){
 //			System.out.print(color.toString());
 //		}

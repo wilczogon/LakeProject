@@ -107,7 +107,12 @@ public class GraphicSystem {
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
-			while(!stoppedHolder.value){
+			if(!stoppedHolder.value){
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
 				if(lakeObject.body == visibleBody.value){
