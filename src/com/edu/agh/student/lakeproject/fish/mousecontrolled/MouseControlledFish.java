@@ -36,7 +36,7 @@ public class MouseControlledFish extends Fish {
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		for(Object color: eye.getView().getPixels()){
-			System.out.print(Integer.toString(((Color)color).getRGB())+" ");
+			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 		}
 		System.out.println();
 		energy--;
