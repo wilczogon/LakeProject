@@ -19,6 +19,10 @@ public abstract class LakeObject{
 	protected Body body;
 	protected Fixture fixture;
 	protected LakeWorld lakeWorld;
+	public LakeWorld getLakeWorld() {
+		return lakeWorld;
+	}
+
 	protected float radius;
 	private Vec2 position;
 	private Image image;
