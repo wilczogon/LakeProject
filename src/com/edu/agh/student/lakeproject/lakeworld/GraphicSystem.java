@@ -88,7 +88,7 @@ public class GraphicSystem {
 		Vec2 pointB;
 		LakeObject visibleObject = null;
 		final BodyHolder visibleBody = new BodyHolder();
-		final BooleanHolder stoppedHolder = new BooleanHolder(false);
+//		final BooleanHolder stoppedHolder = new BooleanHolder(false);
 		final Vec2Holder visiblePoint = new Vec2Holder();
 		float distance = 0;
 		for(int ii = 0; ii < viewSize; ii++){
@@ -102,18 +102,18 @@ public class GraphicSystem {
 						float fraction) {
 					visibleBody.value = fixture.getBody();
 					visiblePoint.value = point;
-					stoppedHolder.value = true;
+//					stoppedHolder.value = true;
 					return 0;
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
-			if(!stoppedHolder.value){
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
+//			if(!stoppedHolder.value){
+//				try {
+//					Thread.sleep(1);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//			}
 			for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
 				if(lakeObject.body == visibleBody.value){
 					visibleObject = lakeObject;
