@@ -10,6 +10,7 @@ import java.util.Timer;
 import javax.swing.JPanel;
 
 import org.jbox2d.collision.shapes.CircleShape;
+import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
@@ -116,6 +117,19 @@ public class LakeWorld extends World {
 		Body body = super.createBody(bodyDef);
 		lakeObject.setBody(body);
 		lakeObjects.add(lakeObject);
+	}
+	
+	public void addBound(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
+	  BodyDef bodyDef = new BodyDef();
+	  bodyDef.position = new Vec2(0, 0);
+	  bodyDef.type = BodyType.STATIC;
+	  Body body = super.createBody(bodyDef);
+	  FixtureDef fixDef = new FixtureDef();
+	  Vec2[] vertices = new Vec2[]{a, b, c, d};
+	  PolygonShape shape = new PolygonShape();
+	  shape.set(vertices, vertices.length);
+	  fixDef.shape = shape;
+	  body.createFixture(fixDef);
 	}
 	
 	public List<LakeObject> getLakeObjects(){
