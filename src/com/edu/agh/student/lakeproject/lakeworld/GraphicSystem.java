@@ -121,7 +121,9 @@ public class GraphicSystem {
 					visibleObject = null;
 				}
 			}
-			pixel = visibleObject.getColor();
+			pixel = Color.black;
+			if(visibleObject != null)
+				pixel = visibleObject.getColor();
 			result.appendPixel(pixel);
 		}
 		return result;

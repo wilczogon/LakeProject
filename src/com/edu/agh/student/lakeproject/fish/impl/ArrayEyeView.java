@@ -18,8 +18,8 @@ public class ArrayEyeView extends EyeView {
 	}
 
 	@Override
-	public Color[] getPixels() {
-		return (Color[]) this.viewArray.toArray();
+	public Object[] getPixels() {
+		return this.viewArray.toArray();
 	}
 
 	@Override
