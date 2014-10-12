@@ -25,5 +25,13 @@ public class Veiltail extends Fish {
 		super.setBody(body);
 		super.muscles = new VeiltailMuscles(super.body);
 	}
+	
+	@Override
+	public void move(){
+		age++;
+		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
+		energy--;
+		muscles.applyForces(null); //Veiltail is stupid - no brain
+	}
 
 }

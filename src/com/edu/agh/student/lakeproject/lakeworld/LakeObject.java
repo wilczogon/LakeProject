@@ -97,22 +97,7 @@ public abstract class LakeObject{
 	  return color;
 	}
 	
-	protected BufferedImage createImage(Color color, BufferedImage mask){
-	  /*int width = mask.getWidth();
-	  int height = mask.getHeight();
-	 
-	  int[] maskPixels = mask.getRGB(0, 0, width, height, null, 0, width);
-
-	  for (int i = 0; i < maskPixels.length; i++){
-	    System.out.print(maskPixels[i] + " ");
-	    int alpha = maskPixels[i] << 24; // Shift green to alpha
-	    maskPixels[i] = color.getRGB() | alpha;
-	  }
-
-	  mask.setRGB(0, 0, width, height, maskPixels, 0, width);
-	  
-	  return mask;*/
-	  
+	private BufferedImage createImage(Color color, BufferedImage mask){
 	  for (int y = 0; y < mask.getHeight(); y++) {
 	    for (int x = 0; x < mask.getWidth(); x++) {
 	      Color maskC = new Color(mask.getRGB(x, y));

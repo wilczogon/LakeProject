@@ -57,7 +57,7 @@ public abstract class Fish extends LakeObject {
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
-		muscles.applyForces(null);//brain.decideMovement(eye.getView())); //TODO
+		muscles.applyForces(brain.decideMovement(eye.getView())); //TODO
 	}
 	
 	@Override

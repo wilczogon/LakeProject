@@ -27,5 +27,13 @@ public class MouseControlledFish extends Fish {
 	public String getSpace() {
 		return "com.edu.agh.student.lakeproject.fish.mousecontrolled";
 	}
+	
+	@Override
+	public void move(){
+		age++;
+		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
+		energy--;
+		muscles.applyForces(null); //TODO
+	}
 
 }
