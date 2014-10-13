@@ -1,5 +1,6 @@
 package com.edu.agh.student.lakeproject.userinterface;
 
+import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +40,8 @@ public class MainFrame extends JFrame {
 	private static String openLakeObjectButtonTitle = "Otworz";
 	private static String saveLakeObjectButtonTitle = "Zapisz";
 	private static String modifyLakeObjectButtonTitle = "Modyfikuj";
+
+	private static Canvas canvas;
 	
 	JButton playButton;
 	JButton pauseButton;
@@ -73,6 +76,8 @@ public class MainFrame extends JFrame {
 		openLakeObjectButton = new JButton(openLakeObjectButtonTitle);
 		saveLakeObjectButton = new JButton(saveLakeObjectButtonTitle);
 		modifyLakeObjectButton = new JButton(modifyLakeObjectButtonTitle);
+		
+		canvas = new Canvas();
 		
 		this.setBounds(0, 0, 800, 600);
 		LakeWorld lakeWorld = new LakeWorld();
@@ -112,6 +117,7 @@ public class MainFrame extends JFrame {
 		objectPanel.add(openLakeObjectButton);
 		objectPanel.add(saveLakeButton);
 		objectPanel.add(modifyLakeObjectButton);
+		objectPanel.add(canvas);
 		controlPanel.add(playButton);
 		controlPanel.add(pauseButton);
 		controlPanel.add(recButton);
@@ -285,5 +291,9 @@ public class MainFrame extends JFrame {
 
 	public void mainWindowClosing(){
 		System.exit(0);
+	}
+
+	public static Canvas getCanvas() {
+		return canvas;
 	}
 }
