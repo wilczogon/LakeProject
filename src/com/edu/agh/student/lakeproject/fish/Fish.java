@@ -68,7 +68,7 @@ public abstract class Fish extends LakeObject {
 	
 	protected void interactWith(Fish fish){
 		if(fish.getSpace().equals(getSpace()) ){//&& getGender() != fish.getGender()){ TODO
-			// mój gatunek, przeciwna płeć
+			// my space, opposite gender
 		} else{
 			health--;
 		}

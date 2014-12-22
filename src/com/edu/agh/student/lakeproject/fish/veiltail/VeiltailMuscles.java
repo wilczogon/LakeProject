@@ -17,8 +17,8 @@ public class VeiltailMuscles extends Muscles {
 
 	@Override
 	public void applyForces(MovementDecision decision) {//TODO
-		float angle = (body.getAngle() + (LakeConfiguration.random.nextFloat() - 0.5f)*2*agility)%360;
-		float speed = LakeConfiguration.random.nextFloat()*strength;
+		float angle = (float)(body.getAngle() + (LakeConfiguration.random.nextFloat() - 0.5f)*2*agility)%360;
+		float speed = (float)(LakeConfiguration.random.nextFloat()*strength);
 		body.m_sweep.a = angle;
 		body.applyForceToCenter(new Vec2((float)Math.sin((angle/180)*Math.PI)*speed, -(float)Math.cos((angle/180)*Math.PI)*speed));
 	}

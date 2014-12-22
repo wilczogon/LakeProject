@@ -1,4 +1,4 @@
-package com.edu.agh.student.lakeproject.neuralnetwork;
+package com.edu.agh.student.lakeproject.neuralnetwork.transitionfunction;
 
 public abstract class TransitionFunction{
 

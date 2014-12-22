@@ -1,9 +1,10 @@
 package com.edu.agh.student.lakeproject.neuralnetwork;
 
 import java.util.Random;
+import com.edu.agh.student.lakeproject.neuralnetwork.transitionfunction.*;
 
 
-public class NeuralNetworkLayer{
+public class NeuralNetworkLayer{	//TODO it would be nice to allow user choose bounds of random weights
 
   double[][] weights = null;
   boolean hasBias = false;
@@ -22,7 +23,7 @@ public class NeuralNetworkLayer{
       
     for(double[] line: weights)
       for(int i = 0; i<line.length; ++i){
-	line[i] = random.nextDouble();
+	line[i] = random.nextDouble()-0.5;
       }
   }
   
@@ -57,12 +58,19 @@ public class NeuralNetworkLayer{
   
   public double[] proceed(double[] in){
     if(hasBias){
-      //dodaj do in 1 na koncu
+      double[] tmp = new double[in.length+1];
+      
+      for(int i = 0; i<in.length; ++i)
+	tmp[i] = in[i];
+
+      tmp[in.length] = 1;
+      in = tmp;
     }
     
     double[] out = new double[getOutputWidth()];
     
     for(int j = 0; j<getOutputWidth(); ++j){
+      out[j] = 0;
       for(int i = 0; i<getTrueInputWidth(); ++i){
 	out[j] += in[i]*weights[j][i];
       }
@@ -71,20 +79,6 @@ public class NeuralNetworkLayer{
     }
     
     return out;
-    
-  }
-  
-  public static void main(String[] args){
-    NeuralNetworkLayer layer = new NeuralNetworkLayer(3, 2, new ZeroOneTransitionFunction(), false);
-    
-    double[] in = new double[3];
-    in[0] = 2.3;
-    in[1] = 0.1;
-    in[2] = 4.6;
-    double[] out = layer.proceed(in);
-    
-    for(double value: out)
-      System.out.println(value);
     
   }
   

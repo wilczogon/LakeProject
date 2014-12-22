@@ -12,8 +12,8 @@ public class MouseControlledEye extends Eye {
 	private MouseControlledFish fish;
 	private LakeWorld lakeWorld;
 	
-	public MouseControlledEye(MouseControlledFish fish, LakeWorld lakeWorld) {
-		super();
+	public MouseControlledEye(LakeWorld lakeWorld, MouseControlledFish fish) {
+		super(lakeWorld, fish);
 		this.fish = fish;
 		this.lakeWorld = lakeWorld;
 	}

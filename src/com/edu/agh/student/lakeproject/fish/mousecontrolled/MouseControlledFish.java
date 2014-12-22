@@ -22,7 +22,7 @@ public class MouseControlledFish extends Fish {
 	public void setBody(Body body){
 		super.setBody(body);
 		super.muscles = new MouseControlledMuscles(super.body);
-		super.eye = new MouseControlledEye(this, lakeWorld);
+		super.eye = new MouseControlledEye(lakeWorld, this);
 		lakeWorld.addMouseMotionListener((MouseMotionListener) muscles);
 	}
 
@@ -35,10 +35,10 @@ public class MouseControlledFish extends Fish {
 	public void move(){
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
-		for(Object color: eye.getView().getPixels()){
+		/*for(Object color: eye.getView().getPixels()){
 			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 		}
-		System.out.println();
+		System.out.println();*/
 		energy--;
 		muscles.applyForces(null); //TODO
 	}
