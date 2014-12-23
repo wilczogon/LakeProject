@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import org.jbox2d.common.Vec2;
 
 import com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish;
+import com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish.NeuralNetworkBrainFish;
 import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
@@ -102,6 +103,7 @@ public class MainFrame extends JFrame {
 		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(200, 450), 10));
 		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(320, 260), 200));
 		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, new Vec2(100, 100)));
+		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(300, 150)));
 		
 		// placing Components
 		
