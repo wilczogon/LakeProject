@@ -37,7 +37,6 @@ public class MouseControlledFish extends Fish {
 	public void move(){
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
-<<<<<<< HEAD
 		int x = 0;
 		for(Object color: eye.getView().getPixels()){
 //			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
@@ -45,12 +44,10 @@ public class MouseControlledFish extends Fish {
 			gd.setColor((Color) color);
 			gd.fillRect(x, 0, 10, 10);
 			x+=10;
-=======
-		/*for(Object color: eye.getView().getPixels()){
-			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
->>>>>>> e14494af7d74789c5b9cd034256c52076eb9feae
+		//for(Object color: eye.getView().getPixels()){
+			//System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 		}
-		System.out.println();*/
+		//System.out.println();*/
 		energy--;
 		muscles.applyForces(null); //TODO
 	}
