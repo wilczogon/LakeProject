@@ -30,7 +30,7 @@ public class NeuralNetworkBrain extends Brain {
 	  
 	  double[] result = neuralNetwork.proceed(values);
 	  
-	  MovementDecision decision = new MovementDecision(result[0], result[1]);	//the result is between -1 and 1
+	  MovementDecision decision = new MovementDecision((result[0]+1)/2, result[1]);	//the result is between 0 and 1 or -1 and 1
 	  
 	  return decision;
 	}

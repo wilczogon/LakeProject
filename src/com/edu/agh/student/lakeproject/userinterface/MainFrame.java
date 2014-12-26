@@ -59,6 +59,17 @@ public class MainFrame extends JFrame {
 		super(frameTitle);
 		init();
 	}
+	
+	protected void createLakeObjects(LakeWorld lakeWorld){
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(300, 300)));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(250, 350)));
+		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
+		lakeWorld.addLakeObject(new Food(lakeWorld, 10.0f, new Vec2(124, 267), 100));
+		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(200, 450), 10));
+		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(320, 260), 200));
+		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, new Vec2(100, 100)));
+		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(300, 150)));
+	}
 
 	public void init(){
 		
@@ -86,15 +97,7 @@ public class MainFrame extends JFrame {
 		lakeWorld.addBound(new Vec2(0, 0), new Vec2(-10, 0), new Vec2(-10, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height));
 		lakeWorld.addBound(new Vec2(LakeConfiguration.width, 0), new Vec2(LakeConfiguration.width+10, 0), new Vec2(LakeConfiguration.width+10, LakeConfiguration.height), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
 		
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(300, 300)));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(250, 350)));
-		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10.0f, new Vec2(124, 267), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(200, 450), 10));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(320, 260), 200));
-		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, new Vec2(100, 100)));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(300, 150)));
-		
+		createLakeObjects(lakeWorld);
 		
 		// placing Components
 		
