@@ -1,6 +1,7 @@
 package com.edu.agh.student.lakeproject.fish.mousecontrolled;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseMotionListener;
 
 import org.jbox2d.common.Vec2;
@@ -9,6 +10,7 @@ import org.jbox2d.dynamics.Body;
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
+import com.edu.agh.student.lakeproject.userinterface.MainFrame;
 import com.edu.agh.student.lakeproject.fish.Gender;
 
 public class MouseControlledFish extends Fish {
@@ -35,10 +37,17 @@ public class MouseControlledFish extends Fish {
 	public void move(){
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
-		/*for(Object color: eye.getView().getPixels()){
-			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
+		int x = 0;
+		for(Object color: eye.getView().getPixels()){
+//			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
+			Graphics gd = MainFrame.getCanvas().getGraphics();
+			gd.setColor((Color) color);
+			gd.fillRect(x, 0, 10, 10);
+			x+=10;
+		//for(Object color: eye.getView().getPixels()){
+			//System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 		}
-		System.out.println();*/
+		//System.out.println();*/
 		energy--;
 		muscles.applyForces(null); //TODO
 	}

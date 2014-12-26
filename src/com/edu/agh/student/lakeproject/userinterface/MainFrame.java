@@ -1,5 +1,6 @@
 package com.edu.agh.student.lakeproject.userinterface;
 
+import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,8 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.food.Food;
+import java.awt.Panel;
+import java.awt.FlowLayout;
 
 public class MainFrame extends JFrame {
 	/**
@@ -29,8 +32,7 @@ public class MainFrame extends JFrame {
 
 	private static String frameTitle = "Lake Project";
 	
-	private static String playButtonTitle = "Start";
-	private static String pauseButtonTitle = "Pauza";
+	private static String playpauseButtonTitle = "Start/Pauza";
 	private static String forwardButtonTitle = "Przyspieszenie";
 	private static String saveLakeButtonTitle = "Zapisz";
 	private static String openLakeButtonTitle = "Otworz";
@@ -40,9 +42,10 @@ public class MainFrame extends JFrame {
 	private static String openLakeObjectButtonTitle = "Otworz";
 	private static String saveLakeObjectButtonTitle = "Zapisz";
 	private static String modifyLakeObjectButtonTitle = "Modyfikuj";
+
+	private static Panel canvas;
 	
-	JButton playButton;
-	JButton pauseButton;
+	JButton playpauseButton;
 	JButton forwardButton;
 	JButton saveLakeButton;
 	JButton openLakeButton;
@@ -54,6 +57,8 @@ public class MainFrame extends JFrame {
 	JButton modifyLakeObjectButton;
 	
 	JPanel lakeWorldPanel;
+
+	static int fps = 60;
 	
 	public MainFrame() {
 		super(frameTitle);
@@ -74,8 +79,7 @@ public class MainFrame extends JFrame {
 	public void init(){
 		
 		// creating Components
-		playButton = new JButton(playButtonTitle);
-		pauseButton = new JButton(pauseButtonTitle);
+		playpauseButton = new JButton(playpauseButtonTitle);
 		forwardButton = new JButton(forwardButtonTitle);
 		saveLakeButton = new JButton(saveLakeButtonTitle);
 		openLakeButton = new JButton(openLakeButtonTitle);
@@ -86,12 +90,18 @@ public class MainFrame extends JFrame {
 		saveLakeObjectButton = new JButton(saveLakeObjectButtonTitle);
 		modifyLakeObjectButton = new JButton(modifyLakeObjectButtonTitle);
 		
-		this.setBounds(0, 0, 800, 600);
+		
+		
+		canvas = new Panel();
+		
+		
+		this.setLayout(null);
+		this.setBounds(0, 0, LakeConfiguration.width + 130, LakeConfiguration.height + 100);
 		LakeWorld lakeWorld = new LakeWorld();
 		lakeWorldPanel = new JPanel();
-		lakeWorldPanel.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
+		
 		lakeWorld.setFrame(lakeWorldPanel);
-		//lakeWorldFrame = lakeWorld.getFrame();
+		
 		lakeWorld.addBound(new Vec2(0, 0), new Vec2(0, -10), new Vec2(LakeConfiguration.width, -10), new Vec2(LakeConfiguration.width, 0));
 		lakeWorld.addBound(new Vec2(0, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
 		lakeWorld.addBound(new Vec2(0, 0), new Vec2(-10, 0), new Vec2(-10, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height));
@@ -101,47 +111,37 @@ public class MainFrame extends JFrame {
 		
 		// placing Components
 		
-		Container pane = this.getContentPane();
-		pane.setLayout(new BoxLayout(pane,BoxLayout.X_AXIS));
-		
-		JPanel objectPanel = new JPanel();
-		JPanel lakePanel = new JPanel();
-		JPanel controlPanel = new JPanel();
-		
-		controlPanel.setLayout(new BoxLayout(controlPanel,BoxLayout.X_AXIS));
-		//((BoxLayout)controlPanel.getLayout()).;
-		objectPanel.setLayout(new BoxLayout(objectPanel,BoxLayout.Y_AXIS));
-		lakePanel.setLayout(new BoxLayout(lakePanel,BoxLayout.Y_AXIS));
-		
-		objectPanel.add(newLakeObjectButton);
-		objectPanel.add(openLakeObjectButton);
-		objectPanel.add(saveLakeButton);
-		objectPanel.add(modifyLakeObjectButton);
-		controlPanel.add(playButton);
-		controlPanel.add(pauseButton);
-		controlPanel.add(recButton);
-		controlPanel.add(forwardButton);
-		controlPanel.add(openLakeButton);
-		controlPanel.add(saveLakeObjectButton);
-		pane.add(objectPanel);
-		pane.add(lakePanel);
-		lakePanel.add(lakeWorldPanel);
-		lakePanel.add(controlPanel);
+		add(newLakeObjectButton);
+		add(openLakeObjectButton);
+		add(saveLakeButton);
+		add(modifyLakeObjectButton);
+		add(saveLakeObjectButton);
+		add(canvas);
+		add(playpauseButton);
+		add(recButton);
+		add(forwardButton);
+		add(openLakeButton);
+		add(lakeWorldPanel);
 		this.setVisible(true);
 		
+		newLakeObjectButton.setBounds(5, 5, 100, 45);
+		openLakeObjectButton.setBounds(5, 50, 100, 45);
+		saveLakeObjectButton.setBounds(5, 95, 100, 45);
+		modifyLakeObjectButton.setBounds(5, 140, 100, 45);
+		lakeWorldPanel.setSize(LakeConfiguration.width, LakeConfiguration.height);
+		lakeWorldPanel.setLocation(110, 5);
+		canvas.setSize(100,10);
+		canvas.setLocation(5, 235);
+		playpauseButton.setBounds(110, LakeConfiguration.height + 10, 100, 45);
+		recButton.setBounds(215, LakeConfiguration.height + 10, 100, 45);
+		forwardButton.setBounds(320, LakeConfiguration.height + 10, 100, 45);
+		openLakeButton.setBounds(425, LakeConfiguration.height + 10, 100, 45);
+		saveLakeButton.setBounds(530, LakeConfiguration.height + 10, 100, 45);
 		// adding Listeners
-		playButton.addActionListener(new ActionListener() {
+		playpauseButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				playButtonActionPerformed();
-				
-			}
-		});
-		
-		pauseButton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				pauseButtonActionPerformed();
+				playpauseButtonActionPerformed();
 				
 			}
 		});
@@ -238,6 +238,11 @@ public class MainFrame extends JFrame {
 		lakeWorld.start();
 	}
 	
+	protected void playpauseButtonActionPerformed() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	protected void modifyLakeObjectButtonActionPerformed() {
 		// TODO Auto-generated method stub
 		
@@ -273,22 +278,18 @@ public class MainFrame extends JFrame {
 		
 	}
 
+	
+	
 	protected void forwardButtonActionPerformed() {
-		// TODO Auto-generated method stub
 		
-	}
-
-	protected void pauseButtonActionPerformed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	protected void playButtonActionPerformed() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void mainWindowClosing(){
 		System.exit(0);
+	}
+
+	public static Panel getCanvas() {
+		return canvas;
 	}
 }
