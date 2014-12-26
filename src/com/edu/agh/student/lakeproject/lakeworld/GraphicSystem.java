@@ -80,7 +80,8 @@ public class GraphicSystem {
 	
 	public EyeView getEyeView(LakeObject fish, float radius, int viewSize){
 		ArrayEyeView result = new ArrayEyeView(viewSize);
-		float angleZero = fish.getAngle();
+		//System.out.println(fish.getAngle());
+		float angleZero = (float) (fish.getAngle() * 180 / Math.PI);
 		float angleDelta = (float) (2 * Math.PI / viewSize);
 		float angle = angleZero;
 		Color pixel;
@@ -92,9 +93,11 @@ public class GraphicSystem {
 		final Vec2Holder visiblePoint = new Vec2Holder();
 		float distance = 0;
 		for(int ii = 0; ii < viewSize; ii++){
+			visibleBody.value = null;
+			visiblePoint.value = null;
 			angle += angleDelta;
-			pointB = new Vec2(pointA);
-			pointB.addLocal((float) Math.sin(angle)*radius,(float) Math.cos(angle)*radius);
+			//pointB = new Vec2(pointA);
+			pointB = pointA.add(new Vec2((float) Math.sin(angle)*radius,(float) Math.cos(angle)*radius));
 			RayCastCallback callback = new RayCastCallback() {
 				
 				@Override
@@ -102,18 +105,10 @@ public class GraphicSystem {
 						float fraction) {
 					visibleBody.value = fixture.getBody();
 					visiblePoint.value = point;
-//					stoppedHolder.value = true;
 					return 0;
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
-//			if(!stoppedHolder.value){
-//				try {
-//					Thread.sleep(1);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//			}
 			for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
 				if(lakeObject.body == visibleBody.value){
 					visibleObject = lakeObject;
