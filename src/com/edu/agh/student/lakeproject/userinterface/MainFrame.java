@@ -54,7 +54,6 @@ public class MainFrame extends JFrame {
 	JButton newLakeObjectButton;
 	JButton openLakeObjectButton;
 	JButton saveLakeObjectButton;
-	JButton modifyLakeObjectButton;
 	
 	JPanel lakeWorldPanel;
 
@@ -88,7 +87,6 @@ public class MainFrame extends JFrame {
 		newLakeObjectButton = new JButton(newLakeObjectButtonTitle);
 		openLakeObjectButton = new JButton(openLakeObjectButtonTitle);
 		saveLakeObjectButton = new JButton(saveLakeObjectButtonTitle);
-		modifyLakeObjectButton = new JButton(modifyLakeObjectButtonTitle);
 		
 		
 		
@@ -114,7 +112,6 @@ public class MainFrame extends JFrame {
 		add(newLakeObjectButton);
 		add(openLakeObjectButton);
 		add(saveLakeButton);
-		add(modifyLakeObjectButton);
 		add(saveLakeObjectButton);
 		add(canvas);
 		add(playpauseButton);
@@ -127,7 +124,6 @@ public class MainFrame extends JFrame {
 		newLakeObjectButton.setBounds(5, 5, 100, 45);
 		openLakeObjectButton.setBounds(5, 50, 100, 45);
 		saveLakeObjectButton.setBounds(5, 95, 100, 45);
-		modifyLakeObjectButton.setBounds(5, 140, 100, 45);
 		lakeWorldPanel.setSize(LakeConfiguration.width, LakeConfiguration.height);
 		lakeWorldPanel.setLocation(110, 5);
 		canvas.setSize(100,10);
@@ -202,14 +198,6 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		modifyLakeObjectButton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				modifyLakeObjectButtonActionPerformed();
-				
-			}
-		});
-		
 		this.addWindowListener(new WindowListener() {
 			
 			public void windowOpened(WindowEvent arg0) {
@@ -239,11 +227,6 @@ public class MainFrame extends JFrame {
 	}
 	
 	protected void playpauseButtonActionPerformed() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	protected void modifyLakeObjectButtonActionPerformed() {
 		// TODO Auto-generated method stub
 		
 	}
