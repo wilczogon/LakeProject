@@ -9,6 +9,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -17,15 +18,24 @@ import org.jbox2d.common.Vec2;
 import com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish;
 import com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish.NeuralNetworkBrainFish;
 import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
+import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.fish.Gender;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
+import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.food.Food;
+
 import java.awt.Panel;
 import java.awt.FlowLayout;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	/**
 	 * 
 	 */
@@ -59,6 +69,10 @@ public class MainFrame extends JFrame {
 	JPanel lakeWorldPanel;
 
 	static int fps = 60;
+
+	private LakeWorld lakeWorld;
+
+	private Fish chosenFish;
 	
 	public MainFrame() {
 		super(frameTitle);
@@ -98,10 +112,11 @@ public class MainFrame extends JFrame {
 		
 		this.setLayout(null);
 		this.setBounds(0, 0, LakeConfiguration.width + 130, LakeConfiguration.height + 100);
-		LakeWorld lakeWorld = new LakeWorld();
+		lakeWorld = new LakeWorld();
 		lakeWorldPanel = new JPanel();
 		
 		lakeWorld.setFrame(lakeWorldPanel);
+		lakeWorld.addLakeObjectFocusListener(this);
 		
 		lakeWorld.addBound(new Vec2(0, 0), new Vec2(0, -10), new Vec2(LakeConfiguration.width, -10), new Vec2(LakeConfiguration.width, 0));
 		lakeWorld.addBound(new Vec2(0, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
@@ -235,13 +250,37 @@ public class MainFrame extends JFrame {
 	}
 
 	protected void saveLakeObjectButtonActionPerformed() {
-		// TODO Auto-generated method stub
+		JFileChooser fc=new JFileChooser();
+		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+			try {
+				ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream(fc.getSelectedFile()));
+				objectOutput.writeObject(chosenFish);
+				objectOutput.flush();
+				objectOutput.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
 	protected void openLakeObjectButtonActionPerformed() {
-		// TODO Auto-generated method stub
-		
+		JFileChooser fc=new JFileChooser();
+		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			try {
+				ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream(fc.getSelectedFile()));
+				Fish newFish = (Fish) objectInput.readObject();
+				lakeWorld.addLakeObject(newFish);
+				objectInput.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	protected void newLakeObjectButtonActionPerformed() {
@@ -277,5 +316,13 @@ public class MainFrame extends JFrame {
 
 	public static Panel getCanvas() {
 		return canvas;
+	}
+
+	@Override
+	public void setChosenLakeObject(LakeObject chosen) {
+		if(chosen instanceof Fish){
+			chosenFish = (Fish) chosen;
+		}
+		
 	}
 }
