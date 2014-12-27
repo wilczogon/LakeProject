@@ -17,6 +17,7 @@ import org.jbox2d.common.Vec2;
 import com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish;
 import com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish.NeuralNetworkBrainFish;
 import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
+import com.edu.agh.student.lakeproject.fish.Gender;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
@@ -65,8 +66,10 @@ public class MainFrame extends JFrame {
 	}
 	
 	protected void createLakeObjects(LakeWorld lakeWorld){
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(300, 300)));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(250, 350)));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(300, 300), Gender.FEMALE));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(250, 350), Gender.MALE));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(200, 100), Gender.FEMALE));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(450, 350), Gender.MALE));
 		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
 		lakeWorld.addLakeObject(new Food(lakeWorld, 10.0f, new Vec2(124, 267), 100));
 		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(200, 450), 10));

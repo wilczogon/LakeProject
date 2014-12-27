@@ -15,6 +15,11 @@ public class Veiltail extends Fish {
 		super(lakeWorld, position, Color.YELLOW);
 		setImage("rsc/ryba.png");
 	}
+	
+	public Veiltail(LakeWorld lakeWorld, Vec2 position, Gender gender){
+		super(lakeWorld, position, gender, Color.YELLOW);
+		setImage("rsc/ryba.png");
+	}
 
 	@Override
 	public String getSpace() {
@@ -33,17 +38,6 @@ public class Veiltail extends Fish {
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
 		muscles.applyForces(null); //Veiltail is stupid - no brain
-	}
-	
-	@Override
-	public void initReproductionOrgans(Gender gender){
-	  // TODO
-	  /*
-	  if(gender == Gender.FEMALE)
-	    reproductiveOrgans = new FemaleReproductiveOrgans();
-	  else if (gender == Gender.MALE)
-	    reproductiveOrgans = new MaleReproductiveOrgans();
-	  */
 	}
 
 }

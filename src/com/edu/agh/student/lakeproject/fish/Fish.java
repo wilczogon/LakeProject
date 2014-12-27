@@ -25,20 +25,29 @@ public abstract class Fish extends LakeObject {
 	protected float growthFactor = 0.001f;
 	
 	public Fish(LakeWorld lakeWorld, Vec2 position, Gender gender, Color color){
-		super(lakeWorld, 20.0f, position, color);
+		super(lakeWorld, 20.0f, position, gender == Gender.MALE ? new Color(color.getRed(), color.getGreen(), Math.min(color.getBlue()+10, 255)):color);	//Thanks to this males are little different in color than females
 		radius = INITIAL_RADIUS;
-		initReproductionOrgans(gender);// TODO
+		initReproductionOrgans(gender);
 	}
 	
 	public Fish(LakeWorld lakeWorld, Vec2 position, Color color){
 		this(lakeWorld, position, (Math.random()%2 == 0 ? Gender.FEMALE : Gender.MALE), color);
 	}
 	
-	public abstract void initReproductionOrgans(Gender gender);
+	public void initReproductionOrgans(Gender gender){
+	  if(gender == Gender.FEMALE)
+	    reproductiveOrgans = new FemaleReproductiveOrgans(super.lakeWorld, this);
+	  else
+	    reproductiveOrgans = new MaleReproductiveOrgans();
+	}
 	
 	@Override
 	public String getType() {
 		return LakeConfiguration.fishTypeName;
+	}
+	
+	public ReproductiveOrgans getReproductiveOrgans(){
+	  return reproductiveOrgans;
 	}
 	
 	public Gender getGender(){
@@ -67,8 +76,10 @@ public abstract class Fish extends LakeObject {
 	}
 	
 	protected void interactWith(Fish fish){
-		if(fish.getSpace().equals(getSpace()) ){//&& getGender() != fish.getGender()){ TODO
-			// my space, opposite gender
+		if(fish.getSpace().equals(getSpace()) && getGender() != fish.getGender()){
+			if(getGender() == Gender.FEMALE){
+			  ((FemaleReproductiveOrgans)getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)fish.getReproductiveOrgans()).getChromosome());
+			}
 		} else{
 			health--;
 		}
