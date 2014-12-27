@@ -51,10 +51,5 @@ public class MouseControlledFish extends Fish {
 		energy--;
 		muscles.applyForces(null); //TODO
 	}
-	
-	@Override
-	public void initReproductionOrgans(Gender gender){
-	  // do nothing
-	}
 
 }
