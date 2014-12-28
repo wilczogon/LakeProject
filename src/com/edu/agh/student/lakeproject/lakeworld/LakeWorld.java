@@ -2,6 +2,7 @@ package com.edu.agh.student.lakeproject.lakeworld;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 
 import com.edu.agh.student.lakeproject.fish.Fish;
+import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
 
 public class LakeWorld extends World {
@@ -146,4 +148,16 @@ public class LakeWorld extends World {
 	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
 	@SuppressWarnings("unused")
 	private List<Fish> retainers = new ArrayList<Fish>();
+	private List<LakeObjectFocusListener> lakeObjectFocusListeners;
+
+	public void addLakeObjectFocusListener(LakeObjectFocusListener listener) {
+		lakeObjectFocusListeners.add(listener);
+		
+	}
+	
+	private void setChosenLakeObject(LakeObject chosen){
+		for(LakeObjectFocusListener listener: lakeObjectFocusListeners){
+			listener.setChosenLakeObject(chosen);
+		}
+	}
 }
