@@ -37,6 +37,7 @@ public class Veiltail extends Fish {
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
+		getReproductiveOrgans().step();
 		muscles.applyForces(null); //Veiltail is stupid - no brain
 	}
 
