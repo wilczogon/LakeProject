@@ -31,6 +31,7 @@ public class LakeWorld extends World {
 
 	public LakeWorld(){
 		super(new Vec2(0, 0));
+		lakeObjectFocusListeners = new ArrayList<LakeObjectFocusListener>();
 //		//frame = new JFrame(LakeConfiguration.title);
 //		panel = new JPanel();
 //		panel.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
