@@ -55,9 +55,9 @@ public class LakeWorld extends World {
 			}
 		}
 		
-		for(LakeObject lakeObject: lakeObjects){
-			lakeObject.move();
-		}
+		for(int i = 0; i<lakeObjects.size(); ++i)
+			lakeObjects.get(i).move();
+		
 		super.step(LakeConfiguration.stepTime, 1, 1);
 		
 		if(getContactCount() != 0){

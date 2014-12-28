@@ -8,4 +8,11 @@ public class MaleReproductiveOrgans extends ReproductiveOrgans{
   public Chromosome getChromosome(){
     return null;
   }
+  
+  @Override
+  public void step(){
+    if(!isMature()){
+      --maturityCounter;
+    }
+  }
 }

@@ -61,6 +61,7 @@ public abstract class Fish extends LakeObject {
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
+		getReproductiveOrgans().step();
 		muscles.applyForces(brain.decideMovement(eye.getView()));
 	}
 	
@@ -77,8 +78,8 @@ public abstract class Fish extends LakeObject {
 	
 	protected void interactWith(Fish fish){
 		if(fish.getSpace().equals(getSpace()) && getGender() != fish.getGender()){
-			if(getGender() == Gender.FEMALE){
-			  ((FemaleReproductiveOrgans)getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)fish.getReproductiveOrgans()).getChromosome());
+			if(getGender() == Gender.MALE && getReproductiveOrgans().isMature()){
+			  ((FemaleReproductiveOrgans)fish.getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)getReproductiveOrgans()).getChromosome());
 			}
 		} else{
 			health--;
