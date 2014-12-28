@@ -1,6 +1,7 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReportManager{
   private LakeWorld lakeWorld;
