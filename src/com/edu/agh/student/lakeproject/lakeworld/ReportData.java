@@ -4,9 +4,9 @@ import java.util.*;
 
 public class ReportData{
   private String spaceName;
-  private Map<int, int> theLongestLivingFish = new HashMap<int, int>();
-  private Map<int, int> numberOfFishes = new HashMap<int, int>();
-  private Map<int, float> meanOfFishesLifeTime = new HashMap<int, float>();
+  private Map<Integer, Integer> theLongestLivingFish = new HashMap<Integer, Integer>();
+  private Map<Integer, Integer> numberOfFishes = new HashMap<Integer, Integer>();
+  private Map<Integer, Float> meanOfFishesLifeTime = new HashMap<Integer, Float>();
   private int fishNo = 0;
   private int fishLifeTimeSum = 0;
   private int lifeTimeOfTheLongestLivingFish = 0;
@@ -23,7 +23,7 @@ public class ReportData{
   public void writeDown(){
     theLongestLivingFish.put(time, lifeTimeOfTheLongestLivingFish);
     numberOfFishes.put(time, fishNo);
-    meanOfFishesLifeTime.put(time, fishLifeTimeSum/fishNo);
+    meanOfFishesLifeTime.put(time, (float)fishLifeTimeSum/(float)fishNo);
   }
   
   public void step(){

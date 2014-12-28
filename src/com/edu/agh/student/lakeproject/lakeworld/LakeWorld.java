@@ -29,10 +29,12 @@ public class LakeWorld extends World implements MouseListener{
 	
 	private GraphicSystem graphicSystem;
 	private JPanel panel;
+	private ReportManager reportManager;
 
 	public LakeWorld(){
 		super(new Vec2(0, 0));
 		lakeObjectFocusListeners = new ArrayList<LakeObjectFocusListener>();
+		reportManager = new ReportManager(this);
 //		//frame = new JFrame(LakeConfiguration.title);
 //		panel = new JPanel();
 //		panel.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
@@ -87,6 +89,7 @@ public class LakeWorld extends World implements MouseListener{
 		graphicSystem.paint();
 		graphicSystem.swapBuffers();
 		//debugDraw.swapBuffers();
+		reportManager.step();
 	}
 	
 	private void init(){

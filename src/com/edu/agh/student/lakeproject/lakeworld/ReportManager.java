@@ -2,6 +2,7 @@ package com.edu.agh.student.lakeproject.lakeworld;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.edu.agh.student.lakeproject.fish.Fish;
 
 public class ReportManager{
   private LakeWorld lakeWorld;
@@ -44,7 +45,7 @@ public class ReportManager{
     List<LakeObject> lakeObjects = lakeWorld.getLakeObjects();
     
     for(LakeObject lakeObject: lakeObjects){
-      if(lakeObject instanceOf Fish){
+      if(lakeObject instanceof Fish){
 	Fish fish = (Fish)lakeObject;
 	String spaceName = fish.getSpace();
 	boolean reportDataFound = false;
@@ -57,7 +58,7 @@ public class ReportManager{
 	  }
 	}
 	
-	if(!reportedDataFound){
+	if(!reportDataFound){
 	  ReportData reportData = new ReportData(fish.getSpace());
 	  reportData.reportFishLifeTime(fish.getAge());
 	}
