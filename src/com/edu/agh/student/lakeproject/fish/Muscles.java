@@ -1,9 +1,11 @@
 package com.edu.agh.student.lakeproject.fish;
 
+import java.io.Serializable;
+
 import org.jbox2d.dynamics.Body;
 import org.jbox2d.common.Vec2;
 
-public class Muscles {
+public class Muscles implements Serializable{
 	
 	protected Body body;
 	protected double strength = 60; //the stronger fish, the faster it swims

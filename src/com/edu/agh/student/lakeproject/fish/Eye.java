@@ -1,13 +1,14 @@
 package com.edu.agh.student.lakeproject.fish;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import com.edu.agh.student.lakeproject.fish.Eye;
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.lakeworld.GraphicSystem;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
-public class Eye {
+public class Eye implements Serializable{
 
 	private LakeWorld lakeWorld;
 	private Fish fish;

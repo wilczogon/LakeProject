@@ -1,4 +1,6 @@
 package com.edu.agh.student.lakeproject.fish;
 
-public abstract class Chromosome{
+import java.io.Serializable;
+
+public abstract class Chromosome implements Serializable{
 } 

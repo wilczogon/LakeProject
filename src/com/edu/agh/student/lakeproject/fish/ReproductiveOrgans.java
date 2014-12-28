@@ -1,6 +1,8 @@
 package com.edu.agh.student.lakeproject.fish;
 
-public abstract class ReproductiveOrgans{
+import java.io.Serializable;
+
+public abstract class ReproductiveOrgans implements Serializable{
 
   protected final static int MATURATION_DURATION = 100;
   protected int maturityCounter = MATURATION_DURATION;

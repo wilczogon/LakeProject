@@ -1,6 +1,8 @@
 package com.edu.agh.student.lakeproject.fish;
 
-public abstract class Brain {
+import java.io.Serializable;
+
+public abstract class Brain implements Serializable{
 	
 	public Brain(){
 		
