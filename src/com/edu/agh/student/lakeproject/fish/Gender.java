@@ -1,5 +1,7 @@
 package com.edu.agh.student.lakeproject.fish;
 
-public enum Gender{
+import java.io.Serializable;
+
+public enum Gender implements Serializable{
   FEMALE, MALE
 }

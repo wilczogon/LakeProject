@@ -1,5 +1,6 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.PrintStream;
@@ -24,7 +25,7 @@ import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
 
-public class LakeWorld extends World {
+public class LakeWorld extends World implements MouseListener{
 	
 	private GraphicSystem graphicSystem;
 	private JPanel panel;
@@ -160,5 +161,42 @@ public class LakeWorld extends World {
 		for(LakeObjectFocusListener listener: lakeObjectFocusListeners){
 			listener.setChosenLakeObject(chosen);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		Vec2 point = new Vec2(arg0.getX(), arg0.getY()); 
+		
+		for(LakeObject lakeObject :lakeObjects){
+			if(lakeObject instanceof Fish && lakeObject.fixture.testPoint(point)){
+				setChosenLakeObject(lakeObject);
+				break;
+			}
+		}
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

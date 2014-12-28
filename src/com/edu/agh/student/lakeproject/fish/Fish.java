@@ -7,9 +7,11 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.food.Food;
-import java.awt.Color;
 
-public abstract class Fish extends LakeObject {
+import java.awt.Color;
+import java.io.Serializable;
+
+public abstract class Fish extends LakeObject implements Serializable{
 
 	protected Eye eye;
 	protected Brain brain;
