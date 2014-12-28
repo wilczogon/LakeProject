@@ -31,6 +31,10 @@ public class LakeWorld extends World implements MouseListener{
 	private JPanel panel;
 	private ReportManager reportManager;
 
+	public ReportManager getReportManager() {
+		return reportManager;
+	}
+
 	public LakeWorld(){
 		super(new Vec2(0, 0));
 		lakeObjectFocusListeners = new ArrayList<LakeObjectFocusListener>();
