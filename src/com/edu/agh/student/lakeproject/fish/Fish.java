@@ -26,6 +26,30 @@ public abstract class Fish extends LakeObject implements Serializable{
 	protected int age = 0;
 	protected float growthFactor = 0.001f;
 	
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
 	public Fish(LakeWorld lakeWorld, Vec2 position, Gender gender, Color color){
 		super(lakeWorld, 20.0f, position, gender == Gender.MALE ? new Color(color.getRed(), color.getGreen(), Math.min(color.getBlue()+10, 255)):color);	//Thanks to this males are little different in color than females
 		radius = INITIAL_RADIUS;
