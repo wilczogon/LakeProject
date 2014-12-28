@@ -23,7 +23,6 @@ public class FemaleReproductiveOrgans extends ReproductiveOrgans{
   
   @Override
   public void step(){
-    System.out.println("Step: " + isMature() + isPregnant() + isRecovering());
     if(!isMature()){
       --maturityCounter;
     }else if(isPregnant()){
