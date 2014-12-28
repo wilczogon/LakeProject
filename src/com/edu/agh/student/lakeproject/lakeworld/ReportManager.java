@@ -1,5 +1,7 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
+import java.util.*;
+
 public class ReportManager{
   private LakeWorld lakeWorld;
   private boolean isStopped = true;
@@ -26,6 +28,9 @@ public class ReportManager{
   }
   
   public void step(){
+    for(ReportData reportData: report)
+      reportData.step();
+      
     if(!isStopped())
       count();
   }
@@ -35,6 +40,24 @@ public class ReportManager{
   }
   
   private void count(){ //TODO
+    List<LakeObject> lakeObjects = lakeWorld.getLakeObjects();
+    
+    for(LakeObject lakeObject: lakeObjects){
+      if(lakeObject instanceOf Fish){
+	Fish fish = (Fish)lakeObject;
+	String spaceName = fish.getSpace();
+	
+	for(ReportData reportData: report){
+	  if(spaceName.equals(reportData.getSpaceName())){
+	    reportData.reportFishLifeTime(fish.getAge());
+	  }
+	}
+      }
+    }
+    
+    for(ReportData reportData: report)
+      reportData.writeDown();
+    
   }
   
 } 
