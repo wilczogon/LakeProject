@@ -2,6 +2,8 @@ package com.edu.agh.student.lakeproject.lakeworld;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.IOException;
 import com.edu.agh.student.lakeproject.fish.Fish;
 
 public class ReportManager{
@@ -26,7 +28,11 @@ public class ReportManager{
     report = new ArrayList<ReportData>();
   }
   
-  public void generateReport(String directoryName){ //TODO
+  public void generateReport(String directoryName) throws IOException{
+  
+    for(ReportData reportData: report){
+      reportData.generateReport(directoryName +  File.separator + reportData.getSpaceName());
+    }
   }
   
   public void step(){
