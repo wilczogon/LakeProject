@@ -52,9 +52,9 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	
 	private static String newLakeObjectButtonTitle = "Nowy";
 	private static String openLakeObjectButtonTitle = "Otworz";
-	private static String openLibraryButtonTitle = "Wczytaj Bibliotekê";
+	private static String openLibraryButtonTitle = "Wczytaj Biblioteke";
 	private static String saveLakeObjectButtonTitle = "Zapisz";
-	private static String removeLakeObjectButtonTitle = "Usuñ";
+	private static String removeLakeObjectButtonTitle = "Usun";
 	
 	private static String reportTitle = "Raport";
 	private static String playpauseReportButtonTitle = "Start/Pauza";

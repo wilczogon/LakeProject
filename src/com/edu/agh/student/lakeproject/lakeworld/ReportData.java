@@ -24,8 +24,9 @@ public class ReportData{
     FileWriter fw;
     BufferedWriter bw;
     
-    File fileTheLongestLivingFish = new File(directoryName + File.separator + "theLongestLivingFish");
+    File fileTheLongestLivingFish = new File(directoryName + File.separator);
     fileTheLongestLivingFish.mkdirs();
+    fileTheLongestLivingFish = new File(directoryName + File.separator + "theLongestLivingFish");
     
     if(!fileTheLongestLivingFish.exists())
       fileTheLongestLivingFish.createNewFile();
@@ -42,8 +43,9 @@ public class ReportData{
     
     
     
-    File fileNumberOfFishes = new File(directoryName + File.separator + "numberOfFishes");
+    File fileNumberOfFishes = new File(directoryName + File.separator);
     fileNumberOfFishes.mkdirs();
+    fileNumberOfFishes = new File(directoryName + File.separator + "numberOfFishes");
     
     if(!fileNumberOfFishes.exists())
       fileNumberOfFishes.createNewFile();
@@ -59,8 +61,9 @@ public class ReportData{
     bw.close();
     
     
-    File fileMeanOfFishesLifeTime = new File(directoryName + File.separator + "meanOfFishesLifeTime");
+    File fileMeanOfFishesLifeTime = new File(directoryName + File.separator);
     fileMeanOfFishesLifeTime.mkdirs();
+    fileMeanOfFishesLifeTime = new File(directoryName + File.separator + "meanOfFishesLifeTime");
     
     if(!fileMeanOfFishesLifeTime.exists())
       fileMeanOfFishesLifeTime.createNewFile();
@@ -96,6 +99,9 @@ public class ReportData{
   public void reportFishLifeTime(int lifeTime){
     fishNo++;
     fishLifeTimeSum += lifeTime;
+    
+    if(lifeTime > lifeTimeOfTheLongestLivingFish)
+      lifeTimeOfTheLongestLivingFish = lifeTime;
   }
   
 }

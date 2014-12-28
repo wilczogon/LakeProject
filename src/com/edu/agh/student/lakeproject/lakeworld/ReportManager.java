@@ -31,7 +31,7 @@ public class ReportManager{
   public void generateReport(String directoryName) throws IOException{
   
     for(ReportData reportData: report){
-      reportData.generateReport(directoryName +  File.separator + reportData.getSpaceName());
+      reportData.generateReport(directoryName +  File.separator + reportData.getSpaceName().replace(".", "_"));
     }
   }
   
@@ -67,6 +67,7 @@ public class ReportManager{
 	if(!reportDataFound){
 	  ReportData reportData = new ReportData(fish.getSpace());
 	  reportData.reportFishLifeTime(fish.getAge());
+	  report.add(reportData);
 	}
       }
     }
