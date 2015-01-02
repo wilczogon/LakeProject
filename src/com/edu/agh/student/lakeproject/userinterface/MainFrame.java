@@ -57,7 +57,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	private static String removeLakeObjectButtonTitle = "Usun";
 	
 	private static String reportTitle = "Raport";
-	private static String playpauseReportButtonTitle = "Start/Pauza";
+	private static String playpauseReportButtonTitle = "Start";
 	private static String resetReportButtonTitle = "Reset";
 	private static String saveReportButtonTitle = "Zapisz";
 	//todo 
@@ -133,10 +133,18 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		playpauseReportButton = new JButton(playpauseReportButtonTitle);
 		playpauseReportButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(lakeWorld.getReportManager().isStopped())
+				if(lakeWorld.getReportManager().isStopped()){
 					lakeWorld.getReportManager().start();
-				else
+					playpauseReportButton.setText("Pauza");
+					resetReportButton.setEnabled(false);
+					saveReportButton.setEnabled(false);
+					
+				}else{
 					lakeWorld.getReportManager().stop();
+					playpauseReportButton.setText("Start");
+					resetReportButton.setEnabled(true);
+					saveReportButton.setEnabled(true);
+				}
 			}
 		});
 		resetReportButton = new JButton(resetReportButtonTitle);
