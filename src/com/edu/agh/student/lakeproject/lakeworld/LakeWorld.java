@@ -30,6 +30,14 @@ public class LakeWorld extends World implements MouseListener{
 	private GraphicSystem graphicSystem;
 	private JPanel panel;
 	private ReportManager reportManager;
+	private Timer timer = null;
+	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
+	@SuppressWarnings("unused")
+	private List<Fish> retainers = new ArrayList<Fish>();
+	private List<LakeObjectFocusListener> lakeObjectFocusListeners;
+	private boolean isTimerStarted = false;
+	private boolean isTimerForwarded = false;
+	private float timerStep = 0;
 
 	public ReportManager getReportManager() {
 		return reportManager;
@@ -68,7 +76,7 @@ public class LakeWorld extends World implements MouseListener{
 		for(int i = 0; i<lakeObjects.size(); ++i)
 			lakeObjects.get(i).move();
 		
-		super.step(LakeConfiguration.stepTime, 1, 1);
+		super.step(timerStep, 1, 1);
 		
 		if(getContactCount() != 0){
 			Contact contact = getContactList();
@@ -103,7 +111,42 @@ public class LakeWorld extends World implements MouseListener{
 		//panel.setVisible(true);
 		
 		timer = new Timer();
-		timer.schedule(new LakeTimerTask(this), new Date(), (long)Math.floor(1000*LakeConfiguration.stepTime));
+		startTimer();
+	}
+	
+	public boolean isTimerStarted(){
+	  return isTimerStarted;
+	}
+	
+	public boolean isTimerForwarded(){
+	  return isTimerForwarded;
+	}
+	
+	public void stopTimer(){
+	  if(isTimerStarted()){
+	    timer.cancel();
+	    timer.purge();
+	    isTimerStarted = false;
+	    isTimerForwarded = false;
+	  }
+	}
+	
+	public void startTimer(){
+	  isTimerForwarded = false;
+	  startTimer((long)Math.floor(2000*LakeConfiguration.stepTime));
+	}
+	
+	public void forwardTimer(long milliseconds){
+	  isTimerForwarded = true;
+	  startTimer(milliseconds);
+	}
+	
+	public void startTimer(long milliseconds){
+	  stopTimer();
+	  timer = new Timer();
+	  timer.schedule(new LakeTimerTask(this), new Date(), milliseconds);
+	  isTimerStarted = true;
+	  timerStep = milliseconds;
 	}
 	
 	public void addMouseListener(MouseListener listener){
@@ -152,12 +195,6 @@ public class LakeWorld extends World implements MouseListener{
 	public GraphicSystem getGraphicSystem(){
 	  return graphicSystem;
 	}
-	
-	private Timer timer = null;
-	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
-	@SuppressWarnings("unused")
-	private List<Fish> retainers = new ArrayList<Fish>();
-	private List<LakeObjectFocusListener> lakeObjectFocusListeners;
 
 	public void addLakeObjectFocusListener(LakeObjectFocusListener listener) {
 		lakeObjectFocusListeners.add(listener);

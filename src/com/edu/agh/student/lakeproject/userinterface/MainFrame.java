@@ -44,8 +44,8 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 
 	private static String frameTitle = "Lake Project";
 	
-	private static String playpauseButtonTitle = "Start/Pauza";
-	private static String forwardButtonTitle = "Przyspieszenie";
+	private static String playpauseButtonTitle = "Pauza";
+	private static String forwardButtonTitle = "Przyspiesz";
 	private static String saveLakeButtonTitle = "Zapisz";
 	private static String openLakeButtonTitle = "Otworz";
 	private static String recButtonTitle = "Nagrywaj";
@@ -326,8 +326,14 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	protected void playpauseButtonActionPerformed() {
-		// TODO Auto-generated method stub
-		
+		if(lakeWorld.isTimerStarted()){
+		  lakeWorld.stopTimer();
+		  playpauseButton.setText("Start");
+		  forwardButton.setText("Przyspiesz");
+		} else{
+		  lakeWorld.startTimer();
+		  playpauseButton.setText("Pauza");
+		}
 	}
 
 	protected void saveLakeObjectButtonActionPerformed() {
@@ -385,7 +391,15 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 	
 	protected void forwardButtonActionPerformed() {
-		
+		if(!lakeWorld.isTimerForwarded()){
+		  lakeWorld.forwardTimer((long)Math.floor(1000*LakeConfiguration.stepTime/10));
+		  playpauseButton.setText("Pauza");
+		  forwardButton.setText("Normalna predkosc");
+		} else{
+		  lakeWorld.startTimer();
+		  playpauseButton.setText("Pauza");
+		  forwardButton.setText("Przyspiesz");
+		}
 		
 	}
 
