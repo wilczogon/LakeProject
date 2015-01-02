@@ -14,7 +14,6 @@ public class NeuralNetworkBrainFish extends Fish {
 
 	public NeuralNetworkBrainFish(LakeWorld lakeWorld, Vec2 position){
 		super(lakeWorld, position, Color.RED);
-		setImage("rsc/ryba.png");
 	}
 	
 	@Override

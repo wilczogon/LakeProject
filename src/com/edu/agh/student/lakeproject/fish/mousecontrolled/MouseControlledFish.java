@@ -17,7 +17,6 @@ public class MouseControlledFish extends Fish {
 
 	public MouseControlledFish(LakeWorld lakeWorld, Vec2 position) {
 		super(lakeWorld, position, Color.WHITE);
-		setImage("rsc/ryba.png");
 	}
 	
 	@Override

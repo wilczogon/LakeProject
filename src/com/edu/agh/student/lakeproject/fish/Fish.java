@@ -53,11 +53,19 @@ public abstract class Fish extends LakeObject implements Serializable{
 	public Fish(LakeWorld lakeWorld, Vec2 position, Gender gender, Color color){
 		super(lakeWorld, 20.0f, position, gender == Gender.MALE ? new Color(color.getRed(), color.getGreen(), Math.min(color.getBlue()+10, 255)):color);	//Thanks to this males are little different in color than females
 		radius = INITIAL_RADIUS;
+		
+		if(gender == Gender.MALE)
+		  setImage("rsc/ryba-m.png");
+		else if(gender == Gender.FEMALE)
+		  setImage("rsc/ryba-f.png");
+		else
+		  setImage("rsc/ryba.png");
+		
 		initReproductionOrgans(gender);
 	}
 	
 	public Fish(LakeWorld lakeWorld, Vec2 position, Color color){
-		this(lakeWorld, position, (Math.random()%2 == 0 ? Gender.FEMALE : Gender.MALE), color);
+		this(lakeWorld, position, (LakeConfiguration.random.nextInt()%2 == 0 ? Gender.FEMALE : Gender.MALE), color);
 	}
 	
 	public void initReproductionOrgans(Gender gender){

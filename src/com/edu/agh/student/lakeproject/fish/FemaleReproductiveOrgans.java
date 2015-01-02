@@ -5,6 +5,7 @@
  import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
  import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
  import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
+ import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 
 public class FemaleReproductiveOrgans extends ReproductiveOrgans{
   private List<Fish> children = new ArrayList<Fish>();
@@ -49,7 +50,8 @@ public class FemaleReproductiveOrgans extends ReproductiveOrgans{
   }
   
   public void cross(Chromosome chromosome){	// in this function you should put right Fishes into list "children"
-    children.add(new Veiltail(lakeWorld, new Vec2(10, 10)));
+    double angle = LakeConfiguration.random.nextDouble()*2*Math.PI;
+    children.add(new Veiltail(lakeWorld, new Vec2((float)(ownerFish.getPosition().x+10*Math.cos(angle)), (float)(ownerFish.getPosition().y+10*Math.sin(angle)))));
   }
   
   public void giveBirth(){

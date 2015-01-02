@@ -13,12 +13,12 @@ public class Veiltail extends Fish {
 	
 	public Veiltail(LakeWorld lakeWorld, Vec2 position){
 		super(lakeWorld, position, Color.YELLOW);
-		setImage("rsc/ryba.png");
+		//setImage("rsc/ryba.png");
 	}
 	
 	public Veiltail(LakeWorld lakeWorld, Vec2 position, Gender gender){
 		super(lakeWorld, position, gender, Color.YELLOW);
-		setImage("rsc/ryba.png");
+		//setImage("rsc/ryba.png");
 	}
 
 	@Override
