@@ -109,21 +109,26 @@ public class GraphicSystem {
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
-			for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
+			/*for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
 				if(lakeObject.body == visibleBody.value){
 					visibleObject = lakeObject;
 					break;
 				}
-			}
-			if(visibleObject != null){
-				distance = visibleObject.body.getPosition().sub(pointA).length();
+			}*/
+			
+			if(visibleBody != null && visibleBody.value != null && visibleBody.value.m_userData instanceof LakeObject){
+			  visibleObject = (LakeObject)visibleBody.value.m_userData;
+			
+			  if(visibleObject != null){
+				distance = visiblePoint.value.sub(pointA).length();
 				if(distance > radius){
 					visibleObject = null;
 				}
+			  } 
 			}
 			pixel = Color.black;
 			if(visibleObject != null)
-				pixel = visibleObject.getColor();
+			  pixel = visibleObject.getColor();
 			result.appendPixel(pixel);
 		}
 		return result;

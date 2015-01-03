@@ -8,7 +8,7 @@ import org.jbox2d.common.Vec2;
 public class Muscles implements Serializable{
 	
 	protected Body body;
-	protected double strength = 60; //the stronger fish, the faster it swims
+	protected double strength = 20; //the stronger fish, the faster it swims
 	protected double agility = 10; //how fats it can change direction
 
 	public Muscles(Body body){

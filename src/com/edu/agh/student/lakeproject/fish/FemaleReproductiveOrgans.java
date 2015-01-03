@@ -63,7 +63,7 @@ public class FemaleReproductiveOrgans extends ReproductiveOrgans{
   }
   
   public void doReproduction(Chromosome chromosome){
-    if(!isPregnant() && !isRecovering() && isMature()){
+    if(!isPregnant() && !isRecovering() && isMature() && ownerFish.getEnergy()>ownerFish.MAX_ENERGY/2){
       cross(chromosome);
       pregnancyCounter = PREGNANCY_DURATION;
     }

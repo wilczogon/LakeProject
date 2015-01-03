@@ -23,6 +23,7 @@ import org.jbox2d.dynamics.contacts.Contact;
 
 import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.food.Food;
+import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
 
@@ -72,7 +73,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	public void step(){
 	
 		if(LakeConfiguration.random.nextInt()%chanceToPutFood == 0)
-		  addLakeObject(new Food(this, 10, getNewObjectPosition(), 10));
+		  addLakeObject(new Food(this, 10, getNewObjectPosition(), 100));
 	
 		List<LakeObject> deadFishes = new ArrayList<LakeObject>();
 		
@@ -195,16 +196,25 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 	
 	public void addBound(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
+	  LakeObject obstacle = new Obstacle(this, 0, new Vec2());
 	  BodyDef bodyDef = new BodyDef();
 	  bodyDef.position = new Vec2(0, 0);
 	  bodyDef.type = BodyType.STATIC;
+	  
+	  bodyDef.userData = obstacle;
 	  Body body = super.createBody(bodyDef);
+	  
 	  FixtureDef fixDef = new FixtureDef();
 	  Vec2[] vertices = new Vec2[]{a, b, c, d};
 	  PolygonShape shape = new PolygonShape();
 	  shape.set(vertices, vertices.length);
 	  fixDef.shape = shape;
 	  body.createFixture(fixDef);
+	  
+	  obstacle.setBody(body);
+	  lakeObjects.add(obstacle);
+	  
+	  //Body body = super.createBody(bodyDef);
 	}
 	
 	public List<LakeObject> getLakeObjects(){
