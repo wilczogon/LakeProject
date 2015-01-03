@@ -98,16 +98,16 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 	
 	protected void createLakeObjects(LakeWorld lakeWorld){
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(300, 300), Gender.FEMALE));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(250, 350), Gender.MALE));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(200, 100), Gender.FEMALE));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(450, 350), Gender.MALE));
+		lakeWorld.addLakeObject(new Veiltail(lakeWorld, new Vec2(300, 300)));
+		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(250, 350)));
+		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(200, 100)));
+		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(450, 350)));
+		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(300, 150)));
 		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
 		lakeWorld.addLakeObject(new Food(lakeWorld, 10.0f, new Vec2(124, 267), 100));
 		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(200, 450), 10));
 		lakeWorld.addLakeObject(new Food(lakeWorld, 5.0f, new Vec2(320, 260), 200));
 		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, new Vec2(100, 100)));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, new Vec2(300, 150)));
 	}
 
 	public void init(){

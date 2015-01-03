@@ -33,8 +33,14 @@ public class NeuralNetworkLayer{	//TODO it would be nice to allow user choose bo
     this.function = function;
   }
   
-  public double[][] getWeights(){
-    return weights;
+  public double[][] getWeights(){	// It will return copies of weights!
+    double[][] copy = new double[weights.length][weights[0].length];
+    
+    for(int i = 0; i<weights.length; ++i)
+      for(int j = 0; j<weights[0].length; ++j)
+	copy[i][j] = weights[i][j];
+    
+    return copy;
   }
   
   private int getTrueInputWidth(){

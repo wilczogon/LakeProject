@@ -113,7 +113,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	protected void interactWith(Fish fish){
 		if(fish.getSpace().equals(getSpace()) && getGender() != fish.getGender()){
 			if(getGender() == Gender.MALE && getReproductiveOrgans().isMature()){
-			  ((FemaleReproductiveOrgans)fish.getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)getReproductiveOrgans()).getChromosome());
+			 ((FemaleReproductiveOrgans)fish.getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)getReproductiveOrgans()).getChromosome());
 			}
 		} else{
 			health--;

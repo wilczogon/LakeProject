@@ -24,12 +24,29 @@ public class NeuralNetwork{
     this(inLayerWidth, outLayerWidth, 5, 3, function, true);
   }
   
+  public NeuralNetwork(double[][][] weights, TransitionFunction transitionFunction, boolean hasBias){
+    layers = new NeuralNetworkLayer[weights.length];
+    for(int i=0; i<weights.length; ++i){
+      layers[i] = new NeuralNetworkLayer(weights[i], transitionFunction, hasBias);
+    }
+  }
+  
   public double[] proceed(double[] in){
     for(int i = 0; i<layers.length; ++i){
       in = layers[i].proceed(in);
     }
     
     return in;
+  }
+  
+  public double[][][] getWeights(){
+    double[][][] copy = new double[layers.length][][];
+    
+    for(int i = 0; i<layers.length; ++i){
+      copy[i] = layers[i].getWeights();
+    }
+    
+    return copy;
   }
   
 }

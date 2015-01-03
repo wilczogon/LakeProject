@@ -8,9 +8,9 @@
  import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 
 public class FemaleReproductiveOrgans extends ReproductiveOrgans{
-  private List<Fish> children = new ArrayList<Fish>();
-  private LakeWorld lakeWorld;
-  private Fish ownerFish;
+  protected List<Fish> children = new ArrayList<Fish>();
+  protected LakeWorld lakeWorld;
+  protected Fish ownerFish;
   protected final static int PREGNANCY_DURATION = 100;
   protected final static int RECOVERY_DURATION = 100;
   private int pregnancyCounter = 0;

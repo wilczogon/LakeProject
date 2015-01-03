@@ -16,19 +16,25 @@ public class NeuralNetworkBrainFish extends Fish {
 		super(lakeWorld, position, Color.RED);
 	}
 	
+	public NeuralNetworkBrainFish(LakeWorld lakeWorld, double[][][] weights, Vec2 position){
+		super(lakeWorld, position, Color.RED);
+		super.brain = new NeuralNetworkBrain(weights);
+	}
+	
 	@Override
 	public void setBody(Body body){
 		super.setBody(body);
 		super.muscles = new Muscles(super.body);
-		super.brain = new NeuralNetworkBrain();
+		if(super.brain == null)
+		  super.brain = new NeuralNetworkBrain();
 		super.eye = new Eye(super.getLakeWorld(), this);
 	}
 	
 	public void initReproductionOrgans(Gender gender){
 	  if(gender == Gender.FEMALE)
-	    super.reproductionOrgans = new NeuralNetworkBrainFishFemaleReproductiveOrgans(super.lakeWorld, this);
+	    super.reproductiveOrgans = new NeuralNetworkBrainFishFemaleReproductiveOrgans(super.lakeWorld, this);
 	  else
-	    super.reproductionOrgans = new NeuralNetworkBrainFishMaleReproductiveOrgans();
+	    super.reproductiveOrgans = new NeuralNetworkBrainFishMaleReproductiveOrgans(this);
 	}
 	
 	public String getSpace(){
@@ -40,7 +46,12 @@ public class NeuralNetworkBrainFish extends Fish {
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
+		reproductiveOrgans.step();
 		muscles.applyForces(brain.decideMovement(eye.getView()));
-	}	
+	}
+	
+	public double[][][] getBrainWeightsCopy(){
+	  return ((NeuralNetworkBrain)super.brain).getBrainWeightsCopy();
+	}
 
 }
