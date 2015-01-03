@@ -22,6 +22,7 @@ import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.contacts.Contact;
 
 import com.edu.agh.student.lakeproject.fish.Fish;
+import com.edu.agh.student.lakeproject.food.Food;
 import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
 
@@ -68,13 +69,21 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 	
 	public void step(){
+	
+		List<LakeObject> objects = new ArrayList<LakeObject>();
 		
 		for(int i = 0; i<lakeObjects.size(); ++i){
 			if(!lakeObjects.get(i).isActive()){
-				super.destroyBody(lakeObjects.get(i).body);
+				LakeObject object = lakeObjects.get(i);
+				super.destroyBody(object.body);
 				lakeObjects.remove(i);
+				if(object instanceof Fish)
+				  objects.add(new Food(this, 10, object.getPosition(), 10));
 			}
 		}
+		
+		for(LakeObject object: objects)
+		  addLakeObject(object);
 		
 		for(int i = 0; i<lakeObjects.size(); ++i)
 			lakeObjects.get(i).move();
