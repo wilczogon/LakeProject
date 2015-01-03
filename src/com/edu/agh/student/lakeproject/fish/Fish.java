@@ -137,4 +137,12 @@ public abstract class Fish extends LakeObject implements Serializable{
 		return true;
 	}
 
+	public int getMaxEnergy() {
+		return MAX_ENERGY;
+	}
+
+	public int getMaxHealth() {
+		return MAX_HEALTH;
+	}
+
 }
