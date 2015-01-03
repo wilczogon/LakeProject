@@ -424,7 +424,15 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 			
 			chosenFish = (Fish) chosen;
 			updateFishLabels();
+		} else if(chosen == null){
+			clearFishLabels();
 		}
 		
+	}
+
+	private void clearFishLabels() {
+		ageLabel.setText("");
+		energyLabel.setText("");
+		healthLabel.setText("");
 	}
 }

@@ -38,6 +38,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private boolean isTimerStarted = false;
 	private boolean isTimerForwarded = false;
 	private float timerStep = 0;
+	private LakeObject chosen;
 
 	public ReportManager getReportManager() {
 		return reportManager;
@@ -104,6 +105,9 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 		graphicSystem.swapBuffers();
 		//debugDraw.swapBuffers();
 		reportManager.step();
+		if(chosen!=null && !chosen.isActive())
+			chosen = null;
+		setChosenLakeObject(chosen);
 	}
 	
 	private void init(){
@@ -240,6 +244,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 		
 		for(LakeObject lakeObject :lakeObjects){
 			if(lakeObject.fixture.testPoint(point)){
+				chosen = lakeObject;
 				setChosenLakeObject(lakeObject);
 				break;
 			}
