@@ -25,7 +25,7 @@ import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
 
-public class LakeWorld extends World implements MouseListener{
+public class LakeWorld extends World implements MouseListener, MouseMotionListener{
 	
 	private GraphicSystem graphicSystem;
 	private JPanel panel;
@@ -58,6 +58,8 @@ public class LakeWorld extends World implements MouseListener{
 
 	public void setFrame(JPanel frame) {
 		this.panel = frame;
+		this.panel.addMouseListener(this);
+		this.panel.addMouseMotionListener(this);
 	}
 
 	public void start(){
@@ -160,7 +162,7 @@ public class LakeWorld extends World implements MouseListener{
 	public void addLakeObject(LakeObject lakeObject){
 		
 		
-		System.out.println(lakeObject.toString());
+		//System.out.println(lakeObject.toString());
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.position = lakeObject.getInitialPosition();
 		
@@ -227,19 +229,31 @@ public class LakeWorld extends World implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		Vec2 point = new Vec2(arg0.getX(), arg0.getY()); 
 		
-		for(LakeObject lakeObject :lakeObjects){
-			if(lakeObject instanceof Fish && lakeObject.fixture.testPoint(point)){
-				setChosenLakeObject(lakeObject);
-				break;
-			}
-		}
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		Vec2 point = new Vec2(arg0.getX(), arg0.getY()); 
+		
+		for(LakeObject lakeObject :lakeObjects){
+			if(lakeObject.fixture.testPoint(point)){
+				setChosenLakeObject(lakeObject);
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
