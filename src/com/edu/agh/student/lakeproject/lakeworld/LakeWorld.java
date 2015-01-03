@@ -25,7 +25,7 @@ import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
 
-public class LakeWorld extends World implements MouseListener{
+public class LakeWorld extends World implements MouseListener, MouseMotionListener{
 	
 	private GraphicSystem graphicSystem;
 	private JPanel panel;
@@ -58,6 +58,8 @@ public class LakeWorld extends World implements MouseListener{
 
 	public void setFrame(JPanel frame) {
 		this.panel = frame;
+		this.panel.addMouseListener(this);
+		this.panel.addMouseMotionListener(this);
 	}
 
 	public void start(){
@@ -242,5 +244,17 @@ public class LakeWorld extends World implements MouseListener{
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

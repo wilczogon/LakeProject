@@ -129,6 +129,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		healthLabel = new JLabel();
 		energyLabel = new JLabel();
 		
+		
 		reportLabel = new JLabel(reportTitle);
 		playpauseReportButton = new JButton(playpauseReportButtonTitle);
 		playpauseReportButton.addActionListener(new ActionListener() {
@@ -411,15 +412,18 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		return canvas;
 	}
 
+	private void updateFishLabels(){
+		ageLabel.setText(		"Age    : " + Integer.toString(chosenFish.getAge()));
+		energyLabel.setText(	"Energy : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
+		healthLabel.setText(	"Health : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
+	}
+	
 	@Override
 	public void setChosenLakeObject(LakeObject chosen) {
-		System.out.print("XX \n");
 		if(chosen instanceof Fish){
 			
 			chosenFish = (Fish) chosen;
-			ageLabel.setText(		"Age    : " + Integer.toString(chosenFish.getAge()));
-			energyLabel.setText(	"Energy : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
-			healthLabel.setText(	"Health : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
+			updateFishLabels();
 		}
 		
 	}
