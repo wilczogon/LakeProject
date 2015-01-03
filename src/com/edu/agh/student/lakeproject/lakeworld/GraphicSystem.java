@@ -15,6 +15,7 @@ import org.omg.CORBA.BooleanHolder;
 
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.impl.ArrayEyeView;
+import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 
 public class GraphicSystem {
 
@@ -89,14 +90,12 @@ public class GraphicSystem {
 		Vec2 pointB;
 		LakeObject visibleObject = null;
 		final BodyHolder visibleBody = new BodyHolder();
-//		final BooleanHolder stoppedHolder = new BooleanHolder(false);
 		final Vec2Holder visiblePoint = new Vec2Holder();
 		float distance = 0;
 		for(int ii = 0; ii < viewSize; ii++){
 			visibleBody.value = null;
 			visiblePoint.value = null;
 			angle += angleDelta;
-			//pointB = new Vec2(pointA);
 			pointB = pointA.add(new Vec2((float) Math.sin(angle)*radius,(float) Math.cos(angle)*radius));
 			RayCastCallback callback = new RayCastCallback() {
 				
@@ -109,26 +108,23 @@ public class GraphicSystem {
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
-			/*for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
-				if(lakeObject.body == visibleBody.value){
-					visibleObject = lakeObject;
-					break;
-				}
-			}*/
+			this.lakeWorld.getGraphicSystem().buffer.getGraphics().setColor(Color.WHITE);
+			this.lakeWorld.getGraphicSystem().buffer.getGraphics().drawLine((int)pointA.x, (int)pointA.y, (int)pointB.x, (int)pointB.y);
 			
-			if(visibleBody != null && visibleBody.value != null && visibleBody.value.m_userData instanceof LakeObject){
-			  visibleObject = (LakeObject)visibleBody.value.m_userData;
-			
-			  if(visibleObject != null){
+			if(visibleBody != null && visibleBody.value != null){
+				if(visibleBody.value.m_userData instanceof LakeObject)
+				visibleObject = (LakeObject)visibleBody.value.m_userData;
 				distance = visiblePoint.value.sub(pointA).length();
 				if(distance > radius){
 					visibleObject = null;
+					visibleBody.value = null;
 				}
-			  } 
 			}
 			pixel = Color.black;
 			if(visibleObject != null)
-			  pixel = visibleObject.getColor();
+				pixel = visibleObject.getColor();
+			if(visibleBody.value != null)
+				pixel = Color.GRAY;
 			result.appendPixel(pixel);
 		}
 		return result;
