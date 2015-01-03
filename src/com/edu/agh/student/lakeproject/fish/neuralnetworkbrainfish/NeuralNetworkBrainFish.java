@@ -24,9 +24,12 @@ public class NeuralNetworkBrainFish extends Fish {
 		super.eye = new Eye(super.getLakeWorld(), this);
 	}
 	
-	/*public void initReproductionOrgans(Gender gender){
-	  //TODO soon
-	}*/
+	public void initReproductionOrgans(Gender gender){
+	  if(gender == Gender.FEMALE)
+	    super.reproductionOrgans = new NeuralNetworkBrainFishFemaleReproductiveOrgans(super.lakeWorld, this);
+	  else
+	    super.reproductionOrgans = new NeuralNetworkBrainFishMaleReproductiveOrgans();
+	}
 	
 	public String getSpace(){
 	  return "com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish";
