@@ -40,6 +40,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private boolean isTimerForwarded = false;
 	private float timerStep = 0;
 	private LakeObject chosen;
+	private int chanceToPutFood = 20;
 
 	public ReportManager getReportManager() {
 		return reportManager;
@@ -70,7 +71,10 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	
 	public void step(){
 	
-		List<LakeObject> objects = new ArrayList<LakeObject>();
+		if(LakeConfiguration.random.nextInt()%chanceToPutFood == 0)
+		  addLakeObject(new Food(this, 10, getNewObjectPosition(), 10));
+	
+		List<LakeObject> deadFishes = new ArrayList<LakeObject>();
 		
 		for(int i = 0; i<lakeObjects.size(); ++i){
 			if(!lakeObjects.get(i).isActive()){
@@ -78,12 +82,12 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 				super.destroyBody(object.body);
 				lakeObjects.remove(i);
 				if(object instanceof Fish)
-				  objects.add(new Food(this, 10, object.getPosition(), 10));
+				  deadFishes.add(new Food(this, 10, object.getPosition(), 10));
 			}
 		}
 		
-		for(LakeObject object: objects)
-		  addLakeObject(object);
+		for(LakeObject food: deadFishes)
+		  addLakeObject(food);
 		
 		for(int i = 0; i<lakeObjects.size(); ++i)
 			lakeObjects.get(i).move();
@@ -270,5 +274,9 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Vec2 getNewObjectPosition(){	//it will tell you where you can place your new object... approximatelly
+	  return new Vec2(Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.width-20) + 10, Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.height-20) + 10);
 	}
 }
