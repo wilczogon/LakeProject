@@ -72,8 +72,8 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	
 	public void step(){
 	
-		if(LakeConfiguration.random.nextInt()%feedProbability == 0)
-		  addLakeObject(new Food(this, 10, getNewObjectPosition(), 100));
+		if(LakeConfiguration.random.nextInt() % 100 > feedProbability)
+			addLakeObject(new Food(this, 10, getNewObjectPosition(), 100));
 	
 		List<LakeObject> deadFishes = new ArrayList<LakeObject>();
 		
@@ -287,7 +287,22 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 	
 	public Vec2 getNewObjectPosition(){	//it will tell you where you can place your new object... approximatelly
-	  return new Vec2(Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.width-20) + 10, Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.height-20) + 10);
+		Vec2 newObjectPosition = new Vec2(Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.width-20) + 10, Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.height-20) + 10);
+		boolean cnt = true;
+		for(int ii = 0; ii < 100; ii++){
+			cnt = true;
+			for(LakeObject lakeObject :lakeObjects){
+				if(lakeObject.fixture.testPoint(newObjectPosition)){
+					cnt = false;
+					break;
+				}
+			}
+			if(cnt){
+				return newObjectPosition;
+			}
+			newObjectPosition = new Vec2(Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.width-20) + 10, Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.height-20) + 10);
+		}
+		return newObjectPosition;
 	}
 	
 	public void setFeedProbability(int probability){ //probability is between 1-100

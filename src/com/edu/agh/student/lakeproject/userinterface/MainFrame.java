@@ -41,6 +41,8 @@ import javax.swing.JSlider;
 import java.awt.Label;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	/**
@@ -261,14 +263,16 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		saveLakeButton.setBounds(530, LakeConfiguration.height + 10, 100, 45);
 		
 		feederSlider = new JSlider();
-		feederSlider.setValue(20);
-		feederSlider.addInputMethodListener(new InputMethodListener() {
-			public void caretPositionChanged(InputMethodEvent arg0) {
-			  lakeWorld.setFeedProbability(20);
-			}
-			public void inputMethodTextChanged(InputMethodEvent arg0) {
+		feederSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider)e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					lakeWorld.setFeedProbability((int)source.getValue());
+				}
 			}
 		});
+		feederSlider.setValue(20);
+		
 		feederSlider.setBounds(5, 530, 100, 26);
 		getContentPane().add(feederSlider);
 		
