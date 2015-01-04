@@ -261,6 +261,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		saveLakeButton.setBounds(530, LakeConfiguration.height + 10, 100, 45);
 		
 		feederSlider = new JSlider();
+		feederSlider.setValue(20);
 		feederSlider.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent arg0) {
 			}
