@@ -81,7 +81,7 @@ public class GraphicSystem {
 	
 	public EyeView getEyeView(LakeObject fish, float radius, int viewSize){
 		ArrayEyeView result = new ArrayEyeView(viewSize);
-		float angleZero = -fish.getAngle();
+		float angleZero = - (float) ((fish.getAngle() + 180) / 180 * Math.PI);
 		float angleDelta = (float) (2 * Math.PI / viewSize);
 		float angle = angleZero;
 		Color pixel;
