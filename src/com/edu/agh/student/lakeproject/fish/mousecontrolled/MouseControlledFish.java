@@ -28,11 +28,6 @@ public class MouseControlledFish extends Fish {
 		super.eye = new MouseControlledEye(lakeWorld, this);
 		lakeWorld.addMouseMotionListener((MouseMotionListener) muscles);
 	}
-
-	@Override
-	public String getSpace() {
-		return "com.edu.agh.student.lakeproject.fish.mousecontrolled";
-	}
 	
 	/*@Override
 	public void move(){
@@ -40,15 +35,11 @@ public class MouseControlledFish extends Fish {
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		int x = 0;
 		for(Object color: eye.getView().getPixels()){
-//			System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 			Graphics gd = MainFrame.getCanvas().getGraphics();
 			gd.setColor((Color) color);
 			gd.fillRect(x, 0, 10, 10);
 			x+=10;
-		//for(Object color: eye.getView().getPixels()){
-			//System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 		}
-		//System.out.println();
 		energy--;
 		muscles.applyForces(null); //TODO
 	}*/

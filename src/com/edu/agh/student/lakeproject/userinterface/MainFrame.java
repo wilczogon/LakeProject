@@ -73,6 +73,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	JButton newLakeObjectButton;
 	JButton openLakeObjectButton;
 	JButton openLibraryButton;
+	JLabel classLabel;
 	JLabel ageLabel;
 	JLabel healthLabel;
 	JLabel energyLabel;
@@ -140,6 +141,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		removeLakeObjectButton = new JButton(removeLakeObjectButtonTitle);
 		openLibraryButton = new JButton(openLibraryButtonTitle);
 		
+		classLabel = new JLabel();
 		ageLabel = new JLabel();
 		healthLabel = new JLabel();
 		energyLabel = new JLabel();
@@ -208,6 +210,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		getContentPane().add(lakeWorldPanel);
 		getContentPane().add(removeLakeObjectButton);
 		getContentPane().add(openLibraryButton);
+		getContentPane().add(classLabel);
 		getContentPane().add(ageLabel);
 		getContentPane().add(healthLabel);
 		getContentPane().add(energyLabel);
@@ -225,12 +228,13 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		
 		canvas.setBounds(5, 155, 100, 10);
 		
-		ageLabel.setBounds(5, 175, 100, 22);
-		healthLabel.setBounds(5, 200, 100, 22);
-		energyLabel.setBounds(5, 225, 100, 22);
+		classLabel.setBounds(5, 175, 100, 22);
+		ageLabel.setBounds(5, 200, 100, 22);
+		healthLabel.setBounds(5, 225, 100, 22);
+		energyLabel.setBounds(5, 250, 100, 22);
 		
-		saveLakeObjectButton.setBounds(5, 255, 100, 45);
-		removeLakeObjectButton.setBounds(5, 305, 100, 45);
+		saveLakeObjectButton.setBounds(5, 280, 100, 45);
+		removeLakeObjectButton.setBounds(5, 330, 100, 45);
 		
 		lakeWorldPanel.setBounds(110, 5, LakeConfiguration.width, LakeConfiguration.height);
 		
@@ -334,7 +338,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 			try {
 				lakeWorld.getReportManager().generateReport(fc.getSelectedFile().getAbsolutePath());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -361,7 +364,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				objectOutput.flush();
 				objectOutput.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -377,10 +379,8 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				lakeWorld.addLakeObject(newFish);
 				objectInput.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -428,6 +428,8 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	private void updateFishLabels(){
+		String name = chosenFish.getSpecies().substring(chosenFish.getSpecies().lastIndexOf('.')+1);
+		classLabel.setText(name);
 		ageLabel.setText(		"A : " + Integer.toString(chosenFish.getAge()));
 		energyLabel.setText(	"E : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
 		healthLabel.setText(	"H : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
@@ -436,7 +438,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	@Override
 	public void setChosenLakeObject(LakeObject chosen) {
 		if(chosen instanceof Fish){
-			
 			chosenFish = (Fish) chosen;
 			updateFishLabels();
 		} else if(chosen == null){
@@ -446,6 +447,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	private void clearFishLabels() {
+		classLabel.setText("");
 		ageLabel.setText("");
 		energyLabel.setText("");
 		healthLabel.setText("");

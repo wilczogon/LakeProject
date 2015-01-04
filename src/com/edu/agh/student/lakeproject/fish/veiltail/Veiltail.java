@@ -20,11 +20,6 @@ public class Veiltail extends Fish {
 	public Veiltail(LakeWorld lakeWorld, Vec2 position, Gender gender){
 		super(lakeWorld, position, gender, Color.YELLOW);
 	}
-
-	@Override
-	public String getSpace() {
-		return "com.edu.agh.student.lakeproject.fish.veiltail";
-	}
 	
 	@Override
 	public void setBody(Body body){

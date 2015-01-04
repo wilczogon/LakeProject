@@ -148,7 +148,6 @@ public class GraphicSystem implements LakeObjectFocusListener{
 
 	@Override
 	public void setChosenLakeObject(LakeObject chosen) {
-		// TODO Auto-generated method stub
 		chosenObject = chosen;
 	}
 }

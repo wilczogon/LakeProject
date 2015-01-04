@@ -37,10 +37,6 @@ public class NeuralNetworkBrainFish extends Fish {
 	    super.reproductiveOrgans = new NeuralNetworkBrainFishMaleReproductiveOrgans(this);
 	}
 	
-	public String getSpace(){
-	  return "com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish";
-	}
-	
 	public double[][][] getBrainWeightsCopy(){
 	  return ((NeuralNetworkBrain)super.brain).getBrainWeightsCopy();
 	}

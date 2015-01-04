@@ -53,7 +53,7 @@ public class ReportManager{
     for(LakeObject lakeObject: lakeObjects){
       if(lakeObject instanceof Fish){
 	Fish fish = (Fish)lakeObject;
-	String spaceName = fish.getSpace();
+	String spaceName = fish.getSpecies();
 	boolean reportDataFound = false;
 	
 	for(ReportData reportData: report){
@@ -65,7 +65,7 @@ public class ReportManager{
 	}
 	
 	if(!reportDataFound){
-	  ReportData reportData = new ReportData(fish.getSpace());
+	  ReportData reportData = new ReportData(fish.getSpecies());
 	  reportData.reportFishLifeTime(fish.getAge());
 	  report.add(reportData);
 	}

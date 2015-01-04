@@ -88,11 +88,13 @@ public abstract class Fish extends LakeObject implements Serializable{
 	  return reproductiveOrgans.getGender();
 	}
 	
-	public abstract String getSpace();
+	public String getSpecies(){
+		return this.getClass().getName();
+	}
 	
 	@Override
 	public void move(){
-		System.out.println(this.toString());
+		//System.out.println(this.getSpecies());
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
@@ -114,7 +116,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	}
 	
 	protected void interactWith(Fish fish){
-		if(fish.getSpace().equals(getSpace())){
+		if(fish.getSpecies().equals(getSpecies())){
 		  if(getGender() != fish.getGender()){
 			if(getGender() == Gender.MALE && getReproductiveOrgans().isMature()){
 			 ((FemaleReproductiveOrgans)fish.getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)getReproductiveOrgans()).getChromosome());
