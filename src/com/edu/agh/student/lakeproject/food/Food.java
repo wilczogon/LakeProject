@@ -50,7 +50,7 @@ public class Food extends LakeObject implements Serializable {
 	
 	@Override
 	public boolean isActive(){
-		if(energy <= 0 or expirationDate <= 0)
+		if(energy <= 0 || expirationDate <= 0)
 			return false;
 		return true;
 	}
