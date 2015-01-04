@@ -264,6 +264,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		feederSlider.setValue(20);
 		feederSlider.addInputMethodListener(new InputMethodListener() {
 			public void caretPositionChanged(InputMethodEvent arg0) {
+			  lakeWorld.setFeedProbability(20);
 			}
 			public void inputMethodTextChanged(InputMethodEvent arg0) {
 			}

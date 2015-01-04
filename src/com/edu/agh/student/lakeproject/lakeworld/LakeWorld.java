@@ -41,7 +41,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private boolean isTimerForwarded = false;
 	private float timerStep = 0;
 	private LakeObject chosen;
-	private int chanceToPutFood = 20;
+	private int feedProbability = 20;
 
 	public ReportManager getReportManager() {
 		return reportManager;
@@ -72,7 +72,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	
 	public void step(){
 	
-		if(LakeConfiguration.random.nextInt()%chanceToPutFood == 0)
+		if(LakeConfiguration.random.nextInt()%feedProbability == 0)
 		  addLakeObject(new Food(this, 10, getNewObjectPosition(), 100));
 	
 		List<LakeObject> deadFishes = new ArrayList<LakeObject>();
@@ -288,5 +288,9 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	
 	public Vec2 getNewObjectPosition(){	//it will tell you where you can place your new object... approximatelly
 	  return new Vec2(Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.width-20) + 10, Math.abs(LakeConfiguration.random.nextInt())%(LakeConfiguration.height-20) + 10);
+	}
+	
+	public void setFeedProbability(int probability){ //probability is between 1-100
+	  feedProbability = 100 - probability;
 	}
 }
