@@ -41,15 +41,6 @@ public class NeuralNetworkBrainFish extends Fish {
 	  return "com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish";
 	}
 	
-	@Override
-	public void move(){
-		age++;
-		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
-		energy--;
-		reproductiveOrgans.step();
-		muscles.applyForces(brain.decideMovement(eye.getView()));
-	}
-	
 	public double[][][] getBrainWeightsCopy(){
 	  return ((NeuralNetworkBrain)super.brain).getBrainWeightsCopy();
 	}

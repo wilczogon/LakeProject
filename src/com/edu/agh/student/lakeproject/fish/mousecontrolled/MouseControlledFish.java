@@ -9,6 +9,7 @@ import org.jbox2d.dynamics.Body;
 
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.Fish;
+import com.edu.agh.student.lakeproject.fish.Brain;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.userinterface.MainFrame;
 import com.edu.agh.student.lakeproject.fish.Gender;
@@ -23,6 +24,7 @@ public class MouseControlledFish extends Fish {
 	public void setBody(Body body){
 		super.setBody(body);
 		super.muscles = new MouseControlledMuscles(super.body);
+		super.brain = new Brain();
 		super.eye = new MouseControlledEye(lakeWorld, this);
 		lakeWorld.addMouseMotionListener((MouseMotionListener) muscles);
 	}
@@ -32,7 +34,7 @@ public class MouseControlledFish extends Fish {
 		return "com.edu.agh.student.lakeproject.fish.mousecontrolled";
 	}
 	
-	@Override
+	/*@Override
 	public void move(){
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
@@ -46,9 +48,9 @@ public class MouseControlledFish extends Fish {
 		//for(Object color: eye.getView().getPixels()){
 			//System.out.print("(" + ((Color)color).getRed() + "," + ((Color)color).getGreen() + "," + ((Color)color).getBlue() + ") ");
 		}
-		//System.out.println();*/
+		//System.out.println();
 		energy--;
 		muscles.applyForces(null); //TODO
-	}
+	}*/
 
 }
