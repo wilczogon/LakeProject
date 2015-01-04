@@ -83,7 +83,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 				super.destroyBody(object.body);
 				lakeObjects.remove(i);
 				if(object instanceof Fish)
-				  deadFishes.add(new Food(this, 10, object.getPosition(), 10));
+				  deadFishes.add(new Food(this, 10, object.getPosition(), 100));
 			}
 		}
 		

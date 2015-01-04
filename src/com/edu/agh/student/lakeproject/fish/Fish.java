@@ -95,6 +95,8 @@ public abstract class Fish extends LakeObject implements Serializable{
 		age++;
 		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
 		energy--;
+		if(energy > MAX_ENERGY/2)
+		  health = Math.min(health+10, MAX_HEALTH);
 		getReproductiveOrgans().step();
 		muscles.applyForces(brain.decideMovement(eye.getView()));
 	}
