@@ -1,7 +1,9 @@
 package com.edu.agh.student.lakeproject.userinterface;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -271,14 +273,12 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		saveLakeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				saveLakeButtonActionPerformed();
-				
 			}
 		});
 
 		recButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				recButtonButtonActionPerformed();
-				
 			}
 		});
 
@@ -447,6 +447,9 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	private void clearFishLabels() {
+		Graphics gd = MainFrame.getCanvas().getGraphics();
+		//gd.setColor(MainFrame.getCanvas().getBackground());
+		gd.clearRect(0, 0, 100, 10);
 		classLabel.setText("");
 		ageLabel.setText("");
 		energyLabel.setText("");

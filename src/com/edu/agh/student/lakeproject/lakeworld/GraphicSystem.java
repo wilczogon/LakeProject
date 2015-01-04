@@ -1,6 +1,7 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -17,6 +18,7 @@ import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.impl.ArrayEyeView;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
+import com.edu.agh.student.lakeproject.userinterface.MainFrame;
 
 public class GraphicSystem implements LakeObjectFocusListener{
 
@@ -119,7 +121,7 @@ public class GraphicSystem implements LakeObjectFocusListener{
 					visibleBody.value = null;
 				}
 			}
-			if(chosenObject == fish && chosenObject.isActive() && ii == 0){
+			if(chosenObject == fish && chosenObject.isActive()){
 				this.lakeWorld.getGraphicSystem().buffer.getGraphics().setColor(Color.WHITE);
 				this.lakeWorld.getGraphicSystem().buffer.getGraphics().drawLine((int)pointA.x, (int)pointA.y, (int)pointB.x, (int)pointB.y);
 			}
@@ -130,6 +132,17 @@ public class GraphicSystem implements LakeObjectFocusListener{
 				pixel = Color.GRAY;
 			result.appendPixel(pixel);
 			angle += angleDelta;
+		}
+		if(chosenObject == fish && chosenObject.isActive()){
+			int x = 10 * (int)(viewSize/2);
+			for(Object color: result.getPixels()){
+				Graphics gd = MainFrame.getCanvas().getGraphics();
+				gd.setColor((Color) color);
+				gd.fillRect(x, 0, 10, 10);
+				x-=10;
+				if(x < 0)
+					x = 90;
+			}
 		}
 		return result;
 	}
