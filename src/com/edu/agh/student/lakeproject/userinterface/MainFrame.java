@@ -1,48 +1,52 @@
 package com.edu.agh.student.lakeproject.userinterface;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
+import java.awt.Label;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.jbox2d.common.Vec2;
 
+import com.edu.agh.student.lakeproject.fish.Fish;
 import com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish;
 import com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish.NeuralNetworkBrainFish;
 import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
-import com.edu.agh.student.lakeproject.fish.Fish;
-import com.edu.agh.student.lakeproject.fish.Gender;
+import com.edu.agh.student.lakeproject.food.Food;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
-import com.edu.agh.student.lakeproject.food.Food;
-
-import java.awt.Panel;
-import java.awt.FlowLayout;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import javax.swing.JSlider;
-import java.awt.Label;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	/**
@@ -415,7 +419,79 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	protected void newLakeObjectButtonActionPerformed() {
-		// TODO Auto-generated method stub
+		try {
+			Object[] options = getLakeObjectClassList();
+			String chosenClass = (String) JOptionPane.showInputDialog(
+				this,
+				"Wybierz typ obiektów:",
+				"Nowy Obiekt",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				options,
+				(String) options[0]);
+			if(chosenClass != null){
+				SpinnerNumberModel sModel = new SpinnerNumberModel(1, 0, 100, 1);
+				JPanel msgDialogPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+				JSpinner spinner = new JSpinner(sModel);
+				msgDialogPanel.add(new JLabel("Wybierz iloœæ obiektów:"));
+				msgDialogPanel.add(spinner);
+				if(JOptionPane.showConfirmDialog(this, msgDialogPanel, "Nowy Obiekt", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION){
+					int numberOfObjects = (int) spinner.getValue();
+					synchronized (lakeWorld) {
+						Class<?> clazz = Class.forName(chosenClass);
+						for(int ii = 0; ii < numberOfObjects; ii++){
+							Constructor<?> constructor = clazz.getConstructor(LakeWorld.class,Vec2.class);
+							LakeObject object = (LakeObject) constructor.newInstance(new Object[]{lakeWorld,lakeWorld.getNewObjectPosition()});
+							lakeWorld.addLakeObject(object);
+						}
+						//System.out.println(chosenClass+" "+numberOfObjects);
+					}
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private String[] getLakeObjectClassList() {
+		
+		try {
+			String filename = "availableLakeObjectsClassNames";
+			BufferedReader reader = new BufferedReader(new FileReader(filename));
+			ArrayList<String> lakeObjectClassList = new ArrayList<String>();
+			while(reader.ready()){
+				String x = reader.readLine();
+				x = x.trim();
+				lakeObjectClassList.add(x);
+			}
+			reader.close();
+			return Arrays.copyOf(lakeObjectClassList.toArray(), lakeObjectClassList.size(), String[].class);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String[] lakeObjectClassList = {"com.edu.agh.student.lakeproject.fish.veiltail.Veiltail"};
+		return lakeObjectClassList;
 		
 	}
 

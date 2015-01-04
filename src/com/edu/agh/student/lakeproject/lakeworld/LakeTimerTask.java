@@ -11,7 +11,9 @@ public class LakeTimerTask extends TimerTask {
 
 	@Override
 	public void run() {
-		world.step();
+		synchronized (world) {
+			world.step();
+		}
 	}
 
 }
