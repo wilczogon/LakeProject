@@ -126,7 +126,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	
 	private void init(){
 		this.graphicSystem = new GraphicSystem(this, panel); // TODO tymczasowo pole
-		
+		this.addLakeObjectFocusListener(graphicSystem);
 		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//panel.setVisible(true);
 		

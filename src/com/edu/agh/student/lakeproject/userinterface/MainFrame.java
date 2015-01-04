@@ -428,9 +428,9 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	private void updateFishLabels(){
-		ageLabel.setText(		"Age    : " + Integer.toString(chosenFish.getAge()));
-		energyLabel.setText(	"Energy : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
-		healthLabel.setText(	"Health : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
+		ageLabel.setText(		"A : " + Integer.toString(chosenFish.getAge()));
+		energyLabel.setText(	"E : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
+		healthLabel.setText(	"H : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
 	}
 	
 	@Override

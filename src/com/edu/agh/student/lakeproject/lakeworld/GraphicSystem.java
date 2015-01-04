@@ -16,8 +16,9 @@ import org.omg.CORBA.BooleanHolder;
 import com.edu.agh.student.lakeproject.fish.EyeView;
 import com.edu.agh.student.lakeproject.fish.impl.ArrayEyeView;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
+import com.edu.agh.student.lakeproject.userinterface.LakeObjectFocusListener;
 
-public class GraphicSystem {
+public class GraphicSystem implements LakeObjectFocusListener{
 
 	private class Vec2Holder {
 
@@ -34,6 +35,7 @@ public class GraphicSystem {
 	private LakeWorld lakeWorld;
 	private Image buffer;
 	private JPanel container;
+	private LakeObject chosenObject;
 
 	public GraphicSystem(LakeWorld lakeWorld, final JPanel app){
 		this.lakeWorld = lakeWorld;
@@ -108,18 +110,18 @@ public class GraphicSystem {
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
-			if(ii == 0){
-			this.lakeWorld.getGraphicSystem().buffer.getGraphics().setColor(Color.WHITE);
-			this.lakeWorld.getGraphicSystem().buffer.getGraphics().drawLine((int)pointA.x, (int)pointA.y, (int)pointB.x, (int)pointB.y);
-			}
 			if(visibleBody.value != null){
 				if(visibleBody.value.m_userData instanceof LakeObject)
-				visibleObject = (LakeObject)visibleBody.value.m_userData;
+					visibleObject = (LakeObject)visibleBody.value.m_userData;
 				distance = visiblePoint.value.sub(pointA).length();
 				if(distance > radius){
 					visibleObject = null;
 					visibleBody.value = null;
 				}
+			}
+			if(chosenObject == fish && chosenObject.isActive() && ii == 0){
+				this.lakeWorld.getGraphicSystem().buffer.getGraphics().setColor(Color.WHITE);
+				this.lakeWorld.getGraphicSystem().buffer.getGraphics().drawLine((int)pointA.x, (int)pointA.y, (int)pointB.x, (int)pointB.y);
 			}
 			pixel = Color.black;
 			if(visibleObject != null)
@@ -142,5 +144,11 @@ public class GraphicSystem {
 		blue *= fadingFactor;
 		result = new Color(red, green, blue);
 		return result;
+	}
+
+	@Override
+	public void setChosenLakeObject(LakeObject chosen) {
+		// TODO Auto-generated method stub
+		chosenObject = chosen;
 	}
 }
