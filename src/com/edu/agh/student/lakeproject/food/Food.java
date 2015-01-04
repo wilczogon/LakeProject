@@ -3,12 +3,13 @@ package com.edu.agh.student.lakeproject.food;
 import java.awt.Color;
 
 import org.jbox2d.common.Vec2;
+import java.io.*;
 
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
-public class Food extends LakeObject {
+public class Food extends LakeObject implements Serializable {
 
 	private int energy;
 	
@@ -17,6 +18,14 @@ public class Food extends LakeObject {
 		this.energy = energy;
 		setImage("rsc/food.png");
 	}
+	
+	/*public static Food readFromFile(ObjectInputStream ois){	//TODO
+	  return (Food)ois.readObject();
+	}
+	
+	public void writeToFile(ObjectInputStream ois){	//TODO
+	  return (Food)ois.readObject();
+	}*/
 
 	@Override
 	public String getType() {
@@ -39,6 +48,18 @@ public class Food extends LakeObject {
 		if(energy <= 0)
 			return false;
 		return true;
+	}
+	
+	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
+	  energy = aInputStream.readInt();
+	  radius = aInputStream.readFloat();
+	  position = (Vec2)aInputStream.readObject();
+	}
+
+	private void writeObject(ObjectOutputStream aOutputStream) throws IOException {
+	  aOutputStream.writeInt(energy);
+	  aOutputStream.writeFloat(radius);
+	  aOutputStream.writeObject(position);
 	}
 
 }

@@ -24,9 +24,9 @@ public abstract class LakeObject{
 	}
 
 	protected float radius;
-	private Vec2 position;
-	private Image image;
-	private Color color;
+	protected Vec2 position;
+	protected Image image;
+	protected Color color;
 	
 	public abstract String getType();
 	
