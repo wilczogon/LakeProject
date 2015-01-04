@@ -81,8 +81,7 @@ public class GraphicSystem {
 	
 	public EyeView getEyeView(LakeObject fish, float radius, int viewSize){
 		ArrayEyeView result = new ArrayEyeView(viewSize);
-		//System.out.println(fish.getAngle());
-		float angleZero = (float) (fish.getAngle() * 180 / Math.PI);
+		float angleZero = -fish.getAngle();
 		float angleDelta = (float) (2 * Math.PI / viewSize);
 		float angle = angleZero;
 		Color pixel;
@@ -95,7 +94,8 @@ public class GraphicSystem {
 		for(int ii = 0; ii < viewSize; ii++){
 			visibleBody.value = null;
 			visiblePoint.value = null;
-			angle += angleDelta;
+			visibleObject = null;
+			
 			pointB = pointA.add(new Vec2((float) Math.sin(angle)*radius,(float) Math.cos(angle)*radius));
 			RayCastCallback callback = new RayCastCallback() {
 				
@@ -108,10 +108,11 @@ public class GraphicSystem {
 				}
 			};
 			lakeWorld.raycast(callback, pointA, pointB);
+			if(ii == 0){
 			this.lakeWorld.getGraphicSystem().buffer.getGraphics().setColor(Color.WHITE);
 			this.lakeWorld.getGraphicSystem().buffer.getGraphics().drawLine((int)pointA.x, (int)pointA.y, (int)pointB.x, (int)pointB.y);
-			
-			if(visibleBody != null && visibleBody.value != null){
+			}
+			if(visibleBody.value != null){
 				if(visibleBody.value.m_userData instanceof LakeObject)
 				visibleObject = (LakeObject)visibleBody.value.m_userData;
 				distance = visiblePoint.value.sub(pointA).length();
@@ -123,9 +124,10 @@ public class GraphicSystem {
 			pixel = Color.black;
 			if(visibleObject != null)
 				pixel = visibleObject.getColor();
-			if(visibleBody.value != null)
+			else if(visibleBody.value != null)
 				pixel = Color.GRAY;
 			result.appendPixel(pixel);
+			angle += angleDelta;
 		}
 		return result;
 	}
