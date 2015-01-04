@@ -12,6 +12,7 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 public class Food extends LakeObject implements Serializable {
 
 	private int energy;
+	private int expirationDate = 5000;
 	
 	public Food(LakeWorld lakeWorld, Vec2 position){
 	  this(lakeWorld, 10, position, 100);
@@ -38,7 +39,7 @@ public class Food extends LakeObject implements Serializable {
 
 	@Override
 	public void move() {
-		return;
+		expirationDate--;
 	}
 	
 	public int getEnergy(){
@@ -49,7 +50,7 @@ public class Food extends LakeObject implements Serializable {
 	
 	@Override
 	public boolean isActive(){
-		if(energy <= 0)
+		if(energy <= 0 or expirationDate <= 0)
 			return false;
 		return true;
 	}
