@@ -37,6 +37,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javax.swing.JSlider;
+import java.awt.Label;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 
 public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	/**
@@ -94,6 +98,10 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	private LakeWorld lakeWorld;
 
 	private Fish chosenFish;
+
+	private Label feederLabel;
+
+	private JSlider feederSlider;
 	
 	public MainFrame() {
 		super(frameTitle);
@@ -251,6 +259,20 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		forwardButton.setBounds(320, LakeConfiguration.height + 10, 100, 45);
 		openLakeButton.setBounds(425, LakeConfiguration.height + 10, 100, 45);
 		saveLakeButton.setBounds(530, LakeConfiguration.height + 10, 100, 45);
+		
+		feederSlider = new JSlider();
+		feederSlider.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent arg0) {
+			}
+			public void inputMethodTextChanged(InputMethodEvent arg0) {
+			}
+		});
+		feederSlider.setBounds(5, 530, 100, 26);
+		getContentPane().add(feederSlider);
+		
+		feederLabel = new Label("Karmnik");
+		feederLabel.setBounds(5, 510, 100, 22);
+		getContentPane().add(feederLabel);
 		// adding Listeners
 		playpauseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -448,7 +470,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 
 	private void clearFishLabels() {
 		Graphics gd = MainFrame.getCanvas().getGraphics();
-		//gd.setColor(MainFrame.getCanvas().getBackground());
 		gd.clearRect(0, 0, 100, 10);
 		classLabel.setText("");
 		ageLabel.setText("");
