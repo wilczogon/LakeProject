@@ -13,6 +13,10 @@ public class Food extends LakeObject implements Serializable {
 
 	private int energy;
 	
+	public Food(LakeWorld lakeWorld, Vec2 position){
+	  this(lakeWorld, 10, position, 100);
+	}
+	
 	public Food(LakeWorld lakeWorld, float radius, Vec2 position, int energy){
 		super(lakeWorld, radius, position, Color.GREEN);
 		this.energy = energy;

@@ -9,6 +9,10 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
 public class Obstacle extends LakeObject {
+
+	public Obstacle(LakeWorld lakeWorld, Vec2 position){
+	  this(lakeWorld, 20, position);
+	}
 	
 	public Obstacle(LakeWorld lakeWorld, float radius, Vec2 position){
 		super(lakeWorld, radius, position, Color.GRAY);

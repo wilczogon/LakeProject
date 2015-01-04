@@ -113,34 +113,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		super(frameTitle);
 		init();
 	}
-	
-	protected void createLakeObjects(LakeWorld lakeWorld){
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Veiltail(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new NeuralNetworkBrainFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-		lakeWorld.addLakeObject(new Obstacle(lakeWorld, 50.0f, new Vec2(100, 200)));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new Food(lakeWorld, 10, lakeWorld.getNewObjectPosition(), 100));
-		lakeWorld.addLakeObject(new MouseControlledFish(lakeWorld, lakeWorld.getNewObjectPosition()));
-	}
 
 	public void init(){
 		
@@ -209,8 +181,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		lakeWorld.addBound(new Vec2(0, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
 		lakeWorld.addBound(new Vec2(0, 0), new Vec2(-10, 0), new Vec2(-10, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height));
 		lakeWorld.addBound(new Vec2(LakeConfiguration.width, 0), new Vec2(LakeConfiguration.width+10, 0), new Vec2(LakeConfiguration.width+10, LakeConfiguration.height), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
-		
-		createLakeObjects(lakeWorld);
 		
 		// placing Components
 		
@@ -423,7 +393,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 			Object[] options = getLakeObjectClassList();
 			String chosenClass = (String) JOptionPane.showInputDialog(
 				this,
-				"Wybierz typ obiektów:",
+				"Wybierz typ obiektow:",
 				"Nowy Obiekt",
 				JOptionPane.PLAIN_MESSAGE,
 				null,
@@ -433,7 +403,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				SpinnerNumberModel sModel = new SpinnerNumberModel(1, 0, 100, 1);
 				JPanel msgDialogPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 				JSpinner spinner = new JSpinner(sModel);
-				msgDialogPanel.add(new JLabel("Wybierz iloœæ obiektów:"));
+				msgDialogPanel.add(new JLabel("Wybierz ilosc obiektow:"));
 				msgDialogPanel.add(spinner);
 				if(JOptionPane.showConfirmDialog(this, msgDialogPanel, "Nowy Obiekt", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION){
 					int numberOfObjects = (int) spinner.getValue();

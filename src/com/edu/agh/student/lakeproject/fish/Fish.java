@@ -21,7 +21,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	protected final int MAX_HEALTH = 500;
 	protected final float INITIAL_RADIUS = 10.0f;
 	protected final float MAX_RADIUS = 20.0f;
-	protected int energy = MAX_ENERGY;	// does fish eat something?
+	protected int energy = MAX_ENERGY/2;	// does fish eat something?
 	protected int health = MAX_HEALTH;	// does fish fight with others?
 	protected int age = 0;
 	protected float growthFactor = 0.001f;
