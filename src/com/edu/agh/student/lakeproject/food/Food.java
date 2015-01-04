@@ -54,6 +54,8 @@ public class Food extends LakeObject implements Serializable {
 	  energy = aInputStream.readInt();
 	  radius = aInputStream.readFloat();
 	  position = (Vec2)aInputStream.readObject();
+	  super.color = Color.GREEN;
+	  setImage("rsc/food.png");
 	}
 
 	private void writeObject(ObjectOutputStream aOutputStream) throws IOException {
