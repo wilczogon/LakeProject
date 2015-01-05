@@ -2,8 +2,7 @@ package com.edu.agh.student.lakeproject.lakeworld;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -35,6 +34,13 @@ public abstract class LakeObject{
 		this.position = position;
 		this.radius = radius;
 		this.color = color;
+	}
+	
+	public LakeObject(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
+		this.lakeWorld = lakeWorld;
+		position = (Vec2)in.readObject();
+		radius = in.readFloat();
+		color = (Color)in.readObject();
 	}
 	
 	public void setBody(Body body){
@@ -111,5 +117,12 @@ public abstract class LakeObject{
 	    }
 	  }
 	  return mask;
+	}
+	
+	public void writeToStream(ObjectOutputStream out) throws IOException{
+	  out.writeObject(this.getClass().getName());
+	  out.writeObject(position);
+	  out.writeFloat(radius);
+	  out.writeObject(color);
 	}
 }

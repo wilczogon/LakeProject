@@ -14,9 +14,12 @@ public class Food extends LakeObject{
 	private int energy;
 	private int expirationDate = 5000;
 	
-	/*public Food(){
-	  
-	}*/
+	public Food(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
+	  super(lakeWorld, in);
+	  energy = in.readInt();
+	  expirationDate = in.readInt();
+	  setImage("rsc/food.png");
+	}
 	
 	public Food(LakeWorld lakeWorld, Vec2 position){
 	  this(lakeWorld, 10, position, 100);
@@ -26,28 +29,25 @@ public class Food extends LakeObject{
 		super(lakeWorld, radius, position, Color.GREEN);
 		this.energy = energy;
 		setImage("rsc/food.png");
-		/*
-		try{
-		  /*FileOutputStream out = new FileOutputStream("test.txt");
+		
+		/*try{	//Don't remove it for now - this is test code, to check if it works
+		  OutputStream out = new BufferedOutputStream(new FileOutputStream("test.txt"));
 		  ObjectOutputStream oout = new ObjectOutputStream(out);
-		  oout.writeObject(this);
+		  this.writeToStream(oout);
+		  oout.flush();
+		  oout.close();
 		  
-		  FileInputStream in = new FileInputStream("test.txt");
+		  InputStream in = new BufferedInputStream(new FileInputStream("test.txt"));
 		  ObjectInputStream oin = new ObjectInputStream(in);
-		  Food food = (Food) oin.readObject();
+		  String className = (String)oin.readObject();
+		  System.out.println(className + className.length());
+		  Food food = new Food(lakeWorld, oin);
 		  System.out.println(food.getEnergy());
-		} catch(Exception e){
+		  oin.close();
+		}catch(Exception e){
 		  e.printStackTrace();
 		}*/
 	}
-	
-	/*public static Food readFromFile(ObjectInputStream ois){	//TODO
-	  return (Food)ois.readObject();
-	}
-	
-	public void writeToFile(ObjectInputStream ois){	//TODO
-	  return (Food)ois.readObject();
-	}*/
 
 	@Override
 	public String getType() {
@@ -72,18 +72,10 @@ public class Food extends LakeObject{
 		return true;
 	}
 	
-	/*private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
-	  energy = aInputStream.readInt();
-	  radius = aInputStream.readFloat();
-	  position = (Vec2)aInputStream.readObject();
-	  super.color = Color.GREEN;
-	  setImage("rsc/food.png");
+	@Override
+	public void writeToStream(ObjectOutputStream out) throws IOException{
+	  super.writeToStream(out);
+	  out.writeInt(energy);
+	  out.writeInt(expirationDate);
 	}
-
-	private void writeObject(ObjectOutputStream aOutputStream) throws IOException {
-	  aOutputStream.writeInt(energy);
-	  aOutputStream.writeFloat(radius);
-	  aOutputStream.writeObject(position);
-	}*/
-
 }
