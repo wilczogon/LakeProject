@@ -1,6 +1,7 @@
 package com.edu.agh.student.lakeproject.fish.veiltail;
 
 import java.awt.Color;
+import java.io.*;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -12,6 +13,10 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 import com.edu.agh.student.lakeproject.fish.Gender;
 
 public class Veiltail extends Fish {
+
+	public Veiltail(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
+	  super(lakeWorld, in);
+	}
 	
 	public Veiltail(LakeWorld lakeWorld, Vec2 position){
 		super(lakeWorld, position, Color.YELLOW);

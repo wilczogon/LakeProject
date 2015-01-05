@@ -1,6 +1,7 @@
 package com.edu.agh.student.lakeproject.fish;
 
 import org.jbox2d.common.Vec2;
+import java.io.*;
 
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
@@ -24,7 +25,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	protected int energy = MAX_ENERGY/2;	// does fish eat something?
 	protected int health = MAX_HEALTH;	// does fish fight with others?
 	protected int age = 0;
-	protected float growthFactor = 0.001f;
+	protected final float GROWTH_FACTOR = 0.001f;
 	
 	public int getEnergy() {
 		return energy;
@@ -48,6 +49,13 @@ public abstract class Fish extends LakeObject implements Serializable{
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+	
+	public Fish(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
+	  super(lakeWorld, in);
+	  energy = in.readInt();
+	  health = in.readInt();
+	  age = in.readInt();
 	}
 	
 	public Fish(LakeWorld lakeWorld, Vec2 position, Gender gender, Color color){
@@ -96,7 +104,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	public void move(){
 		//System.out.println(this.getSpecies());
 		age++;
-		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
+		setRadius(INITIAL_RADIUS - MAX_RADIUS/(GROWTH_FACTOR*age + 1) + MAX_RADIUS);
 		energy--;
 		if(energy > MAX_ENERGY/2)
 		  health = Math.min(health+1, MAX_HEALTH);
@@ -153,6 +161,14 @@ public abstract class Fish extends LakeObject implements Serializable{
 
 	public int getMaxHealth() {
 		return MAX_HEALTH;
+	}
+	
+	@Override
+	public void writeToStream(ObjectOutputStream out) throws IOException{
+	  super.writeToStream(out);
+	  out.writeInt(energy);
+	  out.writeInt(health);
+	  out.writeInt(age);
 	}
 
 }

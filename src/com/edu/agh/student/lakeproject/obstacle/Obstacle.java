@@ -11,7 +11,7 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
 public class Obstacle extends LakeObject {
 
-	public Obstacle(LakeWorld lakeWorld, ObjectInputStream in){
+	public Obstacle(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
 	  super(lakeWorld, in);
 	  setImage("rsc/skala.png");
 	}
