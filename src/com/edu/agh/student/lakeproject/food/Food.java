@@ -9,10 +9,14 @@ import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
 
-public class Food extends LakeObject implements Serializable {
+public class Food extends LakeObject{
 
 	private int energy;
 	private int expirationDate = 5000;
+	
+	/*public Food(){
+	  
+	}*/
 	
 	public Food(LakeWorld lakeWorld, Vec2 position){
 	  this(lakeWorld, 10, position, 100);
@@ -22,6 +26,19 @@ public class Food extends LakeObject implements Serializable {
 		super(lakeWorld, radius, position, Color.GREEN);
 		this.energy = energy;
 		setImage("rsc/food.png");
+		/*
+		try{
+		  /*FileOutputStream out = new FileOutputStream("test.txt");
+		  ObjectOutputStream oout = new ObjectOutputStream(out);
+		  oout.writeObject(this);
+		  
+		  FileInputStream in = new FileInputStream("test.txt");
+		  ObjectInputStream oin = new ObjectInputStream(in);
+		  Food food = (Food) oin.readObject();
+		  System.out.println(food.getEnergy());
+		} catch(Exception e){
+		  e.printStackTrace();
+		}*/
 	}
 	
 	/*public static Food readFromFile(ObjectInputStream ois){	//TODO
@@ -55,7 +72,7 @@ public class Food extends LakeObject implements Serializable {
 		return true;
 	}
 	
-	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
+	/*private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
 	  energy = aInputStream.readInt();
 	  radius = aInputStream.readFloat();
 	  position = (Vec2)aInputStream.readObject();
@@ -67,6 +84,6 @@ public class Food extends LakeObject implements Serializable {
 	  aOutputStream.writeInt(energy);
 	  aOutputStream.writeFloat(radius);
 	  aOutputStream.writeObject(position);
-	}
+	}*/
 
 }

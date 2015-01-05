@@ -245,7 +245,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				}
 			}
 		});
-		feederSlider.setValue(20);
+		feederSlider.setValue(0);
 		
 		feederSlider.setBounds(5, 530, 100, 26);
 		getContentPane().add(feederSlider);
