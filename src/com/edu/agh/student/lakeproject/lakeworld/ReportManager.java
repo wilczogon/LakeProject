@@ -10,6 +10,7 @@ public class ReportManager{
   private LakeWorld lakeWorld;
   private boolean isStopped = true;
   private List<ReportData> report;
+  private int time = 0;
 
   public ReportManager(LakeWorld lakeWorld){
     this.lakeWorld = lakeWorld;
@@ -26,21 +27,23 @@ public class ReportManager{
   
   public void reset(){
     report = new ArrayList<ReportData>();
+    time = 0;
   }
   
   public void generateReport(String directoryName) throws IOException{
   
     for(ReportData reportData: report){
-      reportData.generateReport(directoryName +  File.separator + reportData.getSpaceName().replace(".", "_"));
+      reportData.generateReport(directoryName +  File.separator + reportData.getSpaciesName().replace(".", "_"));
     }
   }
   
   public void step(){
-    for(ReportData reportData: report)
-      reportData.step();
-      
-    if(!isStopped())
+    if(!isStopped()){
+      ++time;
+      for(ReportData reportData: report)
+	reportData.step();
       count();
+    }
   }
   
   public boolean isStopped(){
@@ -57,7 +60,7 @@ public class ReportManager{
 	boolean reportDataFound = false;
 	
 	for(ReportData reportData: report){
-	  if(spaceName.equals(reportData.getSpaceName())){
+	  if(spaceName.equals(reportData.getSpaciesName())){
 	    reportData.reportFishLifeTime(fish.getAge());
 	    reportDataFound = true;
 	    break;
@@ -65,7 +68,7 @@ public class ReportManager{
 	}
 	
 	if(!reportDataFound){
-	  ReportData reportData = new ReportData(fish.getSpecies());
+	  ReportData reportData = new ReportData(fish.getSpecies(), time);
 	  reportData.reportFishLifeTime(fish.getAge());
 	  report.add(reportData);
 	}
