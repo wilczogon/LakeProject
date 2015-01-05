@@ -195,7 +195,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		getContentPane().add(openLakeButton);
 		getContentPane().add(lakeWorldPanel);
 		getContentPane().add(removeLakeObjectButton);
-		getContentPane().add(openLibraryButton);
+		//getContentPane().add(openLibraryButton);
 		getContentPane().add(classLabel);
 		getContentPane().add(ageLabel);
 		getContentPane().add(healthLabel);
@@ -210,7 +210,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		
 		newLakeObjectButton.setBounds(5, 5, 100, 45);
 		openLakeObjectButton.setBounds(5, 55, 100, 45);
-		openLibraryButton.setBounds(5, 105, 100, 45);
+		//openLibraryButton.setBounds(5, 105, 100, 45);
 		
 		canvas.setBounds(5, 155, 100, 10);
 		
@@ -245,7 +245,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				}
 			}
 		});
-		feederSlider.setValue(20);
+		feederSlider.setValue(0);
 		
 		feederSlider.setBounds(5, 530, 100, 26);
 		getContentPane().add(feederSlider);
