@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 
 import javax.swing.JPanel;
 
@@ -38,6 +39,7 @@ public class GraphicSystem implements LakeObjectFocusListener{
 	private Image buffer;
 	private JPanel container;
 	private LakeObject chosenObject;
+	private RenderedImage imageToSave;
 
 	public GraphicSystem(LakeWorld lakeWorld, final JPanel app){
 		this.lakeWorld = lakeWorld;
@@ -58,6 +60,7 @@ public class GraphicSystem implements LakeObjectFocusListener{
 	
 	public void swapBuffers(){
 		this.container.getGraphics().drawImage(buffer, 0, 0, container);
+		this.imageToSave = (RenderedImage) this.buffer;
 		this.buffer = new BufferedImage(this.container.getWidth(),this.container.getHeight(), BufferedImage.TYPE_INT_RGB);
 	}
 	
@@ -162,5 +165,9 @@ public class GraphicSystem implements LakeObjectFocusListener{
 	@Override
 	public void setChosenLakeObject(LakeObject chosen) {
 		chosenObject = chosen;
+	}
+
+	public RenderedImage getImage() {
+		return imageToSave;
 	}
 }

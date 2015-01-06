@@ -1,8 +1,11 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,6 +45,8 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private float timerStep = 0;
 	private LakeObject chosen;
 	private int feedProbability = 20;
+	private boolean recorded;
+	private String recordDirectoryName;
 
 	public ReportManager getReportManager() {
 		return reportManager;
@@ -307,5 +312,28 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	
 	public void setFeedProbability(int probability){ //probability is between 1-100
 	  feedProbability = 100 - probability;
+	}
+
+	public boolean isWorldRecorded() {
+		return recorded;
+	}
+
+	public void stopRecording() {
+		recorded = false;
+	}
+
+	public void startRecording(String filename) {
+		synchronized (this) {
+			recordDirectoryName = filename;
+			recorded = true;
+		}
+	}
+
+	public String getRecordDirectoryName() {
+		return recordDirectoryName;
+	}
+
+	public RenderedImage getWorldImage() {
+		return graphicSystem.getImage();
 	}
 }

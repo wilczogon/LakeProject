@@ -466,7 +466,18 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	protected void recButtonButtonActionPerformed() {
-		// TODO Auto-generated method stub
+		if(lakeWorld.isWorldRecorded()){
+			lakeWorld.stopRecording();
+			recButton.setText("Nagrywaj");
+		} else{
+			JFileChooser fc=new JFileChooser();
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null) {
+				lakeWorld.startRecording(fc.getSelectedFile().getPath());
+				recButton.setText("Zatrzymaj nagrywanie");
+			}
+			
+		}
 		
 	}
 
