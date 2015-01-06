@@ -72,7 +72,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	private static String playpauseReportButtonTitle = "Start";
 	private static String resetReportButtonTitle = "Reset";
 	private static String saveReportButtonTitle = "Zapisz";
-	//todo 
 	
 	private static Panel canvas;
 	
@@ -457,7 +456,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 			return Arrays.copyOf(lakeObjectClassList.toArray(), lakeObjectClassList.size(), String[].class);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String[] lakeObjectClassList = {"com.edu.agh.student.lakeproject.fish.veiltail.Veiltail"};
@@ -472,7 +470,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		} else{
 			JFileChooser fc=new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null) {
+			if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && !fc.getSelectedFile().isDirectory()) {
 				lakeWorld.startRecording(fc.getSelectedFile().getPath());
 				recButton.setText("Zatrzymaj nagrywanie");
 			}
