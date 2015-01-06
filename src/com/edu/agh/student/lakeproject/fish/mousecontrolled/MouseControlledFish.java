@@ -3,6 +3,8 @@ package com.edu.agh.student.lakeproject.fish.mousecontrolled;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;

@@ -8,7 +8,11 @@ import com.edu.agh.student.lakeproject.fish.veiltail.*;
 import com.edu.agh.student.lakeproject.lakeworld.*;
 import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 import com.edu.agh.student.lakeproject.food.Food;
+
 import java.awt.Color;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class NeuralNetworkBrainFish extends Fish {
 
@@ -61,7 +65,7 @@ public class NeuralNetworkBrainFish extends Fish {
 	@Override
 	public void writeToStream(ObjectOutputStream out) throws IOException{
 	  super.writeToStream(out);
-	  double[][][] brainWeights = super.brain.getBrainWeightsCopy();
+	  double[][][] brainWeights = ((NeuralNetworkBrain)super.brain).getBrainWeightsCopy();
 	  
 	  out.writeInt(brainWeights.length);
 	  for(double[][] brainLayer: brainWeights){
@@ -73,7 +77,7 @@ public class NeuralNetworkBrainFish extends Fish {
 	    }
 	  }
 	  
-	  out.writeBoolean(super.brain.hasBias());
+	  out.writeBoolean(((NeuralNetworkBrain)super.brain).hasBias());
 	  
 	}
 

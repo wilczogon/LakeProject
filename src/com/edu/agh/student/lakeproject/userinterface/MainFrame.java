@@ -505,6 +505,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream(fc.getSelectedFile()));
+				objectOutput.writeInt(lakeWorld.getLakeObjects().size());
 				for(LakeObject lakeObject: lakeWorld.getLakeObjects()){
 					lakeObject.writeToStream(objectOutput);
 				}
@@ -522,11 +523,12 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 			try {
 				lakeWorld.clean();
 				ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream(fc.getSelectedFile()));
-				while(objectInput.available() > 0){
+				int objectCount = objectInput.readInt();
+				for(int i = 0; i < objectCount; i++){
 					String className = (String) objectInput.readObject();
 					Class<?> clazz = Class.forName(className);
 					Constructor<?> constructor = clazz.getConstructor(LakeWorld.class,ObjectInputStream.class);
-					Fish newFish = (Fish) constructor.newInstance(lakeWorld,objectInput);
+					LakeObject newFish = (LakeObject) constructor.newInstance(lakeWorld,objectInput);
 					lakeWorld.addLakeObject(newFish);
 				}
 				objectInput.close();

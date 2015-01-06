@@ -48,5 +48,14 @@ public class NeuralNetwork{
     
     return copy;
   }
+
+public boolean hasBias() {
+//	for(NeuralNetworkLayer neuralNetworkLayer: layers){
+//		if(neuralNetworkLayer.hasBias)
+//			return true;
+//	}
+//	return false;
+	return true;
+}
   
 }

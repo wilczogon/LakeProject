@@ -47,4 +47,8 @@ public class NeuralNetworkBrain extends Brain {
 	  return neuralNetwork.getWeights();
 	}
 
+	public boolean hasBias() {
+		return neuralNetwork.hasBias();
+	}
+
 }
