@@ -12,6 +12,23 @@ import java.awt.Color;
 
 public class NeuralNetworkBrainFish extends Fish {
 
+	public NeuralNetworkBrainFish(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
+	  super(lakeWorld, in);
+	  
+	  double[][][] brainWeights = new double[in.readInt()][][];
+
+	  for(int i = 0; i < brainWeights.length; ++i){
+ 	    brainWeights[i] = new double[in.readInt()][];
+	    for(int j = 0; j < brainWeights[i].length; ++j){
+	      brainWeights[i][j] = new double[in.readInt()];
+	      for(int k = 0; k < brainWeights[i][j].length; ++k)
+		brainWeights[i][j][k] = in.readDouble();
+	    }
+	  }
+	  
+	  super.brain = new NeuralNetworkBrain(brainWeights, in.readBoolean());
+	}
+
 	public NeuralNetworkBrainFish(LakeWorld lakeWorld, Vec2 position){
 		super(lakeWorld, position, Color.RED);
 	}
@@ -39,6 +56,25 @@ public class NeuralNetworkBrainFish extends Fish {
 	
 	public double[][][] getBrainWeightsCopy(){
 	  return ((NeuralNetworkBrain)super.brain).getBrainWeightsCopy();
+	}
+	
+	@Override
+	public void writeToStream(ObjectOutputStream out) throws IOException{
+	  super.writeToStream(out);
+	  double[][][] brainWeights = super.brain.getBrainWeightsCopy();
+	  
+	  out.writeInt(brainWeights.length);
+	  for(double[][] brainLayer: brainWeights){
+	    out.writeInt(brainLayer.length);
+	    for(double[] oneNeuronConnections: brainLayer){
+	      out.writeInt(oneNeuronConnections.length);
+	      for(double weight: oneNeuronConnections)
+		out.writeDouble(weight);
+	    }
+	  }
+	  
+	  out.writeBoolean(super.brain.hasBias());
+	  
 	}
 
 }

@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Collections;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import com.edu.agh.student.lakeproject.fish.Fish;
 
 public class ReportManager{
@@ -42,19 +41,21 @@ public class ReportManager{
     }
     
     //TODO save bestFishes
+    int i = 0;
     for(Fish fish: bestFishes.values()){
-      /*FileWriter fw;
-      BufferedWriter bw;
+      File file = new File(directoryName + File.separator + "best_fishes" + File.separator + i);
+      
+      if(!file.exists()){
+	file.getParentFile().mkdirs();
+	file.createNewFile();
+      }
     
-      File file = new File(directoryName);
-    
-    if(!file.exists()){
-      file.getParentFile().mkdirs();
-      file.createNewFile();
-    }
-    
-    fw = new FileWriter(file.getAbsoluteFile());
-    bw = new BufferedWriter(fw);*/
+      OutputStream out = new BufferedOutputStream(new FileOutputStream(directoryName + File.separator + "best_fishes" + File.separator + i));
+      ObjectOutputStream oout = new ObjectOutputStream(out);
+      fish.writeToStream(oout);
+      //oout.flush();
+      oout.close();
+      ++i;
     }
   }
   

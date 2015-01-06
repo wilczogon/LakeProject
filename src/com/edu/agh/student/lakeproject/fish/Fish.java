@@ -56,6 +56,16 @@ public abstract class Fish extends LakeObject implements Serializable{
 	  energy = in.readInt();
 	  health = in.readInt();
 	  age = in.readInt();
+	  Gender gender = (Gender)in.readObject();
+	  
+	  if(gender == Gender.MALE)
+	    setImage("rsc/ryba-m.png");
+	  else if(gender == Gender.FEMALE)
+	    setImage("rsc/ryba-f.png");
+	  else
+	    setImage("rsc/ryba.png");
+	  
+	  initReproductionOrgans(gender);
 	}
 	
 	public Fish(LakeWorld lakeWorld, Vec2 position, Gender gender, Color color){
@@ -169,6 +179,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	  out.writeInt(energy);
 	  out.writeInt(health);
 	  out.writeInt(age);
+	  out.writeObject(reproductiveOrgans.getGender());
 	}
 	
 	public void reset(){

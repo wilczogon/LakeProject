@@ -29,24 +29,6 @@ public class Food extends LakeObject{
 		super(lakeWorld, radius, position, Color.GREEN);
 		this.energy = energy;
 		setImage("rsc/food.png");
-		
-		/*try{	//Don't remove it for now - this is test code, to check if it works
-		  OutputStream out = new BufferedOutputStream(new FileOutputStream("test.txt"));
-		  ObjectOutputStream oout = new ObjectOutputStream(out);
-		  this.writeToStream(oout);
-		  oout.flush();
-		  oout.close();
-		  
-		  InputStream in = new BufferedInputStream(new FileInputStream("test.txt"));
-		  ObjectInputStream oin = new ObjectInputStream(in);
-		  String className = (String)oin.readObject();
-		  System.out.println(className + className.length());
-		  Food food = new Food(lakeWorld, oin);
-		  System.out.println(food.getEnergy());
-		  oin.close();
-		}catch(Exception e){
-		  e.printStackTrace();
-		}*/
 	}
 
 	@Override

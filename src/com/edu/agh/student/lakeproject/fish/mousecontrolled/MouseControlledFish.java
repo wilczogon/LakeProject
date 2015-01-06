@@ -16,6 +16,10 @@ import com.edu.agh.student.lakeproject.fish.Gender;
 
 public class MouseControlledFish extends Fish {
 
+	public MouseControlledFish(LakeWorld lakeWorld, ObjectInputStream in) throws IOException, ClassNotFoundException{
+	  super(lakeWorld, in);
+	}
+
 	public MouseControlledFish(LakeWorld lakeWorld, Vec2 position) {
 		super(lakeWorld, position, Color.WHITE);
 	}
@@ -28,20 +32,5 @@ public class MouseControlledFish extends Fish {
 		super.eye = new MouseControlledEye(lakeWorld, this);
 		lakeWorld.addMouseMotionListener((MouseMotionListener) muscles);
 	}
-	
-	/*@Override
-	public void move(){
-		age++;
-		setRadius(INITIAL_RADIUS - MAX_RADIUS/(growthFactor*age + 1) + MAX_RADIUS);
-		int x = 0;
-		for(Object color: eye.getView().getPixels()){
-			Graphics gd = MainFrame.getCanvas().getGraphics();
-			gd.setColor((Color) color);
-			gd.fillRect(x, 0, 10, 10);
-			x+=10;
-		}
-		energy--;
-		muscles.applyForces(null); //TODO
-	}*/
 
 }
