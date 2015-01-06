@@ -25,11 +25,11 @@ public class ReportData{
     this.time = time;
   }
   
-  public void generateReport(String directoryName) throws IOException{
+  public void generateReport(String fileName) throws IOException{
     FileWriter fw;
     BufferedWriter bw;
     
-    File file = new File(directoryName);
+    File file = new File(fileName);
     
     if(!file.exists()){
       file.getParentFile().mkdirs();
@@ -48,64 +48,6 @@ public class ReportData{
     }
     
     bw.close();
-    
-    /*FileWriter fw;
-    BufferedWriter bw;
-    
-    File fileTheLongestLivingFish = new File(directoryName + File.separator);
-    fileTheLongestLivingFish.mkdirs();
-    fileTheLongestLivingFish = new File(directoryName + File.separator + "theLongestLivingFish");
-    
-    if(!fileTheLongestLivingFish.exists())
-      fileTheLongestLivingFish.createNewFile();
-    
-    fw = new FileWriter(fileTheLongestLivingFish.getAbsoluteFile());
-    bw = new BufferedWriter(fw);
-    
-    for(Map.Entry<Integer, Integer> data: theLongestLivingFish.entrySet()){
-      bw.write(data.getKey() + ", " + data.getValue());
-      bw.newLine();
-    }
-    
-    bw.close();
-    
-    
-    
-    File fileNumberOfFishes = new File(directoryName + File.separator);
-    fileNumberOfFishes.mkdirs();
-    fileNumberOfFishes = new File(directoryName + File.separator + "numberOfFishes");
-    
-    if(!fileNumberOfFishes.exists())
-      fileNumberOfFishes.createNewFile();
-    
-    fw = new FileWriter(fileNumberOfFishes.getAbsoluteFile());
-    bw = new BufferedWriter(fw);
-    
-    for(Map.Entry<Integer, Integer> data: numberOfFishes.entrySet()){
-      bw.write(data.getKey() + ", " + data.getValue());
-      bw.newLine();
-    }
-    
-    bw.close();
-    
-    
-    File fileMeanOfFishesLifeTime = new File(directoryName + File.separator);
-    fileMeanOfFishesLifeTime.mkdirs();
-    fileMeanOfFishesLifeTime = new File(directoryName + File.separator + "meanOfFishesLifeTime");
-    
-    if(!fileMeanOfFishesLifeTime.exists())
-      fileMeanOfFishesLifeTime.createNewFile();
-      
-    fw = new FileWriter(fileMeanOfFishesLifeTime.getAbsoluteFile());
-    bw = new BufferedWriter(fw);
-    
-    for(Map.Entry<Integer, Float> data: meanOfFishesLifeTime.entrySet()){
-      bw.write(data.getKey() + ", " + data.getValue());
-      bw.newLine();
-    }
-    
-    bw.close();
-    */
   }
   
   public String getSpaciesName(){

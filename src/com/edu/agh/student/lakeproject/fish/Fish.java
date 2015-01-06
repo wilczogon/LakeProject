@@ -170,5 +170,10 @@ public abstract class Fish extends LakeObject implements Serializable{
 	  out.writeInt(health);
 	  out.writeInt(age);
 	}
+	
+	public void reset(){
+	  energy = MAX_ENERGY/2;
+	  health = MAX_HEALTH;
+	}
 
 }
