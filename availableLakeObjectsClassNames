@@ -3,3 +3,4 @@ com.edu.agh.student.lakeproject.obstacle.Obstacle
 com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish 
 com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish.NeuralNetworkBrainFish
 com.edu.agh.student.lakeproject.fish.veiltail.Veiltail
+example.ExampleFish

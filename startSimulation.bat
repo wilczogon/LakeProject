@@ -1,3 +1,3 @@
- javac.exe -cp .;src;libs\*;rsc src\LakeMain.java
+ javac -cp .;src;libs\*;rsc;externalFishes src\LakeMain.java
  
- java.exe -cp .;src;libs\*;rsc LakeMain
+ java -cp .;src;libs\*;rsc;externalFishes LakeMain
