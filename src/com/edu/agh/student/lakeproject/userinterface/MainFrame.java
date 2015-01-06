@@ -536,13 +536,19 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		if(chosen instanceof Fish){
 			chosenObject = chosen;
 			updateFishLabels();
+			saveLakeObjectButton.setVisible(true);
+			removeLakeObjectButton.setVisible(true);
 		} else if(chosen != null){
 			chosenObject = chosen;
 			clearFishLabels();
 			classLabel.setText(chosen.getClass().getSimpleName());
+			saveLakeObjectButton.setVisible(false);
+			removeLakeObjectButton.setVisible(true);
 		} else {
 			clearFishLabels();
 			classLabel.setText("");
+			saveLakeObjectButton.setVisible(false);
+			removeLakeObjectButton.setVisible(false);
 		}
 		
 	}
