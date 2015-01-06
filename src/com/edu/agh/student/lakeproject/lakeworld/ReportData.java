@@ -7,21 +7,49 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReportData{
-  private String spaceName;
+  private String spaciesName;
   private Map<Integer, Integer> theLongestLivingFish = new HashMap<Integer, Integer>();
   private Map<Integer, Integer> numberOfFishes = new HashMap<Integer, Integer>();
   private Map<Integer, Float> meanOfFishesLifeTime = new HashMap<Integer, Float>();
   private int fishNo = 0;
   private int fishLifeTimeSum = 0;
   private int lifeTimeOfTheLongestLivingFish = 0;
-  private int time = 0;
+  private int time;
   
-  public ReportData(String spaceName){
-    this.spaceName = spaceName;
+  public ReportData(String spaciesName){
+    this(spaciesName, 0);
+  }
+  
+  public ReportData(String spaciesName, int time){
+    this.spaciesName = spaciesName;
+    this.time = time;
   }
   
   public void generateReport(String directoryName) throws IOException{
     FileWriter fw;
+    BufferedWriter bw;
+    
+    File file = new File(directoryName);
+    
+    if(!file.exists()){
+      file.getParentFile().mkdirs();
+      file.createNewFile();
+    }
+    
+    fw = new FileWriter(file.getAbsoluteFile());
+    bw = new BufferedWriter(fw);
+    
+    bw.write("time, numberOfFishes, meanOfFishesLifeTime, theLongestLivingFish");
+    bw.newLine();
+    
+    for(int t=0; t<time; ++t){
+      bw.write(t + ", " + numberOfFishes.get(t) + ", " + meanOfFishesLifeTime.get(t) + ", " + theLongestLivingFish.get(t));
+      bw.newLine();
+    }
+    
+    bw.close();
+    
+    /*FileWriter fw;
     BufferedWriter bw;
     
     File fileTheLongestLivingFish = new File(directoryName + File.separator);
@@ -77,10 +105,11 @@ public class ReportData{
     }
     
     bw.close();
+    */
   }
   
-  public String getSpaceName(){
-    return spaceName;
+  public String getSpaciesName(){
+    return spaciesName;
   }
   
   public void writeDown(){
