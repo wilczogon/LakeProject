@@ -36,8 +36,6 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private ReportManager reportManager;
 	private Timer timer = null;
 	private List<LakeObject> lakeObjects = new ArrayList<LakeObject>();
-	@SuppressWarnings("unused")
-	private List<Fish> retainers = new ArrayList<Fish>();
 	private List<LakeObjectFocusListener> lakeObjectFocusListeners;
 	private boolean isTimerStarted = false;
 	private boolean isTimerForwarded = false;
@@ -56,9 +54,6 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 		super(new Vec2(0, 0));
 		lakeObjectFocusListeners = new ArrayList<LakeObjectFocusListener>();
 		reportManager = new ReportManager(this);
-//		//frame = new JFrame(LakeConfiguration.title);
-//		panel = new JPanel();
-//		panel.setBounds(10, 10, LakeConfiguration.width, LakeConfiguration.height);
 	}
 	
 	public JPanel getFrame() {
@@ -118,11 +113,8 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 				contact = contact.m_next;
 			}while(contact != null);
 		}
-		
-		//super.drawDebugData();
 		graphicSystem.paint();
 		graphicSystem.swapBuffers();
-		//debugDraw.swapBuffers();
 		reportManager.step();
 		if(chosen!=null && !chosen.isActive())
 			chosen = null;
@@ -150,11 +142,8 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 	
 	private void init(){
-		this.graphicSystem = new GraphicSystem(this, panel); // TODO tymczasowo pole
+		this.graphicSystem = new GraphicSystem(this, panel);
 		this.addLakeObjectFocusListener(graphicSystem);
-		//frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//panel.setVisible(true);
-		
 		timer = new Timer();
 		startTimer();
 	}
@@ -203,9 +192,6 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 
 	public void addLakeObject(LakeObject lakeObject){
-		
-		
-		//System.out.println(lakeObject.toString());
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.position = lakeObject.getInitialPosition();
 		
@@ -221,25 +207,23 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 	
 	public void addBound(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
-	  LakeObject obstacle = new Obstacle(this, 0, new Vec2());
-	  BodyDef bodyDef = new BodyDef();
-	  bodyDef.position = new Vec2(0, 0);
-	  bodyDef.type = BodyType.STATIC;
-	  
-	  bodyDef.userData = obstacle;
-	  Body body = super.createBody(bodyDef);
-	  
-	  FixtureDef fixDef = new FixtureDef();
-	  Vec2[] vertices = new Vec2[]{a, b, c, d};
-	  PolygonShape shape = new PolygonShape();
-	  shape.set(vertices, vertices.length);
-	  fixDef.shape = shape;
-	  body.createFixture(fixDef);
-	  
-	  obstacle.setBody(body);
-	  lakeObjects.add(obstacle);
-	  
-	  //Body body = super.createBody(bodyDef);
+		LakeObject obstacle = new Obstacle(this, 0, new Vec2());
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.position = new Vec2(0, 0);
+		bodyDef.type = BodyType.STATIC;
+		
+		bodyDef.userData = obstacle;
+		Body body = super.createBody(bodyDef);
+		
+		FixtureDef fixDef = new FixtureDef();
+		Vec2[] vertices = new Vec2[]{a, b, c, d};
+		PolygonShape shape = new PolygonShape();
+		shape.set(vertices, vertices.length);
+		fixDef.shape = shape;
+		body.createFixture(fixDef);
+		
+		obstacle.setBody(body);
+		lakeObjects.add(obstacle);
 	}
 	
 	public List<LakeObject> getLakeObjects(){
@@ -263,31 +247,22 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		Vec2 point = new Vec2(arg0.getX(), arg0.getY()); 
 		
 		for(LakeObject lakeObject :lakeObjects){
@@ -301,14 +276,10 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public Vec2 getNewObjectPosition(){	//it will tell you where you can place your new object... approximatelly
@@ -365,6 +336,12 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 				chosen = null;
 				setChosenLakeObject(null);
 			}
+		}
+	}
+
+	public void clean() {
+		for(LakeObject lakeObject: lakeObjects){
+			removeLakeObject(lakeObject);
 		}
 	}
 }
