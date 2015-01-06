@@ -336,4 +336,15 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	public RenderedImage getWorldImage() {
 		return graphicSystem.getImage();
 	}
+
+	public void removeLakeObject(LakeObject lakeObject) {
+		synchronized (this) {
+			lakeObjects.remove(lakeObject);
+			destroyBody(lakeObject.body);
+			if(chosen == lakeObject){
+				chosen = null;
+				setChosenLakeObject(null);
+			}
+		}
+	}
 }

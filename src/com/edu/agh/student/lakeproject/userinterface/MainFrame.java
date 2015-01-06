@@ -102,7 +102,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 
 	private LakeWorld lakeWorld;
 
-	private Fish chosenFish;
+	private LakeObject chosenObject;
 
 	private Label feederLabel;
 
@@ -126,6 +126,11 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		openLakeObjectButton = new JButton(openLakeObjectButtonTitle);
 		saveLakeObjectButton = new JButton(saveLakeObjectButtonTitle);
 		removeLakeObjectButton = new JButton(removeLakeObjectButtonTitle);
+		removeLakeObjectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				removeLakeObjectButtonActionPerformed();
+			}
+		});
 		openLibraryButton = new JButton(openLibraryButtonTitle);
 		
 		classLabel = new JLabel();
@@ -332,6 +337,11 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		lakeWorld.start();
 	}
 	
+	protected void removeLakeObjectButtonActionPerformed() {
+		this.lakeWorld.removeLakeObject(chosenObject);
+		
+	}
+
 	protected void saveReportButtonActionPerformed() {
 		JFileChooser fc=new JFileChooser();
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -361,7 +371,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream(fc.getSelectedFile()));
-				objectOutput.writeObject(chosenFish);
+				objectOutput.writeObject(chosenObject);
 				objectOutput.flush();
 				objectOutput.close();
 			} catch (IOException e) {
@@ -511,20 +521,28 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	}
 
 	private void updateFishLabels(){
-		String name = chosenFish.getSpecies().substring(chosenFish.getSpecies().lastIndexOf('.')+1);
-		classLabel.setText(name);
-		ageLabel.setText(		"A : " + Integer.toString(chosenFish.getAge()));
-		energyLabel.setText(	"E : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
-		healthLabel.setText(	"H : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
+		if(chosenObject instanceof Fish){
+			Fish chosenFish = (Fish) this.chosenObject;
+			String name = chosenFish.getSpecies().substring(chosenFish.getSpecies().lastIndexOf('.')+1);
+			classLabel.setText(name);
+			ageLabel.setText(		"A : " + Integer.toString(chosenFish.getAge()));
+			energyLabel.setText(	"E : " + Integer.toString(chosenFish.getEnergy()) + "/" + Integer.toString(chosenFish.getMaxEnergy()));
+			healthLabel.setText(	"H : " + Integer.toString(chosenFish.getHealth()) + "/" + Integer.toString(chosenFish.getMaxHealth()));
+		}
 	}
 	
 	@Override
 	public void setChosenLakeObject(LakeObject chosen) {
 		if(chosen instanceof Fish){
-			chosenFish = (Fish) chosen;
+			chosenObject = chosen;
 			updateFishLabels();
-		} else if(chosen == null){
+		} else if(chosen != null){
+			chosenObject = chosen;
 			clearFishLabels();
+			classLabel.setText(chosen.getClass().getSimpleName());
+		} else {
+			clearFishLabels();
+			classLabel.setText("");
 		}
 		
 	}
@@ -532,7 +550,6 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	private void clearFishLabels() {
 		Graphics gd = MainFrame.getCanvas().getGraphics();
 		gd.clearRect(0, 0, 100, 10);
-		classLabel.setText("");
 		ageLabel.setText("");
 		energyLabel.setText("");
 		healthLabel.setText("");
