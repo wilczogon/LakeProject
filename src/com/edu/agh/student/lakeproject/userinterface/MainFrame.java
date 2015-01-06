@@ -9,9 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,8 +17,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -39,14 +35,9 @@ import javax.swing.event.ChangeListener;
 import org.jbox2d.common.Vec2;
 
 import com.edu.agh.student.lakeproject.fish.Fish;
-import com.edu.agh.student.lakeproject.fish.mousecontrolled.MouseControlledFish;
-import com.edu.agh.student.lakeproject.fish.neuralnetworkbrainfish.NeuralNetworkBrainFish;
-import com.edu.agh.student.lakeproject.fish.veiltail.Veiltail;
-import com.edu.agh.student.lakeproject.food.Food;
 import com.edu.agh.student.lakeproject.lakeworld.LakeConfiguration;
 import com.edu.agh.student.lakeproject.lakeworld.LakeObject;
 import com.edu.agh.student.lakeproject.lakeworld.LakeWorld;
-import com.edu.agh.student.lakeproject.obstacle.Obstacle;
 
 public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	/**
@@ -498,14 +489,13 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		if(lakeWorld.isWorldRecorded()){
 			lakeWorld.stopRecording();
 			recButton.setText("Nagrywaj");
-		} else{
+		} else {
 			JFileChooser fc=new JFileChooser();
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && !fc.getSelectedFile().isDirectory()) {
+			if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION && fc.getSelectedFile() != null && fc.getSelectedFile().isDirectory()) {
 				lakeWorld.startRecording(fc.getSelectedFile().getPath());
 				recButton.setText("Zatrzymaj nagrywanie");
 			}
-			
 		}
 		
 	}
