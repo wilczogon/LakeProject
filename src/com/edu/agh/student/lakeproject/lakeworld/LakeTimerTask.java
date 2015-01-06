@@ -21,29 +21,6 @@ public class LakeTimerTask extends TimerTask {
 		synchronized (world) {
 			world.step();
 		}
-		synchronized (world) {
-			if(world.isWorldRecorded()){
-				String iToString = Integer.toString(i);
-				String fillerString = "";
-				for(int x = 6; x > iToString.length(); x--){
-					fillerString += "0";
-				}
-				try {
-					File file = new File(world.getRecordDirectoryName() + File.separator + fillerString + iToString + ".jpeg");
-					if(!file.exists()){
-						file.getParentFile().mkdirs();
-						file.createNewFile();
-					}
-					ImageIO.write(world.getWorldImage(), "JPEG", file);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				i++;
-			} else {
-				i  = 0;
-			}
-		}
 	}
 
 }

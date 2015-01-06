@@ -6,12 +6,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import org.jbox2d.collision.shapes.CircleShape;
@@ -47,6 +50,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private int feedProbability = 20;
 	private boolean recorded;
 	private String recordDirectoryName;
+	private int i = 0;
 
 	public ReportManager getReportManager() {
 		return reportManager;
@@ -127,6 +131,26 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 		if(chosen!=null && !chosen.isActive())
 			chosen = null;
 		setChosenLakeObject(chosen);
+		if(this.isWorldRecorded()){
+			String iToString = Integer.toString(i);
+			String fillerString = "";
+			for(int x = 6; x > iToString.length(); x--){
+				fillerString += "0";
+			}
+			try {
+				File file = new File(this.getRecordDirectoryName() + File.separator + fillerString + iToString + ".jpeg");
+				if(!file.exists()){
+					file.getParentFile().mkdirs();
+					file.createNewFile();
+				}
+				ImageIO.write(this.getWorldImage(), "JPEG", file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			i++;
+		} else {
+			i  = 0;
+		}
 	}
 	
 	private void init(){
