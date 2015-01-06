@@ -380,8 +380,10 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				String className = (String) objectInput.readObject();
 				Class<?> clazz = Class.forName(className);
 				Constructor<?> constructor = clazz.getConstructor(LakeWorld.class,ObjectInputStream.class);
-				Fish newFish = (Fish) constructor.newInstance(lakeWorld,objectInput);
-				lakeWorld.addLakeObject(newFish);
+				synchronized (lakeWorld) {
+					Fish newFish = (Fish) constructor.newInstance(lakeWorld,objectInput);
+					lakeWorld.addLakeObject(newFish);
+				}
 				objectInput.close();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -428,14 +430,13 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 				msgDialogPanel.add(spinner);
 				if(JOptionPane.showConfirmDialog(this, msgDialogPanel, "Nowy Obiekt", JOptionPane.PLAIN_MESSAGE) == JOptionPane.OK_OPTION){
 					int numberOfObjects = (int) spinner.getValue();
-					synchronized (lakeWorld) {
-						Class<?> clazz = Class.forName(chosenClass);
-						for(int ii = 0; ii < numberOfObjects; ii++){
-							Constructor<?> constructor = clazz.getConstructor(LakeWorld.class,Vec2.class);
+					Class<?> clazz = Class.forName(chosenClass);
+					for(int ii = 0; ii < numberOfObjects; ii++){
+						Constructor<?> constructor = clazz.getConstructor(LakeWorld.class,Vec2.class);
+						synchronized (lakeWorld) {
 							LakeObject object = (LakeObject) constructor.newInstance(new Object[]{lakeWorld,lakeWorld.getNewObjectPosition()});
 							lakeWorld.addLakeObject(object);
 						}
-						//System.out.println(chosenClass+" "+numberOfObjects);
 					}
 				}
 			}

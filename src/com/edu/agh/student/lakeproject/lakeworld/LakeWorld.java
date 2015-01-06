@@ -342,8 +342,15 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 
 	public void clean() {
-		for(LakeObject lakeObject: lakeObjects){
-			removeLakeObject(lakeObject);
+		synchronized (this) {
+			for(LakeObject lakeObject: lakeObjects){
+				lakeObjects.remove(lakeObject);
+				destroyBody(lakeObject.body);
+				if(chosen == lakeObject){
+					chosen = null;
+					setChosenLakeObject(null);
+				}
+			}
 		}
 	}
 }
