@@ -29,6 +29,11 @@ public class LakeTimerTask extends TimerTask {
 					fillerString += "0";
 				}
 				try {
+					File file = new File(world.getRecordDirectoryName());
+					if(!file.exists()){
+						file.getParentFile().mkdirs();
+						file.createNewFile();
+					}
 					ImageIO.write(world.getWorldImage(), "JPEG", new File(world.getRecordDirectoryName() + "//" + fillerString + iToString + ".jpeg"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
