@@ -192,18 +192,20 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 
 	public void addLakeObject(LakeObject lakeObject){
-		BodyDef bodyDef = new BodyDef();
-		bodyDef.position = lakeObject.getInitialPosition();
-		
-		if(lakeObject.getType().equals(LakeConfiguration.fishTypeName))
-			bodyDef.type = BodyType.DYNAMIC;
-		else
-			bodyDef.type = BodyType.STATIC;
-		
-		bodyDef.userData = lakeObject;
-		Body body = super.createBody(bodyDef);
-		lakeObject.setBody(body);
-		lakeObjects.add(lakeObject);
+		synchronized (this) {
+			BodyDef bodyDef = new BodyDef();
+			bodyDef.position = lakeObject.getInitialPosition();
+			
+			if(lakeObject.getType().equals(LakeConfiguration.fishTypeName))
+				bodyDef.type = BodyType.DYNAMIC;
+			else
+				bodyDef.type = BodyType.STATIC;
+			
+			bodyDef.userData = lakeObject;
+			Body body = super.createBody(bodyDef);
+			lakeObject.setBody(body);
+			lakeObjects.add(lakeObject);
+		}
 	}
 	
 	public void addBound(Vec2 a, Vec2 b, Vec2 c, Vec2 d){
@@ -340,15 +342,15 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 
 	public void clean() {
-		synchronized (this) {
-			for(LakeObject lakeObject: lakeObjects){
-				lakeObjects.remove(lakeObject);
-				destroyBody(lakeObject.body);
-				if(chosen == lakeObject){
-					chosen = null;
-					setChosenLakeObject(null);
-				}
-			}
-		}
+//		synchronized (this) {
+//			for(LakeObject lakeObject: lakeObjects){
+//				lakeObjects.remove(lakeObject);
+//				destroyBody(lakeObject.body);
+//				if(chosen == lakeObject){
+//					chosen = null;
+//					setChosenLakeObject(null);
+//				}
+//			}
+//		}
 	}
 }
