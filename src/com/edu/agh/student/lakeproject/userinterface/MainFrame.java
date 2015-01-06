@@ -371,7 +371,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		if(fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				ObjectOutputStream objectOutput = new ObjectOutputStream(new FileOutputStream(fc.getSelectedFile()));
-				objectOutput.writeObject(chosenObject);
+				chosenObject.writeToStream(objectOutput);
 				objectOutput.flush();
 				objectOutput.close();
 			} catch (IOException e) {
@@ -386,12 +386,33 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 		if(fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 			try {
 				ObjectInputStream objectInput = new ObjectInputStream(new FileInputStream(fc.getSelectedFile()));
-				Fish newFish = (Fish) objectInput.readObject();
+				String className = (String) objectInput.readObject();
+				Class<?> clazz = Class.forName(className);
+				Constructor<?> constructor = clazz.getConstructor(LakeWorld.class,ObjectInputStream.class);
+				Fish newFish = (Fish) constructor.newInstance(lakeWorld,objectInput);
 				lakeWorld.addLakeObject(newFish);
 				objectInput.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
