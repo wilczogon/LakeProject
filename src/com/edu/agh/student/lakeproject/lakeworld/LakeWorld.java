@@ -1,14 +1,11 @@
 package com.edu.agh.student.lakeproject.lakeworld;
 
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +14,6 @@ import java.util.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -48,7 +44,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	private float timerStep = 0;
 	private LakeObject chosen;
 	private int feedProbability = 20;
-	private boolean recorded;
+	private boolean recorded = false;
 	private String recordDirectoryName;
 	private int i = 0;
 
