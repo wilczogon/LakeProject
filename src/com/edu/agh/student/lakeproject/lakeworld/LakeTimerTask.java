@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class LakeTimerTask extends TimerTask {
 	private LakeWorld world;
-	private int i = 0;
+	
 	
 	public LakeTimerTask(LakeWorld world){
 		this.world = world;
