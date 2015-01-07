@@ -4,6 +4,6 @@
  
  git pull origin
  
- find src/ -name "*.java" -printf %p\\n | xargs javac -d bin -cp .:libs/* -sourcepath .:src:externalFishes
+ find src/ externalFishes/ -name "*.java" -printf %p\\n | xargs javac -d bin -cp .:libs/* -sourcepath .:src:externalFishes
  
- #java -cp .:src:libs/*:rsc:externalFishes LakeMain
+ java -cp .:bin:libs/* LakeMain

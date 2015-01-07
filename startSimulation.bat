@@ -1,3 +1,6 @@
- javac -cp .;src;libs\*;rsc;externalFishes src\LakeMain.java
+ dir /s /B src/*.java > sources.txt
+ dir /s /B externalFishes/*.java > sources.txt
  
- java -cp .;src;libs\*;rsc;externalFishes LakeMain
+ javac -d bin -cp .;libs/* -sourcepath .;src;externalFishes @sources.txt
+ 
+ java -cp .;bin;libs/* LakeMain
