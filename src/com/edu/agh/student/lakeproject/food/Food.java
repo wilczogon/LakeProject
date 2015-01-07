@@ -32,7 +32,7 @@ public class Food extends LakeObject{
 	}
 
 	@Override
-	public String getType() {
+	public final String getType() {
 		return LakeConfiguration.foodTypeName;
 	}
 

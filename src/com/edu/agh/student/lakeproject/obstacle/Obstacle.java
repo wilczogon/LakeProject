@@ -26,7 +26,7 @@ public class Obstacle extends LakeObject {
 	}
 
 	@Override
-	public String getType() {
+	public final String getType() {
 		return LakeConfiguration.obstacleTypeName;
 	}
 
