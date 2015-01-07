@@ -467,7 +467,7 @@ public class MainFrame extends JFrame implements LakeObjectFocusListener {
 	private String[] getLakeObjectClassList() {
 		
 		try {
-			String filename = "availableLakeObjectsClassNames";
+			String filename = "availableLakeObjectsClassNames.conf";
 			BufferedReader reader = new BufferedReader(new FileReader(filename));
 			ArrayList<String> lakeObjectClassList = new ArrayList<String>();
 			while(reader.ready()){
