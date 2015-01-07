@@ -13,7 +13,7 @@ public class Eye implements Serializable{
 	private LakeWorld lakeWorld;
 	private Fish fish;
 	private int resolution = 10;
-	private int angle = 100;
+	private int radius = 100;
 
 	public Eye(LakeWorld lakeWorld, Fish fish){
 	  this(lakeWorld, fish, 10, 100);
@@ -27,11 +27,11 @@ public class Eye implements Serializable{
 	  this.lakeWorld = lakeWorld;
 	  this.resolution = resolution;
 	  this.fish = fish;
-	  this.angle = angle;
+	  this.radius = angle;
 	}
 	
 	public EyeView getView(){
-	  EyeView result = lakeWorld.getGraphicSystem().getEyeView(fish, angle, resolution);
+	  EyeView result = lakeWorld.getGraphicSystem().getEyeView(fish, radius, resolution);
 	  return result;
 	}
 

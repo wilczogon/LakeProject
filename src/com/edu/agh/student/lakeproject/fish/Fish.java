@@ -94,7 +94,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	}
 	
 	@Override
-	public String getType() {
+	public final String getType() {
 		return LakeConfiguration.fishTypeName;
 	}
 	
