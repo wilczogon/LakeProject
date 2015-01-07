@@ -71,6 +71,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 	
 	public void step(){
+	  //synchronized(lakeObjects){
 	
 		if(LakeConfiguration.random.nextInt() % 100 > feedProbability)
 			addLakeObject(new Food(this, 10, getNewObjectPosition(), 100));
@@ -141,6 +142,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 		} else {
 			i  = 0;
 		}
+	  //}
 	}
 	
 	private void init(){
@@ -333,26 +335,29 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	}
 
 	public void removeLakeObject(LakeObject lakeObject) {
-		synchronized (this) {
 			lakeObjects.remove(lakeObject);
 			destroyBody(lakeObject.body);
 			if(chosen == lakeObject){
 				chosen = null;
 				setChosenLakeObject(null);
 			}
-		}
 	}
 
 	public void clean() {
-//		synchronized (this) {
-//			for(LakeObject lakeObject: lakeObjects){
-//				lakeObjects.remove(lakeObject);
-//				destroyBody(lakeObject.body);
-//				if(chosen == lakeObject){
-//					chosen = null;
-//					setChosenLakeObject(null);
-//				}
-//			}
-//		}
+	  synchronized (this) {
+		for(LakeObject lakeObject: lakeObjects){
+			//lakeObjects.remove(lakeObject);
+			destroyBody(lakeObject.body);
+			//removeLakeObject(lakeObject);
+		}
+		chosen = null;
+		setChosenLakeObject(null);
+		lakeObjects = new ArrayList<LakeObject>();
+		
+		addBound(new Vec2(0, 0), new Vec2(0, -10), new Vec2(LakeConfiguration.width, -10), new Vec2(LakeConfiguration.width, 0));
+		addBound(new Vec2(0, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height+10), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
+		addBound(new Vec2(0, 0), new Vec2(-10, 0), new Vec2(-10, LakeConfiguration.height), new Vec2(0, LakeConfiguration.height));
+		addBound(new Vec2(LakeConfiguration.width, 0), new Vec2(LakeConfiguration.width+10, 0), new Vec2(LakeConfiguration.width+10, LakeConfiguration.height), new Vec2(LakeConfiguration.width, LakeConfiguration.height));
+	  }
 	}
 }
