@@ -2,7 +2,7 @@
  
  find . -name "*.class" -type f -delete
  
- git pull origin
+ #git pull origin
  
  find src/ externalFishes/ -name "*.java" -printf %p\\n | xargs javac -d bin -cp .:libs/* -sourcepath .:src:externalFishes
  
