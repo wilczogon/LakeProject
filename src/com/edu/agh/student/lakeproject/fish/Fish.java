@@ -144,12 +144,12 @@ public abstract class Fish extends LakeObject implements Serializable{
 		  }
 		  
 		} else{
-		  health-=20;
+		  health-=10;
 		}
 	}
 	
 	protected void interactWith(Obstacle obstacle){
-		health--;
+		health-=10;
 	}
 	
 	protected void interactWith(Food food){

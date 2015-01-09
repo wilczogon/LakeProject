@@ -84,6 +84,7 @@ public class ReportManager{
 	for(ReportData reportData: report){
 	  if(spaceName.equals(reportData.getSpaciesName())){
 	    reportData.reportFishLifeTime(fish.getAge());
+	    System.out.println(fish.getAge());
 	    reportDataFound = true;
 	    break;
 	  }

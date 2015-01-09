@@ -34,7 +34,7 @@ public class NeuralNetworkBrain extends Brain {
 	  double[] values = new double[colors.length];
 	  
 	  for(int i = 0; i<colors.length; ++i)
-	    values[i] = (colors[i].getRed()/255) + (colors[i].getGreen()/255) + (colors[i].getBlue()/255);	//TODO
+	    values[i] = (colors[i].getRed()/255)*256*256 + (colors[i].getGreen()/255)*256 + (colors[i].getBlue()/255);	//TODO
 	  
 	  double[] result = neuralNetwork.proceed(values);
 	  
