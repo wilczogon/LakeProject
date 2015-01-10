@@ -61,6 +61,7 @@ public class GraphicSystem implements LakeObjectFocusListener{
 	public void swapBuffers(){
 		this.container.getGraphics().drawImage(buffer, 0, 0, container);
 		this.imageToSave = (RenderedImage) this.buffer;
+		buffer.getGraphics().dispose();
 		this.buffer = new BufferedImage(this.container.getWidth(),this.container.getHeight(), BufferedImage.TYPE_INT_RGB);
 	}
 	
