@@ -22,7 +22,7 @@ public abstract class Fish extends LakeObject implements Serializable{
 	protected final int MAX_HEALTH = 500;
 	protected final float INITIAL_RADIUS = 10.0f;
 	protected final float MAX_RADIUS = 20.0f;
-	protected int energy = MAX_ENERGY/2;	// does fish eat something?
+	protected int energy = MAX_ENERGY/4;	// does fish eat something?
 	protected int health = MAX_HEALTH;	// does fish fight with others?
 	protected int age = 0;
 	protected final float GROWTH_FACTOR = 0.001f;
@@ -34,6 +34,14 @@ public abstract class Fish extends LakeObject implements Serializable{
 	public void setEnergy(int energy) {
 		this.energy = energy;
 	}
+	
+	public void decreaseEnergy(int energy){
+	  this.energy-=energy;
+	}
+	
+	public void increaseEnergy(int energy){
+	  this.energy+=energy;
+	}
 
 	public int getHealth() {
 		return health;
@@ -41,6 +49,14 @@ public abstract class Fish extends LakeObject implements Serializable{
 
 	public void setHealth(int health) {
 		this.health = health;
+	}
+	
+	public void decreaseHealth(int health){
+	  this.health-=health;
+	}
+	
+	public void increaseHealth(int health){
+	  this.health+=health;
 	}
 
 	public int getAge() {
@@ -140,20 +156,20 @@ public abstract class Fish extends LakeObject implements Serializable{
 			 ((FemaleReproductiveOrgans)fish.getReproductiveOrgans()).doReproduction(((MaleReproductiveOrgans)getReproductiveOrgans()).getChromosome());
 			}
 		  } else{
-			health--;
+			decreaseHealth(1);
 		  }
 		  
 		} else{
-		  health-=10;
+		  decreaseHealth(10);
 		}
 	}
 	
 	protected void interactWith(Obstacle obstacle){
-		health-=5;
+		decreaseHealth(5);
 	}
 	
 	protected void interactWith(Food food){
-		energy+= food.getEnergy();
+		increaseEnergy(food.getEnergy());
 		if(energy > MAX_ENERGY)
 		  energy = MAX_ENERGY;
 	}

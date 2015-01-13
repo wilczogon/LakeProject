@@ -88,5 +88,108 @@ public class NeuralNetworkLayer{	//TODO it would be nice to allow user choose bo
     
   }
   
+  public double[] affect(double[] in, float factor){
+    /*if(hasBias){
+      double[] tmp = new double[in.length+1];
+      
+      for(int i = 0; i<in.length; ++i)
+	tmp[i] = in[i];
+
+      tmp[in.length] = 1;
+      in = tmp;
+    }
+    
+    double[] out = new double[getOutputWidth()];
+    
+    for(int j = 0; j<getOutputWidth(); ++j){
+      out[j] = 0;
+      for(int i = 0; i<getTrueInputWidth(); ++i){
+	out[j] += in[i]*weights[j][i];
+      }
+      
+      out[j] = function.proceed(out[j]);
+    }
+    
+    for(int j = 0; j<getOutputWidth(); ++j){
+      for(int i = 0; i<getTrueInputWidth(); ++i){
+	weights[j][i] = weights[j][i] + factor*in[i]*out[j];
+      }
+    }
+    
+    return out;*/
+    
+    /*System.out.println(factor+1);
+    
+    if(hasBias){
+      double[] tmp = new double[in.length+1];
+      
+      for(int i = 0; i<in.length; ++i)
+	tmp[i] = in[i];
+
+      tmp[in.length] = 1;
+      in = tmp;
+    }
+    
+    double[] out = new double[getOutputWidth()];
+    double[] out2 = new double[getOutputWidth()];
+    
+    for(int j = 0; j<getOutputWidth(); ++j){
+      out[j] = 0;
+      out2[j] = 0;
+      for(int i = 0; i<getTrueInputWidth(); ++i){
+	out[j] += in[i]*weights[j][i];
+	out2[j] += in[i]*Math.pow(weights[j][i], (factor+1));
+	System.out.println(out2[j] + " " + in[i]*Math.pow(weights[j][i], (factor+1)) + " " + weights[j][i]);
+      }
+      
+      //out[j] = function.proceed(out[j]);
+    }
+    
+    for(int j = 0; j<getOutputWidth(); ++j){
+      for(int i = 0; i<getTrueInputWidth(); ++i){
+	System.out.print(out2[j] + " / " + out[j] + "\nfactor: " + (factor+1)+ "\n" + Math.pow(weights[j][i], (factor+1)) + " = ");
+	weights[j][i] = Math.pow(weights[j][i], (factor+1))/(out2[j]/out[j]);
+	System.out.print(weights[j][i] + "\n");
+      }
+    }
+    
+    return out;
+    */
+    
+    if(hasBias){
+      double[] tmp = new double[in.length+1];
+      
+      for(int i = 0; i<in.length; ++i)
+	tmp[i] = in[i];
+
+      tmp[in.length] = 1;
+      in = tmp;
+    }
+    
+    double[] out = new double[getOutputWidth()];
+    double[] out1 = new double[getOutputWidth()];
+    double[] out2 = new double[getOutputWidth()];
+    
+    for(int j = 0; j<getOutputWidth(); ++j){
+      out[j] = 0;
+      out2[j] = 0;
+      for(int i = 0; i<getTrueInputWidth(); ++i){
+	out[j] += in[i]*weights[j][i];
+	//out1[j] += in[i]*Math.abs(weights[j][i]);
+	out2[j] += Math.signum(weights[j][i]*in[i]*out[j])*Math.pow(Math.abs(weights[j][i]*in[i]*out[j]), (factor+1));
+      }
+    }
+    
+    for(int j = 0; j<getOutputWidth(); ++j){
+      for(int i = 0; i<getTrueInputWidth(); ++i){
+	if(out2[j] != 0 && in[i] != 0)
+	  weights[j][i] = (out[j]/out2[j])*Math.signum(weights[j][i]*in[i]*out[j])*Math.pow(Math.abs(weights[j][i]*in[i]*out[j]), (factor+1))/in[i];
+      }
+    }
+    
+    return out;
+    
+  }
+  
 
 } 

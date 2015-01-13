@@ -12,6 +12,7 @@ import com.edu.agh.student.lakeproject.neuralnetwork.transitionfunction.*;
 public class NeuralNetworkBrain extends Brain {
 
 	private NeuralNetwork neuralNetwork = null;
+	private double[] lastView;
 	
 	public NeuralNetworkBrain(){
 		this(10, 3, 5);
@@ -36,9 +37,14 @@ public class NeuralNetworkBrain extends Brain {
 	  for(int i = 0; i<colors.length; ++i)
 	    values[i] = (colors[i].getRed()/255)*256*256 + (colors[i].getGreen()/255)*256 + (colors[i].getBlue()/255);	//TODO
 	  
+	  lastView = values;
+	  
 	  double[] result = neuralNetwork.proceed(values);
 	  
 	  MovementDecision decision = new MovementDecision((result[0]+1)/2, result[1]);	//the result is between 0 and 1 or -1 and 1
+	  
+	  //forgetting
+	  //affect(0.00001f);
 	  
 	  return decision;
 	}
@@ -49,6 +55,22 @@ public class NeuralNetworkBrain extends Brain {
 
 	public boolean hasBias() {
 		return neuralNetwork.hasBias();
+	}
+	
+	public void affect(int factor){
+	  affect(lastView, factor);
+	}
+  
+	public void affect(float factor){
+	  affect(lastView, factor);
+	}
+	
+	public void affect(double[] in, int factor){
+	  neuralNetwork.affect(in, factor);
+	}
+  
+	public void affect(double[] in, float factor){
+	  neuralNetwork.affect(in, factor);
 	}
 
 }

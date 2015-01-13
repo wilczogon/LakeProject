@@ -73,7 +73,7 @@ public class LakeWorld extends World implements MouseListener, MouseMotionListen
 	public void step(){
 	  //synchronized(lakeObjects){
 	
-		if(LakeConfiguration.random.nextInt() % 100 > feedProbability && lakeObjects.size()<100)
+		if(LakeConfiguration.random.nextInt() % 100 > feedProbability && lakeObjects.size()<200)
 			addLakeObject(new Food(this, 10, getNewObjectPosition(), 100));
 	
 		List<LakeObject> deadFishes = new ArrayList<LakeObject>();

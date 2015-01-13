@@ -39,6 +39,22 @@ public class NeuralNetwork{
     return in;
   }
   
+  public double[] affect(double[] in, int factor){
+    for(int i = 0; i<layers.length; ++i){
+      in = layers[i].affect(in, factor*0.0001f);
+    }
+    
+    return in;
+  }
+  
+  public double[] affect(double[] in, float factor){
+    for(int i = 0; i<layers.length; ++i){
+      in = layers[i].affect(in, factor);
+    }
+    
+    return in;
+  }
+  
   public double[][][] getWeights(){
     double[][][] copy = new double[layers.length][][];
     

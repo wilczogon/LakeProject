@@ -81,6 +81,7 @@ public class GraphicSystem implements LakeObjectFocusListener{
 	    Graphics2D g = result.createGraphics();
 	    g.rotate(radians, srcWidth / 2, srcHeight / 2);
 	    g.drawRenderedImage(src, null);
+	    g.dispose();
 	 
 	    return result;
 	}

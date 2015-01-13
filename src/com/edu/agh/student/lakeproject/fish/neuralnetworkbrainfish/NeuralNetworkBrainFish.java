@@ -80,5 +80,17 @@ public class NeuralNetworkBrainFish extends Fish {
 	  out.writeBoolean(((NeuralNetworkBrain)super.brain).hasBias());
 	  
 	}
+	
+	/*@Override
+	public void decreaseHealth(int health){
+	  super.health-=health;
+	  ((NeuralNetworkBrain)super.brain).affect(-health);
+	}
+	
+	@Override
+	public void increaseEnergy(int energy){
+	  super.energy+=energy;
+	  ((NeuralNetworkBrain)super.brain).affect(energy);
+	}*/
 
 }

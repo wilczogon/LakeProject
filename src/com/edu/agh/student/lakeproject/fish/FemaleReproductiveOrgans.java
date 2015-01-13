@@ -55,6 +55,7 @@ public class FemaleReproductiveOrgans extends ReproductiveOrgans{
   }
   
   public void giveBirth(){
+    ownerFish.setEnergy(ownerFish.getEnergy() - ownerFish.MAX_ENERGY/4);
     for(LakeObject child: children)
       lakeWorld.addLakeObject(child);
       
@@ -64,7 +65,7 @@ public class FemaleReproductiveOrgans extends ReproductiveOrgans{
   
   public void doReproduction(Chromosome chromosome){
     if(!isPregnant() && !isRecovering() && isMature() && ownerFish.getEnergy()>ownerFish.MAX_ENERGY/2){
-      for(int i=0; i<3; ++i)
+      for(int i=0; i<5; ++i)
 	cross(chromosome);
       pregnancyCounter = PREGNANCY_DURATION;
     }
